@@ -9,3 +9,9 @@
 # Site Description:  
 This site will determine whether it would be optimal for the user to go outside based on their prefrences and events that are going on. We will be drawing from the factors like weather, games, shows to determine the result. There will also be a scale for the each topic that the user can show their level of interest for.
 
+# APIs used:
+* [Weather API](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_weatherAPI.md)
+* [Riot API](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_riotAPI.md)
+* [My Anime List API](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_MyAnimeList.md)
+
+# Launch Codes:
