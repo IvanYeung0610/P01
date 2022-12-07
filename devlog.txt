@@ -22,6 +22,11 @@ Making an web app that allow people to create stories, edit them, and then view 
 
 fristL -- TIMESTAMP
 --------------------------------------------------------------
-ivanY -- 1999-12-31 9:21
+ivanY -- 2022-12-06 9:21
 * make site map clearer
 * add more to how algorithm works
+
+ivanY -- 2022-12-06 21:33
+* Stating how our algorithm will work on the design doc. How we calculate the result based on user preferences and data from APIs.
+* add section/folder for API keys we will be using (txt files)
+* adding API keys to the component interactions map
