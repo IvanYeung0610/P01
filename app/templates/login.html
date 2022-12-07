@@ -1,5 +1,23 @@
 {% extends "layout.html" %}
 
-{% block body %}
+{% block head %}
+Login
+{% endblock %}
 
-{% end block %}
+{% block title %}
+Login
+{% endblock %}
+
+{% block body %}
+    Enter Login information below to proceed.
+
+    <form action="/login" method="POST">
+        Username: <input type="text" name="user" placeholder="Enter username" required>
+        <br>
+        Password: <input type="password" name="pass" placeholder="Enter password" required> 
+        <br>
+        <input type="submit"> 
+    </form>
+
+    {{ error }}
+    {% endblock %}
