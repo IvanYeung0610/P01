@@ -3,8 +3,12 @@ import os, sqlite3
 
 app = Flask(__name__)
 
+
+app.secret_key = os.urandom(12)
+
 @app.route("/")
 def index():
+    session['logged_in'] = True
     return render_template('home.html')
 
 @app.route("/login", methods=['GET', 'POST'])
