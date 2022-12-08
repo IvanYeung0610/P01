@@ -30,3 +30,6 @@ ivanY -- 2022-12-06 21:33
 * Stating how our algorithm will work on the design doc. How we calculate the result based on user preferences and data from APIs.
 * add section/folder for API keys we will be using (txt files)
 * adding API keys to the component interactions map
+
+ivanY -- 2022-12-08 1:28
+* completed the deliverables for R 2022-12-08 08:00
