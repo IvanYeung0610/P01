@@ -43,3 +43,6 @@ ivanY -- 2022-12-08 9:05
 * Added setup_tables(), get_password(username), get_uid(username), check_username(username), add_user(username, password) to database.py
 * tested functions above  in db_test.py
 * added check_username(username) method to design doc
+
+brianC -- 2022-12-08 9:26
+* changed navbar in layout, added separate external css sheet
