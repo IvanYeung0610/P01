@@ -33,8 +33,8 @@ def home():
     response = urlopen(request_site)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     print(data_json)#checks for correct retrieval of JSON
-    #print(dt.fromtimestamp((int(data_json[0]['schedule'][0]['startTime']) / 1000)))
-    return render_template('api_test.html', clashTime = dt.fromtimestamp((int(data_json[0]['schedule'][0]['startTime']) / 1000)))
+    time = dt.fromtimestamp((int(data_json[0]['schedule'][0]['startTime']) / 1000))
+    return render_template('api_test.html', clashTime = time)
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
