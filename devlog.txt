@@ -30,3 +30,7 @@ ivanY -- 2022-12-06 21:33
 * Stating how our algorithm will work on the design doc. How we calculate the result based on user preferences and data from APIs.
 * add section/folder for API keys we will be using (txt files)
 * adding API keys to the component interactions map
+
+jeffC -- 2022-12-07 22:55
+* Added and tested weather and League of Legends API. Successfully pulled temperature, weather, humidity, and date of next LOL clash tournmanent and displayed it
+* moved tester files to app folder
