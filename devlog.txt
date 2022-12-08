@@ -31,6 +31,22 @@ ivanY -- 2022-12-06 21:33
 * add section/folder for API keys we will be using (txt files)
 * adding API keys to the component interactions map
 
+brianC -- 2022-12-07 9:21
+* base log in and register routes and html
+* layout html page
+
+ivanY -- 2022-12-08 1:28
+* completed the deliverables for R 2022-12-08 08:00
+
+ivanY -- 2022-12-08 9:05
+* Started database.py and db_test.py 
+* Added setup_tables(), get_password(username), get_uid(username), check_username(username), add_user(username, password) to database.py
+* tested functions above  in db_test.py
+* added check_username(username) method to design doc
+
+brianC -- 2022-12-08 9:26
+* changed navbar in layout, added separate external css sheet
+
 jeffC -- 2022-12-07 22:55
 * Added and tested weather and League of Legends API. Successfully pulled temperature, weather, humidity, and date of next LOL clash tournmanent and displayed it
 * moved tester files to app folder
