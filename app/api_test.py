@@ -3,6 +3,9 @@ from urllib.request import urlopen, Request
 from urllib import request
 from datetime import datetime as dt
 
+#for MAL API
+import secrets
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -22,6 +25,7 @@ def home():
     return render_template('api_test.html', temperature=data_json['data'][0]['temp'], humidity=data_json['data'][0]['rh'], rainChance=data_json['data'])
     """
 
+    """
     #LOL api
     with open('./keys/key_LOL.txt', 'r') as f:
         key_LOL = f.read().strip()
@@ -33,8 +37,35 @@ def home():
     response = urlopen(request_site)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     print(data_json)#checks for correct retrieval of JSON
-    time = dt.fromtimestamp((int(data_json[0]['schedule'][0]['startTime']) / 1000))
-    return render_template('api_test.html', clashTime = time)
+    time1 = dt.fromtimestamp((int(data_json[1]['schedule'][0]['startTime']) / 1000)).date()
+    time2 = dt.fromtimestamp((int(data_json[0]['schedule'][0]['startTime']) / 1000)).date()
+
+
+    return render_template('api_test.html', clashTime = time1, clashTime2 = time2)
+    """
+
+    
+    #MAL api
+    def get_new_code_verifier() -> str:
+        token = secrets.token_urlsafe(100)
+        return token[:128]
+
+    code_verifier = code_challenge = get_new_code_verifier()
+    print(len(code_verifier))
+    print(code_verifier) 
+
+    with open('./keys/key_MAL.txt', 'r') as f:
+        key_MAL = f.read().strip()
+    print(key_MAL)
+    """
+    URL = f"https://myanimelist.net/v1/oauth2/authorize?response_type=code&client_id=6e27272028d4946346982f475d7a3346&code_challenge={code_verifier}
+    request_site = Request(URL)#bundles url with headers to identify user as not a bot
+    #print(URL)#checks for getting correct URL
+    response = urlopen(request_site)#grabs the JSON from the page
+    data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
+    print(data_json)#checks for correct retrieval of JSON 
+    """
+    return render_template('api_test.html')
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
