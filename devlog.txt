@@ -37,3 +37,8 @@ brianC -- 2022-12-07 9:21
 
 ivanY -- 2022-12-08 1:28
 * completed the deliverables for R 2022-12-08 08:00
+
+ivanY -- 2022-12-08 9:05
+* Started database.py and db_test.py 
+* Added setup_tables(), get_password(username), get_uid(username), check_username(username), add_user(username, password) to database.py
+* tested functions above  in db_test.py
