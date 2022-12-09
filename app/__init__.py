@@ -8,7 +8,6 @@ app.secret_key = os.urandom(12)
 
 @app.route("/")
 def index():
-    session['logged_in'] = True
     return render_template('home.html')
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -29,6 +28,13 @@ def register():
         return render_template('register.html')
     if request.method == "POST":
         return render_template('login.html')
+
+@app.route("/preferences", methods=['GET', 'POST'])
+def preferences():
+    if request.method == "GET":
+        return render_template('preferences.html')
+    if request.method == "POST":
+        return render_template('home.html')
 
 @app.route("/logout")
 def logout():
