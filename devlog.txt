@@ -48,6 +48,9 @@ ivanY -- 2022-12-08 9:05
 * tested functions above  in db_test.py
 * added check_username(username) method to design doc
 
+vivianG -- 2022-12-08 9:20
+* got basic working code for app
+
 brianC -- 2022-12-08 9:26
 * changed navbar in layout, added separate external css sheet
 
