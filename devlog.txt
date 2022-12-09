@@ -50,3 +50,7 @@ brianC -- 2022-12-08 9:26
 jeffC -- 2022-12-07 22:55
 * Added and tested weather and League of Legends API. Successfully pulled temperature, weather, humidity, and date of next LOL clash tournmanent and displayed it
 * moved tester files to app folder
+
+jeffC -- 2022-12-08 21:18
+
+* Added MAL tester
