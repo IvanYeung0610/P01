@@ -56,3 +56,6 @@ brianC -- 2022-12-08 9:26
 
 jeffC -- 2022-12-08 21:18
 * Added MAL tester
+
+jeffC -- 2022-12-09 15:52
+* Added functions for Riot and Weather API
