@@ -32,9 +32,11 @@
                         <a class="nav-link" href="/login">Login</a>
                         {% endif %}
                     </li> 
+                    {% if not session["logged_in"] %}
                     <li class="nav-item">
                         <a class="nav-link" href="/register">Register</a>
                     </li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>

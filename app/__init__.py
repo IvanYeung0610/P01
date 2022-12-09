@@ -30,6 +30,14 @@ def register():
     if request.method == "POST":
         return redirect(url_for("login"))
 
+@app.route("/preferences", methods=['GET', 'POST'])
+def preferences():
+    if request.method == "GET":
+        return render_template('preferences.html')
+    if request.method == "POST":
+        #do things frl
+        return render_template('home.html')
+
 @app.route("/logout")
 def logout():
     session['logged_in'] = False
