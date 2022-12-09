@@ -34,6 +34,7 @@ def preferences():
     if request.method == "GET":
         return render_template('preferences.html')
     if request.method == "POST":
+        #do things frl
         return render_template('home.html')
 
 @app.route("/logout")
