@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-import os, sqlite3
+import os, sqlite3, database
 
 app = Flask(__name__)
 
@@ -27,11 +27,16 @@ def login():
 def register():
     if request.method == "GET":
         return render_template('register.html')
+    usr = request.form["user"]
+    pswd = request.form["password"]
+    conf = request.form["confirm"]
+    if (pswd != conf):
+        return render_template("register.html")
     if request.method == "POST":
         return redirect(url_for("login"))
 
 @app.route("/preferences", methods=['GET', 'POST'])
-def preferences():
+def pref():
     if request.method == "GET":
         return render_template('preferences.html')
     if request.method == "POST":
@@ -64,3 +69,4 @@ if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
     app.debug = True 
     app.run()
+    databse.setup_tables()
