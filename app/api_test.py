@@ -11,7 +11,6 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     
-    """
     #weather api
     with open('./keys/key_weatherbit.txt', 'r') as f:
         key_weather = f.read().strip()
@@ -23,9 +22,7 @@ def home():
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     print(data_json)#checks for correct retrieval of JSON
     return render_template('api_test.html', temperature=data_json['data'][0]['temp'], humidity=data_json['data'][0]['rh'], rainChance=data_json['data'])
-    """
 
-    """
     #LOL api
     with open('./keys/key_LOL.txt', 'r') as f:
         key_LOL = f.read().strip()
@@ -42,7 +39,6 @@ def home():
 
 
     return render_template('api_test.html', clashTime = time1, clashTime2 = time2)
-    """
 
     #MAL api
     with open('./keys/key_MAL.txt', 'r') as f:
