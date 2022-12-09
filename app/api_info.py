@@ -1,27 +1,21 @@
-from flask import session, Flask, render_template, json
+from flask import json
 from urllib.request import urlopen, Request
 from urllib import request
 from datetime import datetime as dt
-from api_info import *
-
-app = Flask(__name__)
-
-@app.route("/")
-def home():
-    """
+    
+def get_weather(user_location):
     #weather api
     with open('./keys/key_weatherbit.txt', 'r') as f:
         key_weather = f.read().strip()
     print(key_weather)
 
-    URL = f"https://api.weatherbit.io/v2.0/current?city=New%20York%20City&key={key_weather}&units=I"
-    print(URL) 
-    response = urlopen(request_site)#grabs the JSON from the page
+    URL = f"https://api.weatherbit.io/v2.0/current?city={user_location}&key={key_weather}&units=I"
+    #print(URL) 
+    response = urlopen(URL)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     print(data_json)#checks for correct retrieval of JSON
+    return {"temperature" : data_json['data'][0]['temp'], "humidity" : data_json['data'][0]['rh'], "rainChance" : data_json['data'][0]['precip']}
     """
-    return render_template('api_test.html', temperature=get_weather("NYC")['temperature'], humidity=get_weather("NYC")['humidity'], rainChance=get_weather("NYC")['rainChance'])
-
     #LOL api
     with open('./keys/key_LOL.txt', 'r') as f:
         key_LOL = f.read().strip()
@@ -55,8 +49,4 @@ def home():
     anime = data_json['title']
     animeDate = data_json['broadcast']['day_of_the_week'].capitalize()
     return render_template('api_test.html', anime = anime, animeDate = animeDate)
-
-if __name__ == "__main__": #false if this file imported as module
-    #enable debugging, auto-restarting of server when this file is modified
-    app.debug = True
-    app.run()
+    """
