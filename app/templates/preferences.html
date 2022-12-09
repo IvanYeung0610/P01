@@ -9,4 +9,13 @@ Preferences
 {% endblock %}
 
 {% block body %}
+    <form action="preferences" type="POST">
+        <div class="mb-3">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="nba" id="nba">
+                <label class="form-check-label" for="nba">I like the NBA and watching basketball</label>
+                
+            </div>
+        </div>
+    </form>
 {% endblock %}
