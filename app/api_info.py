@@ -15,7 +15,8 @@ def get_weather(user_location):
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     print(data_json)#checks for correct retrieval of JSON
     return {"temperature" : data_json['data'][0]['temp'], "humidity" : data_json['data'][0]['rh'], "rainChance" : data_json['data'][0]['precip']}
-    """
+
+def get_LOL_clash():
     #LOL api
     with open('./keys/key_LOL.txt', 'r') as f:
         key_LOL = f.read().strip()
@@ -30,9 +31,9 @@ def get_weather(user_location):
     time1 = dt.fromtimestamp((int(data_json[1]['schedule'][0]['startTime']) / 1000)).date()
     time2 = dt.fromtimestamp((int(data_json[0]['schedule'][0]['startTime']) / 1000)).date()
 
+    return {"clashTime1" : time1, "clashTime2" : time2}
 
-    return render_template('api_test.html', clashTime = time1, clashTime2 = time2)
-
+    """
     #MAL api
     with open('./keys/key_MAL.txt', 'r') as f:
         key_MAL = f.read().strip()
