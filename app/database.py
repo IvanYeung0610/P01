@@ -1,7 +1,7 @@
 import sqlite3
 
 DB_FILE = "database.db"
-db = sqlite3.connect(DB_FILE)
+db = sqlite3.connect(DB_FILE, check_same_thread=False)
 
 def setup_tables():
     c = db.cursor()
@@ -41,12 +41,11 @@ def add_user(username, password):
     c.execute("SELECT * FROM logins")
     next_uid = len(c.fetchall())
     # creates new user in table
-    c.execute("INSERT INTO logins VALUES(?, ?, ?)", (str(username), str(password), int(next_uid)) )
-
-def add_pref(uid, league, curfew, anime):
+    c.execute("INSERT INTO logins VALUES(?, ?, ?)", (str(username), int(next_uid), str(password)) )
     db.commit()
     c.close()
-def add_pref(uid):
-    c = db.cursor()
-    c.execute("INSERT INTO preferences VALUES(?, ?, ?, ?) ", (str(uid), int(league), int(curfew), int(anime)))
+
+# def update_pref(uid, league, curfew, anime):
+#     c = db.cursor()
+#     c.execute("INSERT INTO preferences VALUES(?, ?, ?, ?) ", (str(uid), int(league), int(curfew), int(anime)))
 
