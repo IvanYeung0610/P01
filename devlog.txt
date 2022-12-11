@@ -57,6 +57,19 @@ brianC -- 2022-12-08 9:26
 jeffC -- 2022-12-08 21:18
 * Added MAL tester
 
+vivianG -- 2022-12-11 12:05
+* completed login and register functions
+
+ivanY -- 2022-12-11 12:51
+* fixed error with database threads
+* Added and Tested Functions:
+    * add_pref(uid, league, curfew, anime, weather)
+    * update_pref(uid, league, curfew, anime, weather)
+    * get_league_pref(uid)
+    * get_curfew_pref(uid)
+    * get_anime_pref(uid)
+    * get_weather_pref(uid)
+
 jeffC -- 2022-12-09 15:52
 * Added functions for Riot and Weather API
 
