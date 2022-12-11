@@ -2,7 +2,16 @@ from flask import json
 from urllib.request import urlopen, Request
 from urllib import request
 from datetime import datetime as dt
-    
+
+
+def replace_space(input):
+    split_words = input.split(' ')
+    output = ""
+    for e in split_words:
+        output = output + "%20" + e
+    return output[3:]
+
+print(replace_space("test for replace space"))
 def get_weather(user_location):
     #weather api
     with open('./keys/key_weatherbit.txt', 'r') as f:
@@ -44,11 +53,10 @@ def search_anime(search):
     #MAL api
     with open('./keys/key_MAL.txt', 'r') as f:
         key_MAL = f.read().strip()
-    print(key_MAL)
-
-    pref_anime = 41084 #read pref anime to here
+    #print(key_MAL)
+    search_fixed = replace_space(search)
     #URL = f"https://api.myanimelist.net/v2/anime/{pref_anime}?fields=broadcast"
-    URL = f"https://api.myanimelist.net/v2/anime?q={search}&limit=2"
+    URL = f"https://api.myanimelist.net/v2/anime?q={search_fixed}&limit=10"
     headers = {"X-MAL-CLIENT-ID": f"{key_MAL}"}
     request_site = Request(URL, headers = headers)#bundles url with headers to identify user as not a bot
     #print(URL)#checks for getting correct URL
@@ -70,3 +78,18 @@ def search_anime(search):
         return_list[f"{values[1]}"] = values[0]
     print(return_list)
     return return_list
+
+def get_anime_date(id):
+    with open('./keys/key_MAL.txt', 'r') as f:
+        key_MAL = f.read().strip()
+    #print(key_MAL)
+    pref_anime = id #read pref anime to here
+    URL = f"https://api.myanimelist.net/v2/anime/{pref_anime}?fields=broadcast"
+    headers = {"X-MAL-CLIENT-ID": f"{key_MAL}"}
+    request_site = Request(URL, headers = headers)#bundles url with headers to identify user as not a bot
+    #print(URL)#checks for getting correct URL
+    response = urlopen(request_site)#grabs the JSON from the page
+    data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
+    anime = data_json['title']
+    animeDate = data_json['broadcast']['day_of_the_week'].capitalize()
+    return animeDate

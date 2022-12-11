@@ -11,7 +11,7 @@ def home():
     return render_template('api_test.html', 
         #temperature=get_weather("NYC")['temperature'], humidity=get_weather("NYC")['humidity'], rainChance=get_weather("NYC")['rainChance'],
         clashTime1=get_LOL_clash()['clash_time1'], clashTime2=get_LOL_clash()['clash_time2'], 
-        anime=search_anime("Made%20In%20Abyss")
+        anime=get_anime_date(44511)
         )
 """
     #LOL api
