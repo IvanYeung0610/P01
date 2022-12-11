@@ -59,3 +59,7 @@ jeffC -- 2022-12-08 21:18
 
 jeffC -- 2022-12-09 15:52
 * Added functions for Riot and Weather API
+
+jeffC -- 2022-12-11 16:41
+
+*added MAL search function, anime broadcast date finder, and whitespace fixer for html
