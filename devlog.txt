@@ -56,3 +56,6 @@ brianC -- 2022-12-08 9:26
 
 jeffC -- 2022-12-08 21:18
 * Added MAL tester
+
+vivianG -- 2022-12-11 12:05
+* completed login and register functions
