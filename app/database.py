@@ -50,4 +50,3 @@ def add_pref(uid):
     c = db.cursor()
     c.execute("INSERT INTO preferences VALUES(?, ?, ?, ?) ", (str(uid), int(league), int(curfew), int(anime)))
 
-def update_pref(uid):
