@@ -9,8 +9,10 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return render_template('api_test.html', 
-        temperature=get_weather("NYC")['temperature'], humidity=get_weather("NYC")['humidity'], rainChance=get_weather("NYC")['rainChance'],
-        clashTime1=get_LOL_clash()['clashTime1'], clashTime2=get_LOL_clash()['clashTime2'])
+        #temperature=get_weather("NYC")['temperature'], humidity=get_weather("NYC")['humidity'], rainChance=get_weather("NYC")['rainChance'],
+        clashTime1=get_LOL_clash()['clash_time1'], clashTime2=get_LOL_clash()['clash_time2'], 
+        anime=search_anime("Made%20In%20Abyss")
+        )
 """
     #LOL api
     with open('./keys/key_LOL.txt', 'r') as f:
