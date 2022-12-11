@@ -3,7 +3,6 @@ import os, sqlite3, database
 
 app = Flask(__name__)
 
-
 app.secret_key = os.urandom(12)
 
 @app.route("/")
@@ -74,6 +73,6 @@ def info():
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
-    app.debug = True 
+    app.debug = True
     app.run()
-    databse.setup_tables()
+    database.setup_tables()
