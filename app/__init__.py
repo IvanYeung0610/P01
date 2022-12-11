@@ -14,7 +14,7 @@ def login():
     if request.method == "GET":
         return render_template('login.html')
     usr = request.form["user"]
-    pswd = request.form["password"]
+    pswd = request.form["pass"]
     if (not database.check_username(usr)):
         return render_template("login.html")
     if (database.get_password(usr) != pswd):
