@@ -15,12 +15,15 @@ def login():
     if request.method == "GET":
         return render_template('login.html')
     usr = request.form["user"]
+    pswd = request.form["password"]
+    if (not database.check_username(usr)):
+        return render_template("login.html")
+    if (database.get_password(usr) != pswd):
+        return render_template("login.html")
     if request.method == "POST":
-
         session.permanent = True
         session["username"] = usr
         session['logged_in'] = True
-
         return redirect(url_for("home"))
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -31,6 +34,10 @@ def register():
     pswd = request.form["password"]
     conf = request.form["confirm"]
     if (pswd != conf):
+        return render_template("register.html")
+    if (not database.check_username(usr)):
+        database.add_user(usr, pswd)
+    else:
         return render_template("register.html")
     if request.method == "POST":
         return redirect(url_for("login"))
