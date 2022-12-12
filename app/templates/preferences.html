@@ -24,18 +24,6 @@ Preferences
                     <input type="range" class="form-range" min="0" max="10" step="1" id="curfew" name="curfew">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-8 offset-2">
-                    <label for="weather" class="form-label">How important is the weather to you?</label>
-                    <input type="range" class="form-range" min="0" max="10" step="1" id="weather" name="weather">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-8 offset-2">
-                    <label for="anime" class="form-label">How important is the Anime to you?</label>
-                    <input type="range" class="form-range" min="0" max="10" step="1" id="anime" name="anime">
-                </div>
-            </div>
             <div class="row mb-3">
                 <div class="col-8 offset-2">
                     <label for="city" class="form-label">Pick Your City</label>
@@ -47,6 +35,30 @@ Preferences
                     </datalist>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <label for="weather" class="form-label">How important is the weather to you?</label>
+                    <input type="range" class="form-range" min="0" max="10" step="1" id="weather" name="weather">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-8 offset-2">
+                    <label for="city" class="form-label">Pick Your Favorite Anime</label>
+                    <input class="form-control" list="cityOptions" id="city" name="city" placeholder="Type to search...">
+                    <datalist id="cityOptions">
+                    {% for x in cities %}
+                        <option value="{{ x }}">
+                    {% endfor %}
+                    </datalist>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <label for="anime" class="form-label">How important is the Anime to you?</label>
+                    <input type="range" class="form-range" min="0" max="10" step="1" id="anime" name="anime">
+                </div>
+            </div>
+          
             <div class="row justify-content-center">
                 <div class="col-1">
                     <input type="submit">

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-import os, database, csv
+import os, database, csv, api_info
 
 app = Flask(__name__)
 
@@ -62,6 +62,7 @@ def pref():
     if request.method == "GET":
         cities = []
         get_cities(cities)
+        api_info.search_anime(id)
         return render_template('preferences.html',
         cities=cities)
     if request.method == "POST":
