@@ -7,11 +7,13 @@ app.secret_key = os.urandom(12)
 
 
 def get_cities(cities):
-    with open('cities.csv', newline='', encoding='utf-8') as csvfile:
+    with open("app/cities.csv", newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         for row in reader:
             cities.append(row[1])
         cities.pop(0)
+
+database.setup_tables()
 
 @app.route("/")
 def index():
