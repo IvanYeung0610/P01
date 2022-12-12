@@ -1,9 +1,17 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-import os, database
+import os, database, csv
 
 app = Flask(__name__)
 
 app.secret_key = os.urandom(12)
+
+
+def get_cities(cities):
+    with open('cities.csv', newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
+        for row in reader:
+            cities.append(row[1])
+        cities.pop(0)
 
 @app.route("/")
 def index():
@@ -16,9 +24,13 @@ def login():
     usr = request.form["user"]
     pswd = request.form["pass"]
     if (not database.check_username(usr)):
-        return render_template("login.html")
+        error = "User doesn't exist"
+        return render_template("login.html", 
+        error=error)
     if (database.get_password(usr) != pswd):
-        return render_template("login.html")
+        error = "Password incorrect"
+        return render_template("login.html", 
+        error=error)
     if request.method == "POST":
         session.permanent = True
         session["username"] = usr
@@ -33,7 +45,9 @@ def register():
     pswd = request.form["password"]
     conf = request.form["confirm"]
     if (pswd != conf):
-        return render_template("register.html")
+        error = "Passwords do not match"
+        return render_template("register.html",
+        error=error)
     if (not database.check_username(usr)):
         database.add_user(usr, pswd)
     else:
@@ -44,10 +58,19 @@ def register():
 @app.route("/preferences", methods=['GET', 'POST'])
 def pref():
     if request.method == "GET":
-        return render_template('preferences.html')
+        cities = []
+        get_cities(cities)
+        return render_template('preferences.html',
+        cities=cities)
     if request.method == "POST":
-        #do things frl
-        return render_template('home.html')
+        league = request.form["league"]
+        curfew = request.form["curfew"]
+        anime = request.form["anime"]
+        weather = request.form["weather"]
+        city = request.form["city"]
+        uid = database.get_uid(session["username"])
+        database.add_pref(uid, league, curfew, anime, weather)
+        return redirect(url_for("home"))
 
 @app.route("/logout")
 def logout():
@@ -59,9 +82,6 @@ def logout():
 def home():
     return render_template("home.html")
 
-@app.route("/preferences")
-def preferences():
-    return render_template("preferences.html")
 
 @app.route("/grass")
 def grass():

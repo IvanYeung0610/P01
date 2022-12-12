@@ -9,20 +9,46 @@ Preferences
 {% endblock %}
 
 {% block body %}
-    <form action="preferences" type="POST">
+    <form action="preferences" method="POST">
         <div class="container">
+
             <div class="row">
-                <div class="form-check form-switch">
-                    <div class="col-3">
-                        <input class="form-check-input" type="checkbox" name="nba" id="nba">
-                    </div>
-                    <div class="col-5">
-                        <label class="form-check-label" for="nba">I like the NBA and watching basketball</label>
-                    </div>
+                <div class="col-8 offset-2">
+                    <label for="league" class="form-label">How important is League of Legends to you?</label>
+                    <input type="range" class="form-range" min="0" max="10" step="1" id="league" name="league">
                 </div>
             </div>
             <div class="row">
-                <div class="col-8">
+                <div class="col-8 offset-2">
+                    <label for="curfew" class="form-label">How strict is your curfew?</label>
+                    <input type="range" class="form-range" min="0" max="10" step="1" id="curfew" name="curfew">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <label for="weather" class="form-label">How important is the weather to you?</label>
+                    <input type="range" class="form-range" min="0" max="10" step="1" id="weather" name="weather">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <label for="anime" class="form-label">How important is the Anime to you?</label>
+                    <input type="range" class="form-range" min="0" max="10" step="1" id="anime" name="anime">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-8 offset-2">
+                    <label for="city" class="form-label">Pick Your City</label>
+                    <input class="form-control" list="cityOptions" id="city" name="city" placeholder="Type to search...">
+                    <datalist id="cityOptions">
+                    {% for x in cities %}
+                        <option value="{{ x }}">
+                    {% endfor %}
+                    </datalist>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-1">
                     <input type="submit">
                 </div>
             </div>

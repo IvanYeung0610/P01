@@ -76,3 +76,10 @@ ivanY -- 2022-12-11 12:51
 jeffC -- 2022-12-11 16:41
 
 *added MAL search function, anime broadcast date finder, and whitespace fixer for html
+
+brianC -- 2022-12-12 02:50
+
+* Added error messages and styling for login and register
+* Created preferences html and url method
+    * csv file for major cities and added data search for cities in preferences
+* Error in sqlite tables when you insert with the same values, such as userid, consider using REPLACE instead of INSERT

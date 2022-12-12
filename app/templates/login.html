@@ -9,15 +9,26 @@ Login
 {% endblock %}
 
 {% block body %}
-    Enter Login information below to proceed.
+    <div class="container">
+        <h2>Enter Login information below to proceed.</h2>
 
-    <form action="/login" method="POST">
-        Username: <input type="text" name="user" placeholder="Enter username" required>
-        <br>
-        Password: <input type="password" name="pass" placeholder="Enter password" required> 
-        <br>
-        <input type="submit"> 
-    </form>
+        <form action="/login" method="POST">
 
-    {{ error }}
+            <div class="mb-3">
+                <label for="user" class="form-label">Username</label>
+                <input type="text" class="form-control" id="user" name="user" placeholder="Enter username" required>
+            </div>
+            <div class="mb-3">
+                <label for="pass" class="form-label">Password</label>
+                <input type="password" class="form-control" id="pass" name="pass" placeholder="Enter Password" required>
+            </div>
+            <input type="submit"> 
+        
+        </form>
+        {% if error %}
+        <div class="alert alert-primary" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+    </div>
     {% endblock %}

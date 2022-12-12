@@ -9,15 +9,27 @@ Register
 {% endblock %}
 
 {% block body %}
-    Register
-    <form action="/register" method="POST">
-        Username: <input type="text" name="user" placeholder="Enter new username" required>
-        <br>
-        Password: <input type="password" name="password" placeholder="Enter new password"required>
-        <br>
-        Confirm: <input type="password" name="confirm" placeholder="Confirm password" required>
-        <br> 
-        <input type="submit"> 
-    </form>
-    {{error}}
+    <div class="container">
+        <h2>Register</h2>
+        <form action="/register" method="POST">
+            <div class="mb-3">
+                <label for="user" class="form-label">Enter new username</label>
+                <input type="text" class="form-control" id="user" name="user" placeholder="Enter new username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Enter new password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter new password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirm" class="form-label">Confirm new password</label>
+                <input type="password" class="form-control" id="confirm" name="confirm" placeholder="Confirm new password" required>
+            </div>
+            <input type="submit"> 
+        </form>
+        {% if error %}
+        <div class="alert alert-primary" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+    </div>
 {% endblock %}

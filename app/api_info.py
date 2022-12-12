@@ -3,7 +3,6 @@ from urllib.request import urlopen, Request
 from urllib import request
 from datetime import datetime as dt
 
-
 def replace_space(input):
     split_words = input.split(' ')
     output = ""
