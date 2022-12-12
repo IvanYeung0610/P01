@@ -7,7 +7,7 @@ def setup_tables():
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS logins (username TEXT, uid INTEGER PRIMARY KEY, password TEXT)")
     c.execute("CREATE TABLE IF NOT EXISTS preferences (uid INTEGER PRIMARY KEY, league INTEGER, curfew INTEGER, anime INTEGER, weather INTEGER)")
-    c.execute("CREATE TABLE IF NOT EXISTS user_info (uid INTEGER PRIMARY KEY, city TEXT, desired_curfew INTEGER, favorite_anime TEXT, favorite_weather TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS user_info (uid INTEGER PRIMARY KEY, city TEXT, favorite_anime TEXT, favorite_weather TEXT)")
     c.close()
 
 def get_password(username):
@@ -96,7 +96,7 @@ def get_weather_pref(uid):
     c.close()
     return weather_pref
 
-def add_user_info(uid):
+def add_user_info(uid, city, favorite_anime, favorite_weather):
     c = db.cursor()
-    c.execute("INSERT INTO")
+    c.execute("INSERT INTO preferences VALUES(?, ?, ?, ?)", (int(uid), str(city), str(favorite_anime), str(favorite_weather)))
     c.close()
