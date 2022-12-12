@@ -7,7 +7,7 @@ def setup_tables():
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS logins (username TEXT, uid INTEGER PRIMARY KEY, password TEXT)")
     c.execute("CREATE TABLE IF NOT EXISTS preferences (uid INTEGER PRIMARY KEY, league INTEGER, curfew INTEGER, anime INTEGER, weather INTEGER)")
-    c.execute("CREATE TABLE IF NOT EXISTS user_info (uid INTEGER PRIMARY KEY, location TEXT, desired_curfew INTEGER, user_id INTEGER)")
+    c.execute("CREATE TABLE IF NOT EXISTS user_info (uid INTEGER PRIMARY KEY, city TEXT, desired_curfew INTEGER, favorite_anime TEXT, favorite_weather TEXT)")
     c.close()
 
 def get_password(username):
@@ -51,6 +51,17 @@ def add_pref(uid, league, curfew, anime, weather):
     db.commit()
     c.close() 
 
+def check_pref(uid):
+    c = db.cursor()
+    return_value = c.execute("SELECT uid FROM preferences WHERE uid = ?",  (str(uid),))
+    try:
+        c.fetchone()[0]
+        c.close()
+        return True 
+    except:
+        c.close()
+        return False
+
 def update_pref(uid, league, curfew, anime, weather):
     c = db.cursor()
     c.execute("UPDATE preferences SET league = ?, curfew = ?, anime = ?, weather = ? WHERE uid = ?", (int(league), int(curfew), int(anime), int(weather), int(uid)))
@@ -84,3 +95,8 @@ def get_weather_pref(uid):
     weather_pref = c.fetchone()[0]
     c.close()
     return weather_pref
+
+def add_user_info(uid):
+    c = db.cursor()
+    c.execute("INSERT INTO")
+    c.close()
