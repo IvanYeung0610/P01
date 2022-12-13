@@ -4,7 +4,7 @@ import os, database, csv, api_info
 app = Flask(__name__)
 
 app.secret_key = os.urandom(12)
-
+database.setup_tables()
 
 def get_cities(cities):
     with open("cities.csv", newline='', encoding='utf-8') as csvfile:
@@ -73,6 +73,11 @@ def pref():
             database.add_pref(uid, league, anime, weather)
         else:
             database.update_pref(uid, league, anime, weather)
+        
+        if (not database.check_user_info()):
+            database.add_user_info(uid, city, "Filler", "Filler")
+        else:
+            database.update_pref(uid, city, "Filler", "Filler")
         return redirect(url_for("home"))
 
 @app.route("/logout")

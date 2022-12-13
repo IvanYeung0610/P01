@@ -41,4 +41,12 @@ cd app/
 python3 __init__.py
 ```
 
-6. Copy the link from terminal onto a web browser.
+6. Copy the link(http://127.0.0.1:5000) from terminal onto a web browser. Or Ctrl + click the link(http://127.0.0.1:5000).
+```sh
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 924-082-676
+
+```
