@@ -7,13 +7,11 @@ app.secret_key = os.urandom(12)
 
 
 def get_cities(cities):
-    with open("app/cities.csv", newline='', encoding='utf-8') as csvfile:
+    with open("cities.csv", newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         for row in reader:
             cities.append(row[1])
         cities.pop(0)
-
-database.setup_tables()
 
 @app.route("/")
 def index():
@@ -27,11 +25,11 @@ def login():
     pswd = request.form["pass"]
     if (not database.check_username(usr)):
         error = "User doesn't exist"
-        return render_template("login.html", 
+        return render_template("login.html",
         error=error)
     if (database.get_password(usr) != pswd):
         error = "Password incorrect"
-        return render_template("login.html", 
+        return render_template("login.html",
         error=error)
     if request.method == "POST":
         session.permanent = True
@@ -62,17 +60,19 @@ def pref():
     if request.method == "GET":
         cities = []
         get_cities(cities)
-        api_info.search_anime(id)
+        #api_info.search_anime(id) <-- SOMETHING IS WRONG WITH THE SPLIT IN API_INFO
         return render_template('preferences.html',
         cities=cities)
     if request.method == "POST":
         league = request.form["league"]
-        curfew = request.form["curfew"]
         anime = request.form["anime"]
         weather = request.form["weather"]
         city = request.form["city"]
         uid = database.get_uid(session["username"])
-        database.add_pref(uid, league, curfew, anime, weather)
+        if (not database.check_pref(uid)):
+            database.add_pref(uid, league, anime, weather)
+        else:
+            database.update_pref(uid, league, anime, weather)
         return redirect(url_for("home"))
 
 @app.route("/logout")
