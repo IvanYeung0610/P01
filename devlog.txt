@@ -98,3 +98,7 @@ ivanY -- 2022-12-12 21:32
     * get_favorite_weather(uid)
 * Need to connect these functions to flask along with making a form(drop down) for favorite weather
 * Found error api_info.search_anime(id) [has something to do with the split method]
+
+ivanY -- 2022-12-13 9:24
+* Linked user_info table with flask 
+* Started working on drawing info to home page
