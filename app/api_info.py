@@ -10,7 +10,7 @@ def replace_space(input):
         output = output + "%20" + e
     return output[3:]
 
-print(replace_space("test for replace space"))
+#print(replace_space("test for replace space"))
 def get_weather(user_location):
     #weather api
     with open('./keys/key_weatherbit.txt', 'r') as f:
@@ -71,11 +71,11 @@ def search_anime(search):
        values = list(e.values()) #gets rid of data container dict
        for value in values:
         values = list(value.values()) #gets rid of node container dict
-        print(values)
+        #print(values)
         #anime_name = values[1]
         #print(anime_name)
         return_list[f"{values[1]}"] = values[0]
-    print(return_list)
+    #print(return_list)
     return return_list
 
 def get_anime_date(id):
@@ -91,4 +91,5 @@ def get_anime_date(id):
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     anime = data_json['title']
     animeDate = data_json['broadcast']['day_of_the_week'].capitalize()
+    print(animeDate)
     return animeDate
