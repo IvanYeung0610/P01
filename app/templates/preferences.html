@@ -38,12 +38,7 @@ Preferences
             <div class="row mb-3">
                 <div class="col-8 offset-2">
                     <label for="city" class="form-label">Pick Your Favorite Anime</label>
-                    <input class="form-control" list="cityOptions" id="city" name="city" placeholder="Type to search...">
-                    <datalist id="cityOptions">
-                    {% for x in cities %}
-                        <option value="{{ x }}">
-                    {% endfor %}
-                    </datalist>
+                    <input class="form-control" type="text" id="city" name="city" placeholder="Type to search...">
                 </div>
             </div>
             <div class="row">
