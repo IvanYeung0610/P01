@@ -9,6 +9,24 @@ Preferences
 {% endblock %}
 
 {% block body %}
+    {% if page2 %}
+    <form action="preferences" method="POST">
+        <input type="hidden" name="page2" value="True">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-7 offset-2">
+                    <label for="search" class="form-label">Pick Your Favorite Anime</label>
+                    <input class="form-control" type="text" id="search" name="search" placeholder="Enter keywords of your favorite anime to search">
+                </div>
+                <div class="col-1">
+                    <input type="submit">
+                </div>
+            </div>
+        </div>
+
+    </form>
+    {% else %}
     <form action="preferences" method="POST">
         <div class="container">
 
@@ -55,4 +73,5 @@ Preferences
             </div>
         </div>
     </form>
+    {% endif %}
 {% endblock %}
