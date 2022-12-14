@@ -4,7 +4,7 @@ import math
 from datetime import date
 def calc_weather(city):
     weather = get_weather(city)
-    print(weather)
+    #print(weather)
     temp = weather['temperature']
     humidity = weather['humidity']
     rain_chance = weather['rain_chance']
@@ -55,10 +55,14 @@ def calc_anime_date(anime_id):
     return 0
     
     
-def algorithm(prefs):
-    #print(calc_weather("New York City")) 
-    #today = date.today()
-    #print(calc_LOL_clash())
-    print(calc_anime_date(44511)) #test using chainsawman
+def algorithm(uid):
+    print(calc_weather("New York City")) 
+    print(calc_weather("New York City") * get_weather_pref(uid) / 10) 
 
-algorithm()
+    print(calc_LOL_clash())
+    print(calc_LOL_clash() * get_league_pref(uid) / 10)
+    
+    print(calc_anime_date(44511)) #test using chainsawman
+    print(calc_anime_date(44511) * get_anime_pref(uid) / 10) #test using chainsawman
+
+algorithm(0)

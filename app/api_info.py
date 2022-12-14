@@ -91,5 +91,5 @@ def get_anime_date(id):
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     anime = data_json['title']
     animeDate = data_json['broadcast']['day_of_the_week'].capitalize()
-    print(animeDate)
+    #print(animeDate)
     return animeDate
