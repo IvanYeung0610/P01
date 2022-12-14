@@ -114,3 +114,4 @@ jeffC -- 2022-12-13 20:14
 
 ivanY -- 2022-12-13 22:27
 * Untracked API keys from github repo
+* created try/except statements in the case that the keys do not exist

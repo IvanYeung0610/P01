@@ -13,8 +13,12 @@ def replace_space(input):
 #print(replace_space("test for replace space"))
 def get_weather(user_location):
     #weather api
-    with open('./keys/key_weatherbit.txt', 'r') as f:
-        key_weather = f.read().strip()
+    try:
+        with open('./keys/key_weatherbit.txt', 'r') as f:
+            key_weather = f.read().strip()
+    except FileNotFoundError:
+        print("File containing key for weatherbit does not exist.")
+        key_weather = None
     #print(key_weather)
     user_location = replace_space(user_location)
     URL = f"https://api.weatherbit.io/v2.0/current?city={user_location}&key={key_weather}&units=I"
@@ -26,8 +30,12 @@ def get_weather(user_location):
 
 def get_LOL_clash():
     #LOL api
-    with open('./keys/key_LOL.txt', 'r') as f:
-        key_LOL = f.read().strip()
+    try:
+        with open('./keys/key_LOL.txt', 'r') as f:
+            key_LOL = f.read().strip()
+    except FileNotFoundError:
+        print("File containing key for RIOT API does not exist")
+        key_LOL = None
     #print(key_LOL)
 
     URL = f"https://na1.api.riotgames.com/lol/clash/v1/tournaments?api_key={key_LOL}"
@@ -50,8 +58,12 @@ def get_LOL_clash():
 
 def search_anime(search):
     #MAL api
-    with open('./keys/key_MAL.txt', 'r') as f:
-        key_MAL = f.read().strip()
+    try:
+        with open('./keys/key_MAL.txt', 'r') as f:
+            key_MAL = f.read().strip()
+    except FileNotFoundError:
+        print("File containing key for My Anime List API does not exist")
+        key_MAL = None
     #print(key_MAL)
     search_fixed = replace_space(search)
     #URL = f"https://api.myanimelist.net/v2/anime/{pref_anime}?fields=broadcast"
@@ -79,8 +91,12 @@ def search_anime(search):
     return return_list
 
 def get_anime_date(id):
-    with open('./keys/key_MAL.txt', 'r') as f:
-        key_MAL = f.read().strip()
+    try:
+        with open('./keys/key_MAL.txt', 'r') as f:
+            key_MAL = f.read().strip()
+    except FileNotFoundError:
+        print("File containing key for My Anime List API does not exist")
+        key_MAL = None
     #print(key_MAL)
     pref_anime = id #read pref anime to here
     URL = f"https://api.myanimelist.net/v2/anime/{pref_anime}?fields=broadcast"
