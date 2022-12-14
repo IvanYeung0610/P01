@@ -86,6 +86,10 @@ brianC -- 2022-12-12 02:50
     * csv file for major cities and added data search for cities in preferences
 * Error in sqlite tables when you insert with the same values, such as userid, consider using REPLACE instead of INSERT
 
+jeffC -- 2022-12-12 23:34
+
+*WIP algorithm, finished writing out concept, begin implementation
+
 ivanY -- 2022-12-12 21:32
 * fixed bug with preferences using cities.csv file
 * removed curfew from databases and made changes to reflect this in app and html
@@ -102,3 +106,8 @@ ivanY -- 2022-12-12 21:32
 ivanY -- 2022-12-13 9:24
 * Linked user_info table with flask 
 * Started working on drawing info to home page
+
+jeffC -- 2022-12-13 20:14
+
+* Finished anime and LOL clash components of algorithm
+* Finished algorithm, testing required (can't test clash yet, need to wait till tomorrow)
