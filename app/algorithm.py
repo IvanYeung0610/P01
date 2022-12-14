@@ -65,4 +65,8 @@ def algorithm(uid):
     print(calc_anime_date(44511)) #test using chainsawman
     #print(calc_anime_date(44511) * get_anime_pref(uid) / 10) #test using chainsawman
 
+    return((calc_weather("New York City") * get_weather_pref(uid) / 10) +
+            (calc_LOL_clash() * get_league_pref(uid) / 10) +
+            (calc_anime_date(44511) * get_anime_pref(uid) / 10))
+
 algorithm(0)
