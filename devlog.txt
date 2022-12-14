@@ -87,3 +87,7 @@ brianC -- 2022-12-12 02:50
 jeffC -- 2022-12-12 23:34
 
 *WIP algorithm, finished writing out concept, being implementation
+
+jeffC -- 2022-12-12 20:14
+
+* Finished anime and LOL clash components of alogrithm
