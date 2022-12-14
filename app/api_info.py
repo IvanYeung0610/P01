@@ -16,7 +16,7 @@ def get_weather(user_location):
     with open('./keys/key_weatherbit.txt', 'r') as f:
         key_weather = f.read().strip()
     #print(key_weather)
-
+    user_location = replace_space(user_location)
     URL = f"https://api.weatherbit.io/v2.0/current?city={user_location}&key={key_weather}&units=I"
     #print(URL) 
     response = urlopen(URL)#grabs the JSON from the page
