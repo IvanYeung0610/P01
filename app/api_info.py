@@ -10,7 +10,7 @@ def replace_space(input):
         output = output + "%20" + e
     return output[3:]
 
-print(replace_space("test for replace space"))
+#print(replace_space("test for replace space"))
 def get_weather(user_location):
     #weather api
     with open('./keys/key_weatherbit.txt', 'r') as f:
@@ -18,7 +18,7 @@ def get_weather(user_location):
     #print(key_weather)
     user_location = replace_space(user_location)
     URL = f"https://api.weatherbit.io/v2.0/current?city={user_location}&key={key_weather}&units=I"
-    #print(URL) 
+    #print(URL)
     response = urlopen(URL)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     #print(data_json)#checks for correct retrieval of JSON
@@ -45,7 +45,7 @@ def get_LOL_clash():
     elif len(data_json) == 0:
         time1 = "No clash!"
         time2 = "No clash!"
-        
+
     return {"clash_time1" : time1, "clash_time2" : time2}
 
 def search_anime(search):
@@ -62,7 +62,7 @@ def search_anime(search):
     response = urlopen(request_site)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     #print("here")
-    #print(data_json)#checks for correct retrieval of JSON 
+    #print(data_json)#checks for correct retrieval of JSON
     #anime = data_json['title']
     #animeDate = data_json['broadcast']['day_of_the_week'].capitalize()
     return_list = {}
@@ -71,11 +71,11 @@ def search_anime(search):
        values = list(e.values()) #gets rid of data container dict
        for value in values:
         values = list(value.values()) #gets rid of node container dict
-        print(values)
+        #print(values)
         #anime_name = values[1]
         #print(anime_name)
         return_list[f"{values[1]}"] = values[0]
-    print(return_list)
+    #print(return_list)
     return return_list
 
 def get_anime_date(id):

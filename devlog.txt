@@ -43,7 +43,7 @@ ivanY -- 2022-12-08 1:28
 * completed the deliverables for R 2022-12-08 08:00
 
 ivanY -- 2022-12-08 9:05
-* Started database.py and db_test.py 
+* Started database.py and db_test.py
 * Added setup_tables(), get_password(username), get_uid(username), check_username(username), add_user(username, password) to database.py
 * tested functions above  in db_test.py
 * added check_username(username) method to design doc
@@ -74,11 +74,13 @@ ivanY -- 2022-12-11 12:51
     * get_weather_pref(uid)
 
 jeffC -- 2022-12-11 16:41
-
 *added MAL search function, anime broadcast date finder, and whitespace fixer for html
 
-brianC -- 2022-12-12 02:50
+ivanY -- 2022-12-12 9:20
+* started removing curfew from database tables
+* started creating functions for the user_info table
 
+brianC -- 2022-12-12 02:50
 * Added error messages and styling for login and register
 * Created preferences html and url method
     * csv file for major cities and added data search for cities in preferences
@@ -86,9 +88,35 @@ brianC -- 2022-12-12 02:50
 
 jeffC -- 2022-12-12 23:34
 
+<<<<<<< HEAD
 *WIP algorithm, finished writing out concept, being implementation
 
 jeffC -- 2022-12-13 9:26
 
 * Finished weather calculator
 * Begin Riot calculator
+=======
+*WIP algorithm, finished writing out concept, begin implementation
+
+ivanY -- 2022-12-12 21:32
+* fixed bug with preferences using cities.csv file
+* removed curfew from databases and made changes to reflect this in app and html
+* Added and Tested Functions for the user_info table:
+    * add_user_info(uid, city, favorite_anime, favorite_weather)
+    * check_user_info(uid)
+    * update_user_info(uid, city, favorite_anime, favorite_weather)
+    * get_city(uid)
+    * get_favorite_anime(uid)
+    * get_favorite_weather(uid)
+* Need to connect these functions to flask along with making a form(drop down) for favorite weather
+* Found error api_info.search_anime(id) [has something to do with the split method]
+
+ivanY -- 2022-12-13 9:24
+* Linked user_info table with flask 
+* Started working on drawing info to home page
+
+jeffC -- 2022-12-13 20:14
+
+* Finished anime and LOL clash components of algorithm
+* Finished algorithm, testing required (can't test clash yet, need to wait till tomorrow)
+>>>>>>> e22b60eb597bcff35b36ceb7088ad9b7eb080e64
