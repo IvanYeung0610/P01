@@ -18,7 +18,7 @@ def get_weather(user_location):
     #print(key_weather)
     user_location = replace_space(user_location)
     URL = f"https://api.weatherbit.io/v2.0/current?city={user_location}&key={key_weather}&units=I"
-    #print(URL) 
+    #print(URL)
     response = urlopen(URL)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     #print(data_json)#checks for correct retrieval of JSON
@@ -45,7 +45,7 @@ def get_LOL_clash():
     elif len(data_json) == 0:
         time1 = "No clash!"
         time2 = "No clash!"
-        
+
     return {"clash_time1" : time1, "clash_time2" : time2}
 
 def search_anime(search):
@@ -62,7 +62,7 @@ def search_anime(search):
     response = urlopen(request_site)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     #print("here")
-    #print(data_json)#checks for correct retrieval of JSON 
+    #print(data_json)#checks for correct retrieval of JSON
     #anime = data_json['title']
     #animeDate = data_json['broadcast']['day_of_the_week'].capitalize()
     return_list = {}
@@ -91,5 +91,4 @@ def get_anime_date(id):
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     anime = data_json['title']
     animeDate = data_json['broadcast']['day_of_the_week'].capitalize()
-    #print(animeDate)
     return animeDate
