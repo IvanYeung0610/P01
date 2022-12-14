@@ -91,3 +91,4 @@ jeffC -- 2022-12-12 23:34
 jeffC -- 2022-12-12 20:14
 
 * Finished anime and LOL clash components of alogrithm
+* Finished algorithm, testing required

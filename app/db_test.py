@@ -2,15 +2,16 @@ import database as db
 
 db.setup_tables()
 
-db.add_user("Bob", "1234")
+# db.add_user("Bob", "1234")
 
-print(db.get_password("Bob"))
-print(db.get_uid("Bob"))
-print(db.check_username("Bob"))
-print(db.check_username("Not Bob"))
+# print(db.get_password("Bob"))
+# print(db.get_uid("Bob"))
+# print(db.check_username("Bob"))
+# print(db.check_username("Not Bob"))
 
 # CHECKING ADDING PREFERENCES 
 
+print("preferences table exists?:" + str(db.check_pref(0)))
 db.add_pref(0, 1, 2, 3, 4)
 print()
 print(20*"#" + "ADDING PREFERENCES" + 20*"#")
@@ -37,6 +38,8 @@ else:
 
 # CHECKING UDATING PREFERENCES
 
+
+print("preferences table exists?:" + str(db.check_pref(0)))
 db.update_pref(0, 2, 4, 6, 8)
 print()
 print(20*"#" + "UPDATING PREFERENCES" + 20*"#")
