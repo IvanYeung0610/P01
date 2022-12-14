@@ -75,9 +75,9 @@ def pref():
             database.update_pref(uid, league, anime, weather)
         
         if (not database.check_user_info(uid)):
-            database.add_user_info(uid, city, "Filler", "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
+            database.add_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
         else:
-            database.update_user_info(uid, city, "Filler", "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
+            database.update_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
         return redirect(url_for("home"))
 
 @app.route("/logout")

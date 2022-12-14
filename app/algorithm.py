@@ -1,4 +1,4 @@
-from database import get_anime_pref, get_league_pref, get_weather_pref
+from database import *
 from api_info import *
 import math
 from datetime import date
@@ -57,16 +57,16 @@ def calc_anime_date(anime_id):
     
 def algorithm(uid):
     #print(calc_weather("New York City")) 
-    #print(calc_weather("New York City") * get_weather_pref(uid) / 10) 
+    #print(calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10) 
 
     #print(calc_LOL_clash())
     #print(calc_LOL_clash() * get_league_pref(uid) / 10)
     
     #print(calc_anime_date(44511)) #test using chainsawman
-    #print(calc_anime_date(44511) * get_anime_pref(uid) / 10) #test using chainsawman
+    #print(calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10) #test using chainsawman
 
-    return((calc_weather("New York City") * get_weather_pref(uid) / 10) +
+    return((calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10) +
             (calc_LOL_clash() * get_league_pref(uid) / 10) +
-            (calc_anime_date(44511) * get_anime_pref(uid) / 10))
+            (calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10))
 
-#algorithm(0)
+#print(algorithm(0))
