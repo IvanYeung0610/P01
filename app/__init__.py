@@ -35,6 +35,8 @@ def login():
         session.permanent = True
         session["username"] = usr
         session['logged_in'] = True
+        print("SESSION LOGIN:")
+        print(session)
         return redirect(url_for("home"))
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -51,7 +53,8 @@ def register():
     if (not database.check_username(usr)):
         database.add_user(usr, pswd)
     else:
-        return render_template("register.html")
+        error="User already exists"
+        return render_template("register.html", error=error)
     if request.method == "POST":
         return redirect(url_for("login"))
 
@@ -100,7 +103,18 @@ def logout():
 
 @app.route("/home")
 def home():
-    return render_template("home.html")
+    if (not bool(session)):
+        return redirect(url_for("login"))
+    print("SESSION HOME:")
+    print(session)
+    uid = database.get_uid(session["username"])
+    print("USERNAME:")
+    print(session["username"])
+    print("***********"+str(uid)+"***********")
+    if (not database.check_pref(uid)):
+        return redirect(url_for("preferences"))
+    else:
+        return render_template("home.html")
 
 
 @app.route("/grass")
