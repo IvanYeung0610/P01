@@ -20,7 +20,7 @@ def calc_weather(city):
    
     rain_factor = 1 - rain_chance/100
 
-    return (temp_factor + humidity_factor + rain_factor) / 3 
+    return {"factor" : (temp_factor + humidity_factor + rain_factor) / 3, "weather" : weather}
     
 
 def calc_LOL_clash():
@@ -28,7 +28,7 @@ def calc_LOL_clash():
     #print(clash_dates)
     #print(dates)
     if clash_dates['clash_time1'] == dt.today():
-        return 1
+        return {r}
     return 0
 
 def weekday_to_integer(day):
@@ -67,6 +67,6 @@ def algorithm(uid):
 
     return((calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10) +
             (calc_LOL_clash() * get_league_pref(uid) / 10) +
-            (calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10))
+            (calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10)) / 3
 
-#print(algorithm(0))
+#print(algorithm(0)
