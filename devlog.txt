@@ -87,8 +87,11 @@ brianC -- 2022-12-12 02:50
 * Error in sqlite tables when you insert with the same values, such as userid, consider using REPLACE instead of INSERT
 
 jeffC -- 2022-12-12 23:34
+*WIP algorithm, finished writing out concept, being implementation
 
-*WIP algorithm, finished writing out concept, begin implementation
+jeffC -- 2022-12-13 9:26
+* Finished weather calculator
+* Begin Riot calculator
 
 ivanY -- 2022-12-12 21:32
 * fixed bug with preferences using cities.csv file
@@ -115,3 +118,6 @@ jeffC -- 2022-12-13 20:14
 ivanY -- 2022-12-13 22:27
 * Untracked API keys from github repo
 * created try/except statements in the case that the keys do not exist
+
+jeffC -- 2022-12-14 10:11
+* Confirmed algorithm works, changed the anime table to hold anime ID
