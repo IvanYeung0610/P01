@@ -108,7 +108,7 @@ def check_user_info(uid):
 
 def update_user_info(uid, city, favorite_anime, favorite_weather):
     c = db.cursor()
-    c.execute("UPDATE user_info SET city = ?, favorite_anime = ?, favorite_weather = ? WHERE uid = ?", (str(city), str(favorite_anime), int(favorite_weather), int(uid)))
+    c.execute("UPDATE user_info SET city = ?, favorite_anime = ?, favorite_weather = ? WHERE uid = ?", (str(city), int(favorite_anime), str(favorite_weather), int(uid)))
     db.commit()
     c.close()
 

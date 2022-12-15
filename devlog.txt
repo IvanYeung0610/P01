@@ -119,5 +119,12 @@ ivanY -- 2022-12-13 22:27
 * Untracked API keys from github repo
 * created try/except statements in the case that the keys do not exist
 
+ivanY -- 2022-12-14 9:26
+* Started testing algorithm and what it returns
+
 jeffC -- 2022-12-14 10:11
 * Confirmed algorithm works, changed the anime table to hold anime ID
+
+ivanY -- 2022-12-14 23:00
+* Fixed bug with database. 
+* Found issue with LOL key in api_info.py
