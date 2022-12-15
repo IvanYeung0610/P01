@@ -9,6 +9,24 @@ Preferences
 {% endblock %}
 
 {% block body %}
+    {% if page2 %}
+    <form action="preferences" method="POST">
+        <input type="hidden" name="page2" value="True">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-7 offset-2">
+                    <label for="search" class="form-label">Pick Your Favorite Anime</label>
+                    <input class="form-control" type="text" id="search" name="search" placeholder="Enter keywords of your favorite anime to search">
+                </div>
+                <div class="col-1">
+                    <input type="submit">
+                </div>
+            </div>
+        </div>
+
+    </form>
+    {% else %}
     <form action="preferences" method="POST">
         <div class="container">
 
@@ -38,12 +56,7 @@ Preferences
             <div class="row mb-3">
                 <div class="col-8 offset-2">
                     <label for="city" class="form-label">Pick Your Favorite Anime</label>
-                    <input class="form-control" list="cityOptions" id="city" name="city" placeholder="Type to search...">
-                    <datalist id="cityOptions">
-                    {% for x in cities %}
-                        <option value="{{ x }}">
-                    {% endfor %}
-                    </datalist>
+                    <input class="form-control" type="text" id="city" name="city" placeholder="Type to search...">
                 </div>
             </div>
             <div class="row">
@@ -60,4 +73,5 @@ Preferences
             </div>
         </div>
     </form>
+    {% endif %}
 {% endblock %}
