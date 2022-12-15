@@ -68,6 +68,6 @@ def algorithm(uid):
 
     return((calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10) +
             (calc_LOL_clash() * get_league_pref(uid) / 10) +
-            (calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10)) 
+            (calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10)) / 3
 
 #print(algorithm(0)
