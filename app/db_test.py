@@ -57,7 +57,7 @@ else:
 
 print()
 print("user_info table exists?:" + str(db.check_user_info(0)))
-db.add_user_info(0, "New York", "Naruto", "Rain")
+db.add_user_info(0, "New York", 44511, "Rain")
 print(20*"#" + "ADDING USER INFO" + 20*"#")
 
 if (db.get_city(0) == "New York"):
@@ -65,10 +65,10 @@ if (db.get_city(0) == "New York"):
 else:
     print("CITY IS INCORRECT. SHOULD BE New York NOT " + db.get_city(0))
 
-if (db.get_favorite_anime(0) == "Naruto"):
+if (db.get_favorite_anime(0) == 44511):
     print("FAVORITE ANIME IS CORRECT")
 else:
-    print("FAVORITE ANIME IS INCORRECT. SHOULD BE Naruto NOT " + db.get_favorite_anime(0))
+    print("FAVORITE ANIME IS INCORRECT. SHOULD BE 44511 NOT " + db.get_favorite_anime(0))
 
 if (db.get_favorite_weather(0) == "Rain"):
     print("FAVORITE WEATHER IS CORRECT")
@@ -79,7 +79,7 @@ else:
 
 print()
 print("user_info table exists?:" + str(db.check_user_info(0)))
-db.update_user_info(0, "Chicago", "Bleach", "Sunny")
+db.update_user_info(0, "Chicago", 12324, "Sunny")
 print(20*"#" + "UPDATING USER INFO" + 20*"#")
 
 if (db.get_city(0) == "Chicago"):
@@ -87,10 +87,10 @@ if (db.get_city(0) == "Chicago"):
 else:
     print("CITY IS INCORRECT. SHOULD BE Chicago NOT " + db.get_city(0))
 
-if (db.get_favorite_anime(0) == "Bleach"):
+if (db.get_favorite_anime(0) == 12324):
     print("FAVORITE ANIME IS CORRECT")
 else:
-    print("FAVORITE ANIME IS INCORRECT. SHOULD BE Bleach NOT " + db.get_favorite_anime(0))
+    print("FAVORITE ANIME IS INCORRECT. SHOULD BE 12324 NOT " + db.get_favorite_anime(0))
 
 if (db.get_favorite_weather(0) == "Sunny"):
     print("FAVORITE WEATHER IS CORRECT")

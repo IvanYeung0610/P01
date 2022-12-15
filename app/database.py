@@ -7,7 +7,7 @@ def setup_tables():
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS logins (username TEXT, uid INTEGER PRIMARY KEY, password TEXT)")
     c.execute("CREATE TABLE IF NOT EXISTS preferences (uid INTEGER PRIMARY KEY, league INTEGER, anime INTEGER, weather INTEGER)")
-    c.execute("CREATE TABLE IF NOT EXISTS user_info (uid INTEGER PRIMARY KEY, city TEXT, favorite_anime TEXT, favorite_weather TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS user_info (uid INTEGER PRIMARY KEY, city TEXT, favorite_anime INTEGER, favorite_weather TEXT)")
     c.close()
 
 def get_password(username):
@@ -91,7 +91,7 @@ def get_weather_pref(uid):
 
 def add_user_info(uid, city, favorite_anime, favorite_weather):
     c = db.cursor()
-    c.execute("INSERT INTO user_info VALUES(?, ?, ?, ?)", (int(uid), str(city), str(favorite_anime), str(favorite_weather)))
+    c.execute("INSERT INTO user_info VALUES(?, ?, ?, ?)", (int(uid), str(city), int(favorite_anime), str(favorite_weather)))
     db.commit()
     c.close()
 
@@ -108,7 +108,7 @@ def check_user_info(uid):
 
 def update_user_info(uid, city, favorite_anime, favorite_weather):
     c = db.cursor()
-    c.execute("UPDATE user_info SET city = ?, favorite_anime = ?, favorite_weather = ? WHERE uid = ?", (str(city), str(favorite_anime), str(favorite_weather), int(uid)))
+    c.execute("UPDATE user_info SET city = ?, favorite_anime = ?, favorite_weather = ? WHERE uid = ?", (str(city), int(favorite_anime), str(favorite_weather), int(uid)))
     db.commit()
     c.close()
 
