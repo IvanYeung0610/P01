@@ -20,9 +20,16 @@ Preferences
                     <input class="form-control" type="text" id="search" name="search" placeholder="Enter keywords of your favorite anime to search">
                 </div>
                 <div class="col-1">
-                    <input type="submit">
+                    <input type="submit" name="submit" value="Search">
                 </div>
             </div>
+            {% for x in searchresult %}
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <button type="submit" value="{{x}}" name="submit" class="btn btn-primary btn-block w-100 mt-3" >{{x}}</button>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
     </form>

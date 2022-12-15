@@ -65,11 +65,23 @@ def pref():
         cities=cities)
     if request.method == "POST":
         if "page2" in request.form:
-            search = request.form["search"]
-            searchresult = api_info.search_anime(search)
-            return render_template('preferences.html',
-                page2=True,
-                searchresult=searchresult)
+            #if searching for anime name
+            if request.form["submit"] == 'Search':
+                search = request.form["search"]
+                '''searchresult = api_info.search_anime(search)'''
+                #doesn't currently work without keys
+                searchresult = []
+                for x in search:
+                    searchresult.append(x)
+                return render_template('preferences.html',
+                    page2=True,
+                    searchresult=searchresult)
+            #if picking one 
+            else:
+                name = request.form["submit"]
+                #get anime using name
+                return redirect(url_for("home"))
+            
         else:
             league = request.form["league"]
             anime = request.form["anime"]
