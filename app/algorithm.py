@@ -3,11 +3,10 @@ from api_info import *
 import math
 from datetime import date
 def calc_weather(city):
-    weather = get_weather(city)
     #print(weather)
-    temp = weather['temperature']
-    humidity = weather['humidity']
-    rain_chance = weather['rain_chance']
+    temp = city['temperature']
+    humidity = city['humidity']
+    rain_chance = city['rain_chance']
     if temp > 75:
         temp_factor = math.pow((100-temp), -1) * 100
     elif temp <= 75:
@@ -24,11 +23,10 @@ def calc_weather(city):
     return (temp_factor + humidity_factor + rain_factor) / 3
     
 
-def calc_LOL_clash():
-    clash_dates = get_LOL_clash()
+def calc_LOL_clash(dates):
     #print(clash_dates)
     #print(dates)
-    if clash_dates['clash_time1'] == dt.today():
+    if dates['clash_time1'] == dt.today():
         return 0
     return 1
 
@@ -48,10 +46,8 @@ def weekday_to_integer(day):
     else:
         return 6
 
-def calc_anime_date(anime_id):
-    broadcast = weekday_to_integer(get_anime_date(anime_id))
-    today = date.today().weekday()
-    if broadcast == today:
+def calc_anime_date(anime_date):
+    if anime_date == date.today().weekday():
         return 0
     return 1
     

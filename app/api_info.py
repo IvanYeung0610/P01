@@ -26,6 +26,8 @@ def get_weather(user_location):
     response = urlopen(URL)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     #print(data_json)#checks for correct retrieval of JSON
+
+
     return {"temperature" : data_json['data'][0]['temp'], "humidity" : data_json['data'][0]['rh'], "rain_chance" : data_json['data'][0]['precip']}
 
 def get_LOL_clash():
@@ -53,8 +55,8 @@ def get_LOL_clash():
     elif len(data_json) == 0:
         time1 = "No clash!"
         time2 = "No clash!"
-
-    return {"clash_time1" : time1, "clash_time2" : time2}
+    
+    return {"data" : data_json, "clash_time1" : time1, "clash_time2" : time2}
 
 def search_anime(search):
     #MAL api
@@ -105,6 +107,5 @@ def get_anime_date(id):
     #print(URL)#checks for getting correct URL
     response = urlopen(request_site)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
-    anime = data_json['title']
     animeDate = data_json['broadcast']['day_of_the_week'].capitalize()
-    return animeDate
+    return {"data" : data_json, "anime_date" : animeDate}
