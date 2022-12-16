@@ -92,6 +92,7 @@ jeffC -- 2022-12-12 23:34
 jeffC -- 2022-12-13 9:26
 * Finished weather calculator
 * Begin Riot calculator
+*WIP algorithm, finished writing out concept, begin implementation
 
 ivanY -- 2022-12-12 21:32
 * fixed bug with preferences using cities.csv file
@@ -111,6 +112,7 @@ ivanY -- 2022-12-13 9:24
 * Started working on drawing info to home page
 
 jeffC -- 2022-12-13 20:14
+
 * Finished anime and LOL clash components of algorithm
 * Finished algorithm, testing required (can't test clash yet, need to wait till tomorrow)
 
@@ -128,5 +130,12 @@ ivanY -- 2022-12-14 23:00
 * Fixed bug with database. 
 * Found issue with LOL key in api_info.py
 
+ivanY -- 2022-12-15 9:23
+* Tested algorithm and determined outputs of the functions
+
 brianC -- 2022-12-15 09:26
 * Created different page displays for preferences html and preferences method incorporating anime list search
+
+ivanY -- 2022-12-16 9:21
+* Adding to design doc for new system of storing api info
+* making tables that will store api info to facilitate display on site
