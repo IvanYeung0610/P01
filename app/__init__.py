@@ -68,11 +68,11 @@ def pref():
             #if searching for anime name
             if request.form["submit"] == 'Search':
                 search = request.form["search"]
-                '''searchresult = api_info.search_anime(search)'''
+                searchresult = api_info.search_anime(search)
                 #doesn't currently work without keys
-                searchresult = []
+                '''searchresult = []
                 for x in search:
-                    searchresult.append(x)
+                    searchresult.append(x)'''
                 return render_template('preferences.html',
                     page2=True,
                     searchresult=searchresult)
@@ -80,6 +80,7 @@ def pref():
             else:
                 name = request.form["submit"]
                 #get anime using name
+                print(name)
                 return redirect(url_for("home"))
             
         else:
