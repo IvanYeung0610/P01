@@ -15,7 +15,15 @@ def get_cities(cities):
 
 @app.route("/")
 def index():
-    return render_template('home.html')
+    if (not bool(session)):
+        return render_template("home.html")
+    else:
+        uid = database.get_uid(session["username"])
+        if (not database.check_pref(uid)):
+            return redirect(url_for("pref"))
+        else:
+            return render_template("home.html")
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -37,7 +45,7 @@ def login():
         session['logged_in'] = True
         print("SESSION LOGIN:")
         print(session)
-        return redirect(url_for("home"))
+        return redirect(url_for("index"))
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -60,74 +68,58 @@ def register():
 
 @app.route("/preferences", methods=['GET', 'POST'])
 def pref():
-    if request.method == "GET":
-        cities = []
-        get_cities(cities)
-        #api_info.search_anime(id) <-- SOMETHING IS WRONG WITH THE SPLIT IN API_INFO
-        return render_template('preferences.html',
-        cities=cities)
-    if request.method == "POST":
-        if "page2" in request.form:
-            #if searching for anime name
-            if request.form["submit"] == 'Search':
-                search = request.form["search"]
-                '''searchresult = api_info.search_anime(search)'''
-                #doesn't currently work without keys
-                searchresult = []
-                for x in search:
-                    searchresult.append(x)
-                return render_template('preferences.html',
-                    page2=True,
-                    searchresult=searchresult)
-            #if picking one 
+    if (not bool(session)):
+        return redirect(url_for("index"))
+    else:
+        if request.method == "GET":
+            cities = []
+            get_cities(cities)
+            #api_info.search_anime(id) <-- SOMETHING IS WRONG WITH THE SPLIT IN API_INFO
+            return render_template('preferences.html',
+            cities=cities)
+        if request.method == "POST":
+            if "page2" in request.form:
+                #if searching for anime name
+                if request.form["submit"] == 'Search':
+                    search = request.form["search"]
+                    '''searchresult = api_info.search_anime(search)'''
+                    #doesn't currently work without keys
+                    return render_template('preferences.html',
+                        page2=True,
+                        searchresult=searchresult)
+                #if picking one 
+                else:
+                    name = request.form["submit"]
+                    #get anime using name
+                    return redirect(url_for("index"))
+                
             else:
-                name = request.form["submit"]
-                #get anime using name
-                return redirect(url_for("home"))
-            
-        else:
-            league = request.form["league"]
-            anime = request.form["anime"]
-            weather = request.form["weather"]
-            city = request.form["city"]
-            uid = database.get_uid(session["username"])
+                league = request.form["league"]
+                anime = request.form["anime"]
+                weather = request.form["weather"]
+                city = request.form["city"]
+                uid = database.get_uid(session["username"])
 
-            if (not database.check_pref(uid)):
-                database.add_pref(uid, league, anime, weather)
+                if (not database.check_pref(uid)):
+                    database.add_pref(uid, league, anime, weather)
+                else:
+                    database.update_pref(uid, league, anime, weather)
+
+                if int(anime) > 0:
+                    return render_template('preferences.html',
+                    page2=True)
+                
+            if (not database.check_user_info(uid)):
+                database.add_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
             else:
-                database.update_pref(uid, league, anime, weather)
-
-            if int(anime) > 0:
-                return render_template('preferences.html',
-                page2=True)
-            
-        if (not database.check_user_info(uid)):
-            database.add_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
-        else:
-            database.update_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
-        return redirect(url_for("home"))
+                database.update_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
+            return redirect(url_for("index"))
 
 @app.route("/logout")
 def logout():
     session['logged_in'] = False
     session.pop('username', None)
     return redirect(url_for("login"))
-
-@app.route("/home")
-def home():
-    if (not bool(session)):
-        return redirect(url_for("login"))
-    print("SESSION HOME:")
-    print(session)
-    uid = database.get_uid(session["username"])
-    print("USERNAME:")
-    print(session["username"])
-    print("***********"+str(uid)+"***********")
-    if (not database.check_pref(uid)):
-        return redirect(url_for("preferences"))
-    else:
-        return render_template("home.html")
-
 
 @app.route("/grass")
 def grass():
