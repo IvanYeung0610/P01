@@ -111,7 +111,6 @@ ivanY -- 2022-12-13 9:24
 * Started working on drawing info to home page
 
 jeffC -- 2022-12-13 20:14
-
 * Finished anime and LOL clash components of algorithm
 * Finished algorithm, testing required (can't test clash yet, need to wait till tomorrow)
 
@@ -128,3 +127,6 @@ jeffC -- 2022-12-14 10:11
 ivanY -- 2022-12-14 23:00
 * Fixed bug with database. 
 * Found issue with LOL key in api_info.py
+
+brianC -- 2022-12-15 09:26
+* Created different page displays for preferences html and preferences method incorporating anime list search
