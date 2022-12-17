@@ -2,6 +2,7 @@ from flask import json
 from urllib.request import urlopen, Request
 from urllib import request
 from datetime import datetime as dt, date
+from database import add_weather_info
 
 def replace_space(input):
     split_words = input.split(' ')
@@ -26,6 +27,7 @@ def get_weather(user_location):
     response = urlopen(URL)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
     #print(data_json)#checks for correct retrieval of JSON
+    add_weather_info(data_json['temp'], data_json['rh'], data_json['precip'], data_json['aqi'], data_json['sunrise'], data_json['sunset'])
 
 
     return None

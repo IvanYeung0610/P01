@@ -3,10 +3,11 @@ from api_info import *
 import math
 from datetime import date, datetime as dt, timedelta
 def calc_weather(city):
-    #print(weather)
-    temp = city['temperature']
-    humidity = city['humidity']
-    rain_chance = city['rain_chance']
+    get_weather(city)
+
+    temp = get_temperature()
+    humidity = get_humidity()
+    rain_chance = get_rain_chance() 
     if temp > 75:
         temp_factor = math.pow((100-temp), -1) * 100
     elif temp <= 75:

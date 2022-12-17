@@ -125,7 +125,7 @@ def info():
     return render_template("info.html")
 
 @app.route("/weather_details")
-def(weather_details):
+def weather_details():
     return render_template("")
 
 if __name__ == "__main__": #false if this file imported as module
