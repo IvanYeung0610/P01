@@ -1,7 +1,7 @@
 from flask import json
 from urllib.request import urlopen, Request
 from urllib import request
-from datetime import datetime as dt
+from datetime import datetime as dt, date
 
 def replace_space(input):
     split_words = input.split(' ')
@@ -28,8 +28,8 @@ def get_weather(user_location):
     #print(data_json)#checks for correct retrieval of JSON
 
 
-    return {"temperature" : data_json['data'][0]['temp'], "humidity" : data_json['data'][0]['rh'], "rain_chance" : data_json['data'][0]['precip']}
-
+    return None
+"""
 def get_LOL_clash():
     #LOL api
     try:
@@ -57,6 +57,39 @@ def get_LOL_clash():
         time2 = "No clash!"
     
     return {"data" : data_json, "clash_time1" : time1, "clash_time2" : time2}
+"""
+
+def get_NBA(): #returns list of all games this month
+    year = 2022
+    mon = date.today().month
+    #print(mon)
+
+    match mon: #changes current month (1-12) to month system used by NBA api: Jan = 0 .. . Mar = 3, Sept = 4 ... December = 7
+        case 1:
+            mon = 0
+        case 2:
+            mon = 1
+        case 3: 
+            mon = 2
+        case 4:
+            mon = 3
+        case 9:
+            mon = 4
+        case 10:
+            mon = 5
+        case 11:
+            mon = 6
+        case 12:
+            mon = 7 
+
+    url = f"https://data.nba.com/data/10s/v2015/json/mobile_teams/nba/{year}/league/00_full_schedule.json"
+    request_site = Request(url)
+    response = urlopen(request_site)
+
+    data = json.loads(response.read())
+    data = data['lscd'][mon]['mscd']['g']   
+
+    return data
 
 def search_anime(search):
     #MAL api
