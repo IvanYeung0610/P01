@@ -22,12 +22,16 @@ def get_weather(user_location):
         key_weather = None
     #print(key_weather)
     user_location = replace_space(user_location)
+    #print(user_location)
     URL = f"https://api.weatherbit.io/v2.0/current?city={user_location}&key={key_weather}&units=I"
     #print(URL)
     response = urlopen(URL)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
+    #print("here " + data_json['data'][0]['precip'])
     #print(data_json)#checks for correct retrieval of JSON
-    add_weather_info(data_json['temp'], data_json['rh'], data_json['precip'], data_json['aqi'], data_json['sunrise'], data_json['sunset'])
+    if data_json['data'][0]['precip'] == None:
+        rain_chance = 0
+    add_weather_info(data_json['data'][0]['temp'], data_json['data'][0]['rh'], rain_chance, data_json['data'][0]['aqi'], data_json['data'][0]['sunrise'], data_json['data'][0]['sunset'])
 
 
     return None

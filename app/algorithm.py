@@ -1,13 +1,13 @@
 from database import *
 from api_info import *
 import math
-from datetime import date, datetime as dt, timedelta
+from datetime import date, datetime as dt
 def calc_weather(city):
     get_weather(city)
-
     temp = get_temperature()
     humidity = get_humidity()
     rain_chance = get_rain_chance() 
+    #print(rain_chance)
     if temp > 75:
         temp_factor = math.pow((100-temp), -1) * 100
     elif temp <= 75:
@@ -63,7 +63,7 @@ def NBA_today(data):
     if difference < 30: #if time till next nba game is < 30 min, calculate %
         return difference / 30
     else:
-        return 0
+        return 1 
 
 def weekday_to_integer(day):
     if day == "Monday":
@@ -95,8 +95,11 @@ def algorithm(uid):
     #print(calc_LOL_clash() * get_league_pref(uid) / 10)
     
     #print(calc_anime_date(44511)) #test using chainsawman
-    #print(calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10) #test using chainsawman
-
-    return((calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10) +
-            (NBA_today() * get_nba_pref(uid) / 10) +
-            (calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10)) / 3
+    #p['data'][0irint(calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10) #test using chainsawman
+    weather_fac = calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10
+    print("weather: " + str(weather_fac))
+    nba_fac = NBA_today(get_NBA()) * get_nba_pref(uid) / 10
+    print("nba: " + str(nba_fac))
+    anime_fac = calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10
+    print("anime: " + str(anime_fac))
+    return((weather_fac + nba_fac + anime_fac) / 3)
