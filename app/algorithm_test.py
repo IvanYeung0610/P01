@@ -18,5 +18,5 @@ else:
 
 print(db.get_city(0))
 city = db.get_city(0)
-print(algo.calc_weather(city))
+#print(algo.calc_weather(city))
 print(algo.algorithm(0))
