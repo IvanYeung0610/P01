@@ -127,7 +127,11 @@ def weather_details():
     elif (not database.check_pref(uid)):
         return redirect(url_for("pref"))
     else:
-        return render_template("weather.html")
+        temp = database.get_temperature(uid)
+        humid = database.get_humidity(uid)
+        rain = database.get_rain_chance(uid)
+        print(rain)
+        return render_template("weather.html", temp=temp, humid=humid, rain=rainChance)
 
 @app.route("/nba_details")
 def nba_details():

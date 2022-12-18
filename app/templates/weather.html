@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block head %}
+Weather
+{% endblock %}
+
+{% block title %}
+Weather
+{% endblock %}
+
+{% block body %}
+    Temperature: {{ temp }}
+    Humidity: {{ humid }}
+    Chance of rain: {{ rainChance }}
+{% endblock %}
