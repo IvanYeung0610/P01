@@ -6,7 +6,7 @@ db = sqlite3.connect(DB_FILE, check_same_thread=False)
 def setup_tables():
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS logins (username TEXT, uid INTEGER PRIMARY KEY, password TEXT)")
-    c.execute("CREATE TABLE IF NOT EXISTS preferences (uid INTEGER PRIMARY KEY, NBA INTEGER, anime INTEGER, weather INTEGER)")
+    c.execute("CREATE TABLE IF NOT EXISTS preferences (uid INTEGER PRIMARY KEY, nba INTEGER, anime INTEGER, weather INTEGER)")
     c.execute("CREATE TABLE IF NOT EXISTS user_info (uid INTEGER PRIMARY KEY, city TEXT, favorite_anime INTEGER, favorite_weather TEXT)")
     c.execute("CREATE TABLE IF NOT EXISTS weather_info (temperature REAL, humidity REAL, rain_chance REAL, aqi REAL, sunrise REAL, sunset REAL)")
     c.close()
@@ -110,6 +110,24 @@ def check_user_info(uid):
 def update_user_info(uid, city, favorite_anime, favorite_weather):
     c = db.cursor()
     c.execute("UPDATE user_info SET city = ?, favorite_anime = ?, favorite_weather = ? WHERE uid = ?", (str(city), int(favorite_anime), str(favorite_weather), int(uid)))
+    db.commit()
+    c.close()
+
+def update_city(uid, city):
+    c = db.cursor()
+    c.execute("UPDATE user_info SET city = ? WHERE uid = ?", (str(city), int(uid)))
+    db.commit()
+    c.close()
+
+def update_favorite_anime(uid, favorite_anime):
+    c = db.cursor()
+    c.execute("UPDATE user_info SET favorite_anime = ? WHERE uid = ?", (str(favorite_anime), int(uid)))
+    db.commit()
+    c.close()
+
+def update_favorite_weather(uid, favorite_weather):
+    c = db.cursor()
+    c.execute("UPDATE user_info SET favorite_weather = ? WHERE uid = ?", (str(favorite_weather), int(uid)))
     db.commit()
     c.close()
 

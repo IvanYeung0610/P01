@@ -119,13 +119,35 @@ def grass():
     else:
         return render_template("grass.html", grass=algorithm.algorithm(uid))
 
-@app.route("/info")
-def info():
-    return render_template("info.html")
-
 @app.route("/weather_details")
 def weather_details():
-    return render_template("")
+    uid = database.get_uid(session["username"])
+    if (not bool(session)):
+        return redirect(url_for("index"))
+    elif (not database.check_pref(uid)):
+        return redirect(url_for("pref"))
+    else:
+        return render_template("weather.html")
+
+@app.route("/nba_details")
+def nba_details():
+    uid = database.get_uid(session["username"])
+    if (not bool(session)):
+        return redirect(url_for("index"))
+    elif (not database.check_pref(uid)):
+        return redirect(url_for("pref"))
+    else:
+        return render_template("nba.html")
+
+@app.route("/anime_details")
+def anime_details():
+    uid = database.get_uid(session["username"])
+    if (not bool(session)):
+        return redirect(url_for("index"))
+    elif (not database.check_pref(uid)):
+        return redirect(url_for("pref"))
+    else:
+        return render_template("anime.html")
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

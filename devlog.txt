@@ -155,3 +155,14 @@ jeffC -- 2022-12-16 21:27
 * removed LOL_clash api_info
 * added NBA api
 * added NBA algorithm
+
+ivanY -- 2022-12-17 
+* made update functions for the seperate columns in user_info table and tested them:
+    * update_city(uid, city)
+    * update_favorite_anime(uid, favorite_anime)
+    * update_favorite_weather(uid, favorite_weather)
+
+vivianG -- 2022-12-17
+* made a redirect to preferences page upon first login
+* added grass.html page
+* made a redirect to preferences page if they want api info but don't have preferences set
