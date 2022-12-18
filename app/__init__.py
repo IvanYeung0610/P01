@@ -125,7 +125,15 @@ def info():
 
 @app.route("/weather_details")
 def weather_details():
-    return render_template("")
+    return render_template("weather.html")
+
+@app.route("/nba_details")
+def nba_details():
+    return render_template("nba.html")
+
+@app.route("/anime_details")
+def anime_details():
+    return render_template("anime.html")
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
