@@ -1,7 +1,7 @@
 from database import *
 from api_info import *
 import math
-from datetime import date, datetime as dt
+from datetime import date, datetime as dt, timedelta
 def calc_weather(city):
     get_weather(city)
     temp = get_temperature()
@@ -39,12 +39,13 @@ def NBA_today(data):
     for x in data:
         #print("here")
         #print(f"{x['gdte']}")
+        #print(f"{x['stt']}")
         if (f"{x['gdte']}") == str(current_time.date()):
-            dt_string = f"{x['gdte']}" + " " + f"{x['stt']}"
+            dt_string = f"{x['gdtutc']} " + f"{x['utctm']}"
             #print(dt_string)
-            dt_object = dt.strptime(dt_string[:-3], '%Y-%m-%d %I:%M %p')
+            dt_object = dt.strptime(dt_string, '%Y-%m-%d %H:%M') - (timedelta(hours=5))
             #print(dt_object)
-            #print(str(current_time))
+            #print(current_time)
             difference = dt_object - current_time
             difference = difference.total_seconds() / 60
             #print(difference)
@@ -52,7 +53,11 @@ def NBA_today(data):
                 delta = difference
                 #print(dt_object)
                 #print(difference)
+                #print("delta")
                 #print(delta)
+                break
+            else:
+                delta = 0
                 break
         #if (f"{x['gdte']}") == str(date.today()):
         #    #print(x)
@@ -60,8 +65,8 @@ def NBA_today(data):
         #    #print(f"The {x['h']['tc']} {x['h']['tn']} will be playing the {x['v']['tc']} {x['v']['tn']} at {x['stt']} on {x['gdte']}")
     #print(delta)
 
-    if difference < 30: #if time till next nba game is < 30 min, calculate %
-        return difference / 30
+    if delta < 30: #if time till next nba game is < 30 min, calculate %
+        return delta / 30
     else:
         return 1 
 
@@ -97,9 +102,9 @@ def algorithm(uid):
     #print(calc_anime_date(44511)) #test using chainsawman
     #p['data'][0irint(calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10) #test using chainsawman
     weather_fac = calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10
-    print("weather: " + str(weather_fac))
+    #print("weather: " + str(weather_fac))
     nba_fac = NBA_today(get_NBA()) * get_nba_pref(uid) / 10
-    print("nba: " + str(nba_fac))
+    #print("nba: " + str(nba_fac))
     anime_fac = calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10
-    print("anime: " + str(anime_fac))
+    #print("anime: " + str(anime_fac))
     return((weather_fac + nba_fac + anime_fac) / 3)
