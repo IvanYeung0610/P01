@@ -155,3 +155,7 @@ jeffC -- 2022-12-16 21:27
 * removed LOL_clash api_info
 * added NBA api
 * added NBA algorithm
+
+vivianG -- 2022-12-17 21:53
+* made a redirect to preferences page upon first login
+* added grass.html page
