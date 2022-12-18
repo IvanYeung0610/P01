@@ -41,7 +41,7 @@ def NBA_today(data):
             difference = dt_object - current_time
             difference = difference.total_seconds() / 60
             #print(difference)
-            if difference > 0:
+            if difference > -60:
                 delta = difference
                 #print(dt_object)
                 #print(difference)
@@ -57,8 +57,10 @@ def NBA_today(data):
         #    #print(f"The {x['h']['tc']} {x['h']['tn']} will be playing the {x['v']['tc']} {x['v']['tn']} at {x['stt']} on {x['gdte']}")
     #print(delta)
 
-    if delta < 30: #if time till next nba game is < 30 min, calculate %
+    if delta < 30 and delta > 0: #if time till next nba game is < 30 min, calculate %
         return delta / 30
+    elif delta > -60:
+        return 0
     else:
         return 1 
 
@@ -78,10 +80,10 @@ def weekday_to_integer(day):
     else:
         return 6
 
-def calc_anime_date(anime_date):
-    if anime_date == date.today().weekday():
-        return 0
-    return 1
+def calc_anime_date(anime_deets):
+    if anime_deets['airing'] == 0:
+        return 0 #it's finished! you can watch whenever
+    
     
     
 def algorithm(uid):
@@ -97,6 +99,6 @@ def algorithm(uid):
     #print("weather: " + str(weather_fac))
     nba_fac = NBA_today(get_NBA()) * get_nba_pref(uid) / 10
     #print("nba: " + str(nba_fac))
-    anime_fac = calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10
+    anime_fac = calc_anime_date(get_anime_date((get_favorite_anime(uid)))) * get_anime_pref(uid) / 10
     #print("anime: " + str(anime_fac))
     return((weather_fac + nba_fac + anime_fac) / 3)
