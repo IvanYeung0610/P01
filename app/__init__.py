@@ -35,6 +35,7 @@ def login():
         session.permanent = True
         session["username"] = usr
         session['logged_in'] = True
+        uid = database.get_uid(session["username"])
         if (not database.check_pref(uid)):
             return redirect(url_for("pref"))
         else:
