@@ -15,11 +15,7 @@ def get_cities(cities):
 
 @app.route("/")
 def index():
-    if (not bool(session)):
-        return render_template("home.html")
-    else:
-        return render_template("home.html")
-
+    return render_template("home.html")
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -39,9 +35,10 @@ def login():
         session.permanent = True
         session["username"] = usr
         session['logged_in'] = True
-        print("SESSION LOGIN:")
-        print(session)
-        return redirect(url_for("pref"))
+        if (not database.check_pref(uid)):
+            return redirect(url_for("pref"))
+        else:
+            return redirect(url_for("index"))
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -99,7 +96,7 @@ def pref():
                 city = request.form["city"]
                 uid = database.get_uid(session["username"])
                 if (not database.check_pref(uid)):
-                database.add_pref(uid, league, anime, weather)
+                    database.add_pref(uid, league, anime, weather)
                 else:
                     database.update_pref(uid, league, anime, weather)
                 if int(anime) > 0:
@@ -111,15 +108,14 @@ def pref():
                     database.update_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
                 return redirect(url_for("index"))
 
-@app.route("/logout")
-def logout():
-    session['logged_in'] = False
-    session.pop('username', None)
-    return redirect(url_for("login"))
-
 @app.route("/grass")
 def grass():
-    return render_template("grass.html")
+    if (not bool(session)):
+        return redirect(url_for("index"))
+    elif (not database.check_pref(uid)):
+        return redirect(url_for("pref"))
+    else:
+        return render_template("grass.html")
 
 @app.route("/info")
 def info():
