@@ -8,7 +8,7 @@ def setup_tables():
     c.execute("CREATE TABLE IF NOT EXISTS logins (username TEXT, uid INTEGER PRIMARY KEY, password TEXT)")
     c.execute("CREATE TABLE IF NOT EXISTS preferences (uid INTEGER PRIMARY KEY, nba INTEGER, anime INTEGER, weather INTEGER)")
     c.execute("CREATE TABLE IF NOT EXISTS user_info (uid INTEGER PRIMARY KEY, city TEXT, favorite_anime INTEGER, favorite_weather TEXT)")
-    c.execute("CREATE TABLE IF NOT EXISTS weather_info (temperature REAL, humidity REAL, rain_chance REAL, aqi REAL, sunrise REAL, sunset REAL)")
+    c.execute("CREATE TABLE IF NOT EXISTS weather_info (city TEXT PRIMARY KEY, temperature REAL, humidity REAL, rain_chance REAL, aqi REAL, sunrise REAL, sunset REAL)")
     c.close()
 
 def get_password(username):
@@ -152,51 +152,51 @@ def get_favorite_weather(uid):
     c.close()
     return favorite_weather
 
-def add_weather_info(temperature, humidity, rain_chance, aqi, sunrise, sunset):
+def add_weather_info(city, temperature, humidity, rain_chance, aqi, sunrise, sunset):
     c = db.cursor()
-    c.execute("DELETE FROM weather_info") #clears all rows from table
-    c.execute("INSERT INTO weather_info VALUES(?, ?, ?, ?, ?, ?)", (temperature, humidity, rain_chance, aqi, sunrise, sunset))
+    c.execute("DELETE FROM weather_info WHERE city = ?", (str(city),)) #clears all rows from table
+    c.execute("INSERT INTO weather_info VALUES(?, ?, ?, ?, ?, ?, ?)", (city, temperature, humidity, rain_chance, aqi, sunrise, sunset))
     db.commit()
     c.close()
 
-def get_temperature():
+def get_temperature(city):
     c = db.cursor()
-    c.execute("SELECT temperature FROM weather_info")
+    c.execute("SELECT temperature FROM weather_info WHERE city = ?", (str(city),))
     temperature = c.fetchone()[0]
     c.close()
     return temperature
 
-def get_humidity():
+def get_humidity(city):
     c = db.cursor()
-    c.execute("SELECT humidity FROM weather_info")
+    c.execute("SELECT humidity FROM weather_info WHERE city = ?", (str(city),))
     humidity = c.fetchone()[0]
     c.close()
     return humidity
 
-def get_rain_chance():
+def get_rain_chance(city):
     c = db.cursor()
-    c.execute("SELECT rain_chance FROM weather_info")
+    c.execute("SELECT rain_chance FROM weather_info WHERE city = ?", (str(city),))
     rain_chance = c.fetchone()[0]
     c.close()
     return rain_chance
 
-def get_aqi():
+def get_aqi(city):
     c = db.cursor()
-    c.execute("SELECT aqi FROM weather_info")
+    c.execute("SELECT aqi FROM weather_info WHERE city = ?", (str(city),))
     aqi = c.fetchone()[0]
     c.close()
     return aqi
 
-def get_sunrise():
+def get_sunrise(city):
     c = db.cursor()
-    c.execute("SELECT sunrise FROM weather_info")
+    c.execute("SELECT sunrise FROM weather_info WHERE city = ?", (str(city),))
     sunrise = c.fetchone()[0]
     c.close()
     return sunrise
 
-def get_sunset():
+def get_sunset(city):
     c = db.cursor()
-    c.execute("SELECT sunset FROM weather_info")
+    c.execute("SELECT sunset FROM weather_info WHERE city = ?", (str(city),))
     sunset = c.fetchone()[0]
     c.close()
     return sunset

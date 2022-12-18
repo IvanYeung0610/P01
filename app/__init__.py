@@ -88,25 +88,30 @@ def pref():
                 else:
                     name = request.form["submit"]
                     #get anime using name
-                    print(name)
+                    #print(name)
                     return redirect(url_for("index"))
             else:
                 nba = request.form["nba"]
                 anime = request.form["anime"]
                 weather = request.form["weather"]
                 city = request.form["city"]
+                #print("VARIABLE HOLDING CITY: " + city)
                 uid = database.get_uid(session["username"])
                 if (not database.check_pref(uid)):
                     database.add_pref(uid, nba, anime, weather)
                 else:
                     database.update_pref(uid, nba, anime, weather)
+                if (not database.check_user_info(uid)):
+                    database.add_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
+                    api_info.get_weather(database.get_city(uid))
+                    print("USER'S CITY: " + database.get_city(uid))
+                else:
+                    database.update_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
+                    api_info.get_weather(database.get_city(uid))
+                    print("USER'S CITY: " + database.get_city(uid))
                 if int(anime) > 0:
                     return render_template('preferences.html',
                     page2=True)
-                if (not database.check_user_info(uid)):
-                    database.add_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
-                else:
-                    database.update_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
                 return redirect(url_for("index"))
 
 @app.route("/grass")
@@ -141,7 +146,7 @@ def weather_details():
 
         Source: https://www.flaticon.com/
         '''
-        return render_template("weather.html", temp=temp, humid=humid, rain=rainChance)
+        return render_template("weather.html", temp=temp, humid=humid, rain=rain)
 
 @app.route("/nba_details")
 def nba_details():
