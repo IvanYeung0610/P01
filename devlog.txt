@@ -156,8 +156,14 @@ jeffC -- 2022-12-16 21:27
 * added NBA api
 * added NBA algorithm
 
+<<<<<<< HEAD
 ivanY -- 2022-12-17 
 * made update functions for the seperate columns in user_info table and tested them:
     * update_city(uid, city)
     * update_favorite_anime(uid, favorite_anime)
     * update_favorite_weather(uid, favorite_weather)
+=======
+vivianG -- 2022-12-17 21:53
+* made a redirect to preferences page upon first login
+* added grass.html page
+>>>>>>> 49c618ed0968eb8839e22b2692be8e4ed556b957
