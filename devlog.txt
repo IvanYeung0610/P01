@@ -168,7 +168,7 @@ vivianG -- 2022-12-17
 * made a redirect to preferences page if they want api info but don't have preferences set
 * put in the start of the weather.html page
 
-ivanY -- 2022-12-18 0:20
+ivanY -- 2022-12-18 00:20
 * updated design doc with database functions
 * changed weather_info table to include a column with city along with corresponding functions
 * added a non functional drop down for the detail pages
@@ -177,3 +177,7 @@ ivanY -- 2022-12-18 0:20
 jeffC -- 2022-12-18 00:22
 * bugfixed weather calculator
 * changed anime calculator to function more like NBA calculator, makes chance to go outside lower as you approach an anime airing time
+
+ivanY -- 2022-12-18 00:50
+* got weather details page working 
+* added city parameters to the functions drawing data from the weather_info table

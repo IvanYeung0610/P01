@@ -4,9 +4,9 @@ import math
 from datetime import date, datetime as dt, timedelta
 def calc_weather(city):
     get_weather(city)
-    temp = get_temperature()
-    humidity = get_humidity()
-    rain_chance = get_rain_chance() 
+    temp = get_temperature(city)
+    humidity = get_humidity(city)
+    rain_chance = get_rain_chance(city) 
     #print(rain_chance)
     if temp > 75:
         temp_factor = math.pow((100-temp), -1) * 100

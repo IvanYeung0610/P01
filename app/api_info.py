@@ -15,6 +15,7 @@ def replace_space(input):
 #print(replace_space("test for replace space"))
 def get_weather(user_location):
     #weather api
+    city = user_location
     try:
         with open('./keys/key_weatherbit.txt', 'r') as f:
             key_weather = f.read().strip()
@@ -38,10 +39,10 @@ def get_weather(user_location):
     print("temperature: " + str(data_json['data'][0]['temp']))
     print("humidity: " + str(data_json['data'][0]['rh']))
     print("rain_chance " + str(rain_chance))
-    add_weather_info(user_location, data_json['data'][0]['temp'], data_json['data'][0]['rh'], rain_chance, data_json['data'][0]['aqi'], data_json['data'][0]['sunrise'], data_json['data'][0]['sunset'])
-    print("temperature: " + database.get_temperature(user_location))
-    print("humidity: " + database.get_humidity(user_location))
-    print("rain_chance " + database.get_rain_chance(user_location))
+    add_weather_info(city, data_json['data'][0]['temp'], data_json['data'][0]['rh'], rain_chance, data_json['data'][0]['aqi'], data_json['data'][0]['sunrise'], data_json['data'][0]['sunset'])
+    print("temperature: " + str(database.get_temperature(user_location)))
+    print("humidity: " + str(database.get_humidity(user_location)))
+    print("rain_chance " + str(database.get_rain_chance(user_location)))
 
     return None
 """

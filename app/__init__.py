@@ -139,6 +139,7 @@ def weather_details():
         return redirect(url_for("index"))
     else:
         uid = database.get_uid(session["username"])
+        print(uid)
         if (not database.check_pref(uid)):
             return redirect(url_for("pref"))
         else:
@@ -146,7 +147,6 @@ def weather_details():
             temp = database.get_temperature(city)
             humid = database.get_humidity(city)
             rain = database.get_rain_chance(city)
-            print(rain)
             '''
             https://cdn-icons-png.flaticon.com/512/3222/3222672.png
             https://cdn-icons-png.flaticon.com/512/5822/5822964.png
@@ -154,8 +154,8 @@ def weather_details():
             https://cdn-icons-png.flaticon.com/512/106/106044.png
             https://cdn-icons-png.flaticon.com/512/4088/4088914.png
 
-        Source: https://www.flaticon.com/
-        '''
+            Source: https://www.flaticon.com/
+            '''
         return render_template("weather.html", temp=temp, humid=humid, rain=rain)
 
 @app.route("/nba_details")
