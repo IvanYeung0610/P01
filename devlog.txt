@@ -166,3 +166,4 @@ vivianG -- 2022-12-17
 * made a redirect to preferences page upon first login
 * added grass.html page
 * made a redirect to preferences page if they want api info but don't have preferences set
+* put in the start of the weather.html page
