@@ -127,9 +127,10 @@ def weather_details():
     elif (not database.check_pref(uid)):
         return redirect(url_for("pref"))
     else:
-        temp = database.get_temperature(uid)
-        humid = database.get_humidity(uid)
-        rain = database.get_rain_chance(uid)
+        city = database.get_city(uid)
+        temp = database.get_temperature(city)
+        humid = database.get_humidity(city)
+        rain = database.get_rain_chance(city)
         print(rain)
         '''
         https://cdn-icons-png.flaticon.com/512/3222/3222672.png
