@@ -80,10 +80,10 @@ def weekday_to_integer(day):
     else:
         return 6
 
-def calc_anime_date(anime_date):
-    if anime_date == date.today().weekday():
-        return 0
-    return 1
+def calc_anime_date(anime_deets):
+    if anime_deets['airing'] == 0:
+        return 0 #it's finished! you can watch whenever
+    
     
     
 def algorithm(uid):
