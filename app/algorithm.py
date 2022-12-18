@@ -80,9 +80,29 @@ def weekday_to_integer(day):
     else:
         return 6
 
-def calc_anime_date(anime_deets):
-    if anime_deets['airing'] == 0:
-        return 0 #it's finished! you can watch whenever
+def calc_anime_date(uid):
+    deets = get_anime_date(uid)
+    if deets['airing'] == 0:
+        return 1 #it's finished! you can watch whenever
+        
+    current_JST = dt.today() + timedelta(hours=14)
+    #print(current_JST)
+    if current_JST.weekday() == deets['anime_date']: 
+        anime_broadcast_time = current_JST.date().strftime('%Y-%m-%d') + " " + deets['anime_time'] #string with anime broadcast date + time
+        anime_broadcast_time = dt.strptime(anime_broadcast_time, '%Y-%m-%d %H-%M') #dt object with anime broadcast date + time
+        difference = anime_broadcast_time - current_JST 
+        difference = difference.total_seconds() / 60 #difference in minutes
+        if difference > 0 and difference < 30:
+            return difference / 30 
+        elif difference < 0 and difference < -60:
+            return 0 #if it's been less than 1 since episode aired
+    else:
+        return 1 #wrong day for anime
+
+    #this is the anime airing date for EST
+    #abt_est = dt.strptime(anime_broadcast_time, '%Y-%m-%d %H:%M') - (timedelta(hours=14))
+    #
+    #if weekday_to_integer(deets['anime_date']) == current_day.weekday()""
     
     
     
@@ -99,6 +119,6 @@ def algorithm(uid):
     #print("weather: " + str(weather_fac))
     nba_fac = NBA_today(get_NBA()) * get_nba_pref(uid) / 10
     #print("nba: " + str(nba_fac))
-    anime_fac = calc_anime_date(get_anime_date((get_favorite_anime(uid)))) * get_anime_pref(uid) / 10
+    anime_fac = calc_anime_date((get_favorite_anime(uid))) * get_anime_pref(uid) / 10
     #print("anime: " + str(anime_fac))
     return((weather_fac + nba_fac + anime_fac) / 3)

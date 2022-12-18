@@ -148,11 +148,12 @@ def get_anime_date(id):
     #print(URL)#checks for getting correct URL
     response = urlopen(request_site)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
+    #print(data_json.get("status"))
     anime_date = data_json['broadcast']['day_of_the_week'].capitalize()
     anime_time = data_json['broadcast']['start_time']
-    if data_json['status'] != "finished_airing":
-        airing = 0
-    else:
-        airing = 1
+    if data_json.get("status") != None:
+        if data_json['status'] != "finished_airing":
+            airing = 0
+    else: airing = 1
 
-    return {"data" : data_json, "anime_date" : animeDate, "airing" : airing}
+    return {"data" : data_json, "anime_date" : anime_date, "anime_time" : anime_time, "airing" : airing}
