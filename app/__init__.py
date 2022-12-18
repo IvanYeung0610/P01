@@ -111,12 +111,12 @@ def pref():
 
 @app.route("/grass")
 def grass():
+    uid = database.get_uid(session["username"])
     if (not bool(session)):
         return redirect(url_for("index"))
     elif (not database.check_pref(uid)):
         return redirect(url_for("pref"))
     else:
-        uid = database.get_uid(session["username"])
         return render_template("grass.html", grass=algorithm.algorithm(uid))
 
 @app.route("/info")
