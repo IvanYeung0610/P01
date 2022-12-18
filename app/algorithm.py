@@ -23,14 +23,6 @@ def calc_weather(city):
    # return {"factor" : (temp_factor + humidity_factor + rain_factor) / 3, "weather" : weather}
     return (temp_factor + humidity_factor + rain_factor) / 3
     
-"""
-def calc_LOL_clash(dates):
-    #print(clash_dates)
-    #print(dates)
-    if dates['clash_time1'] == dt.today():
-        return 0
-    return 1
-"""
 def NBA_today(data): 
 
     current_time = dt.today()
