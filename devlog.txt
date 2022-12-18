@@ -108,7 +108,7 @@ ivanY -- 2022-12-12 21:32
 * Found error api_info.search_anime(id) [has something to do with the split method]
 
 ivanY -- 2022-12-13 9:24
-* Linked user_info table with flask 
+* Linked user_info table with flask
 * Started working on drawing info to home page
 
 jeffC -- 2022-12-13 20:14
@@ -127,7 +127,7 @@ jeffC -- 2022-12-14 10:11
 * Confirmed algorithm works, changed the anime table to hold anime ID
 
 ivanY -- 2022-12-14 23:00
-* Fixed bug with database. 
+* Fixed bug with database.
 * Found issue with LOL key in api_info.py
 
 ivanY -- 2022-12-15 9:23
@@ -139,3 +139,19 @@ brianC -- 2022-12-15 09:26
 ivanY -- 2022-12-16 9:21
 * Adding to design doc for new system of storing api info
 * making tables that will store api info to facilitate display on site
+
+ivanY -- 2022-12-16 18:26
+* created a weather_info table to store info from weather api
+* add functions for weather_info table:
+    * add_weather_info(temperature, humidity, rain_chance, aqi, sunrise, sunset)
+    * get_temperature()
+    * get_humidity()
+    * get_rain_chance()
+    * get_aqi()
+    * get_sunrise()
+    * get_sunset()
+
+jeffC -- 2022-12-16 21:27
+* removed LOL_clash api_info
+* added NBA api
+* added NBA algorithm

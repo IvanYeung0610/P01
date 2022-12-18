@@ -3,7 +3,7 @@ from urllib.request import urlopen, Request
 from urllib import request
 from datetime import datetime as dt
 from api_info import *
-
+"""
 app = Flask(__name__)
 
 @app.route("/")
@@ -13,7 +13,6 @@ def home():
         clashTime1=get_LOL_clash()['clash_time1'], clashTime2=get_LOL_clash()['clash_time2'], 
         anime=get_anime_date(44511)
         )
-"""
     #LOL api
     with open('./keys/key_LOL.txt', 'r') as f:
         key_LOL = f.read().strip()
@@ -47,8 +46,12 @@ def home():
     anime = data_json['title']
     animeDate = data_json['broadcast']['day_of_the_week'].capitalize()
     return render_template('api_test.html', anime = anime, animeDate = animeDate)
-"""
+
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
     app.debug = True
     app.run()
+
+"""
+
+get_NBA()

@@ -1,13 +1,13 @@
 from database import *
 from api_info import *
 import math
-from datetime import date
+from datetime import date, datetime as dt
 def calc_weather(city):
-    weather = get_weather(city)
-    #print(weather)
-    temp = weather['temperature']
-    humidity = weather['humidity']
-    rain_chance = weather['rain_chance']
+    get_weather(city)
+    temp = get_temperature()
+    humidity = get_humidity()
+    rain_chance = get_rain_chance() 
+    #print(rain_chance)
     if temp > 75:
         temp_factor = math.pow((100-temp), -1) * 100
     elif temp <= 75:
@@ -23,14 +23,47 @@ def calc_weather(city):
    # return {"factor" : (temp_factor + humidity_factor + rain_factor) / 3, "weather" : weather}
     return (temp_factor + humidity_factor + rain_factor) / 3
     
-
-def calc_LOL_clash():
-    clash_dates = get_LOL_clash()
+"""
+def calc_LOL_clash(dates):
     #print(clash_dates)
     #print(dates)
-    if clash_dates['clash_time1'] == dt.today():
+    if dates['clash_time1'] == dt.today():
         return 0
     return 1
+"""
+def NBA_today(data): 
+
+    current_time = dt.today()
+    #print(current_time)
+    delta = None
+    for x in data:
+        #print("here")
+        #print(f"{x['gdte']}")
+        if (f"{x['gdte']}") == str(current_time.date()):
+            dt_string = f"{x['gdte']}" + " " + f"{x['stt']}"
+            #print(dt_string)
+            dt_object = dt.strptime(dt_string[:-3], '%Y-%m-%d %I:%M %p')
+            #print(dt_object)
+            #print(str(current_time))
+            difference = dt_object - current_time
+            difference = difference.total_seconds() / 60
+            #print(difference)
+            if difference > 0:
+                delta = difference
+                #print(dt_object)
+                #print(difference)
+                #print(delta)
+                break
+        #if (f"{x['gdte']}") == str(date.today()):
+        #    #print(x)
+        #    games_today.append(x)
+        #    #print(f"The {x['h']['tc']} {x['h']['tn']} will be playing the {x['v']['tc']} {x['v']['tn']} at {x['stt']} on {x['gdte']}")
+    #print(delta)
+
+    if difference < 30: #if time till next nba game is < 30 min, calculate %
+        return difference / 30
+    else:
+        return 1 
 
 def weekday_to_integer(day):
     if day == "Monday":
@@ -48,10 +81,8 @@ def weekday_to_integer(day):
     else:
         return 6
 
-def calc_anime_date(anime_id):
-    broadcast = weekday_to_integer(get_anime_date(anime_id))
-    today = date.today().weekday()
-    if broadcast == today:
+def calc_anime_date(anime_date):
+    if anime_date == date.today().weekday():
         return 0
     return 1
     
@@ -64,10 +95,11 @@ def algorithm(uid):
     #print(calc_LOL_clash() * get_league_pref(uid) / 10)
     
     #print(calc_anime_date(44511)) #test using chainsawman
-    #print(calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10) #test using chainsawman
-
-    return((calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10) +
-            (calc_LOL_clash() * get_league_pref(uid) / 10) +
-            (calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10)) / 3
-
-#print(algorithm(0)
+    #p['data'][0irint(calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10) #test using chainsawman
+    weather_fac = calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10
+    print("weather: " + str(weather_fac))
+    nba_fac = NBA_today(get_NBA()) * get_nba_pref(uid) / 10
+    print("nba: " + str(nba_fac))
+    anime_fac = calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10
+    print("anime: " + str(anime_fac))
+    return((weather_fac + nba_fac + anime_fac) / 3)

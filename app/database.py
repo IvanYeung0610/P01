@@ -6,8 +6,9 @@ db = sqlite3.connect(DB_FILE, check_same_thread=False)
 def setup_tables():
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS logins (username TEXT, uid INTEGER PRIMARY KEY, password TEXT)")
-    c.execute("CREATE TABLE IF NOT EXISTS preferences (uid INTEGER PRIMARY KEY, league INTEGER, anime INTEGER, weather INTEGER)")
+    c.execute("CREATE TABLE IF NOT EXISTS preferences (uid INTEGER PRIMARY KEY, NBA INTEGER, anime INTEGER, weather INTEGER)")
     c.execute("CREATE TABLE IF NOT EXISTS user_info (uid INTEGER PRIMARY KEY, city TEXT, favorite_anime INTEGER, favorite_weather TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS weather_info (temperature REAL, humidity REAL, rain_chance REAL, aqi REAL, sunrise REAL, sunset REAL)")
     c.close()
 
 def get_password(username):
@@ -45,9 +46,9 @@ def add_user(username, password):
     db.commit()
     c.close()
 
-def add_pref(uid, league, anime, weather):
+def add_pref(uid, nba, anime, weather):
     c = db.cursor()
-    c.execute("INSERT INTO preferences VALUES(?, ?, ?, ?) ", (int(uid), int(league), int(anime), int(weather) ))
+    c.execute("INSERT INTO preferences VALUES(?, ?, ?, ?) ", (int(uid), int(nba), int(anime), int(weather) ))
     db.commit()
     c.close()
 
@@ -62,18 +63,18 @@ def check_pref(uid):
         c.close()
         return False
 
-def update_pref(uid, league, anime, weather):
+def update_pref(uid, nba, anime, weather):
     c = db.cursor()
-    c.execute("UPDATE preferences SET league = ?, anime = ?, weather = ? WHERE uid = ?", (int(league), int(anime), int(weather), int(uid)))
+    c.execute("UPDATE preferences SET nba = ?, anime = ?, weather = ? WHERE uid = ?", (int(nba), int(anime), int(weather), int(uid)))
     db.commit()
     c.close()
 
-def get_league_pref(uid):
+def get_nba_pref(uid):
     c = db.cursor()
-    c.execute("SELECT league FROM preferences WHERE uid = ?", (int(uid),) )
-    league_pref = c.fetchone()[0]
+    c.execute("SELECT nba FROM preferences WHERE uid = ?", (int(uid),) )
+    nba_pref = c.fetchone()[0]
     c.close()
-    return league_pref
+    return nba_pref
 
 def get_anime_pref(uid):
     c = db.cursor()
@@ -132,3 +133,52 @@ def get_favorite_weather(uid):
     favorite_weather = c.fetchone()[0]
     c.close()
     return favorite_weather
+
+def add_weather_info(temperature, humidity, rain_chance, aqi, sunrise, sunset):
+    c = db.cursor()
+    c.execute("DELETE FROM weather_info") #clears all rows from table
+    c.execute("INSERT INTO weather_info VALUES(?, ?, ?, ?, ?, ?)", (temperature, humidity, rain_chance, aqi, sunrise, sunset))
+    db.commit()
+    c.close()
+
+def get_temperature():
+    c = db.cursor()
+    c.execute("SELECT temperature FROM weather_info")
+    temperature = c.fetchone()[0]
+    c.close()
+    return temperature
+
+def get_humidity():
+    c = db.cursor()
+    c.execute("SELECT humidity FROM weather_info")
+    humidity = c.fetchone()[0]
+    c.close()
+    return humidity
+
+def get_rain_chance():
+    c = db.cursor()
+    c.execute("SELECT rain_chance FROM weather_info")
+    rain_chance = c.fetchone()[0]
+    c.close()
+    return rain_chance
+
+def get_aqi():
+    c = db.cursor()
+    c.execute("SELECT aqi FROM weather_info")
+    aqi = c.fetchone()[0]
+    c.close()
+    return aqi
+
+def get_sunrise():
+    c = db.cursor()
+    c.execute("SELECT sunrise FROM weather_info")
+    sunrise = c.fetchone()[0]
+    c.close()
+    return sunrise
+
+def get_sunset():
+    c = db.cursor()
+    c.execute("SELECT sunset FROM weather_info")
+    sunset = c.fetchone()[0]
+    c.close()
+    return sunset

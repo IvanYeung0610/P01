@@ -1,7 +1,8 @@
 from flask import json
 from urllib.request import urlopen, Request
 from urllib import request
-from datetime import datetime as dt
+from datetime import datetime as dt, date
+from database import add_weather_info
 
 def replace_space(input):
     split_words = input.split(' ')
@@ -21,13 +22,20 @@ def get_weather(user_location):
         key_weather = None
     #print(key_weather)
     user_location = replace_space(user_location)
+    #print(user_location)
     URL = f"https://api.weatherbit.io/v2.0/current?city={user_location}&key={key_weather}&units=I"
     #print(URL)
     response = urlopen(URL)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
+    #print("here " + data_json['data'][0]['precip'])
     #print(data_json)#checks for correct retrieval of JSON
-    return {"temperature" : data_json['data'][0]['temp'], "humidity" : data_json['data'][0]['rh'], "rain_chance" : data_json['data'][0]['precip']}
+    if data_json['data'][0]['precip'] == None:
+        rain_chance = 0
+    add_weather_info(data_json['data'][0]['temp'], data_json['data'][0]['rh'], rain_chance, data_json['data'][0]['aqi'], data_json['data'][0]['sunrise'], data_json['data'][0]['sunset'])
 
+
+    return None
+"""
 def get_LOL_clash():
     #LOL api
     try:
@@ -53,8 +61,41 @@ def get_LOL_clash():
     elif len(data_json) == 0:
         time1 = "No clash!"
         time2 = "No clash!"
+    
+    return {"data" : data_json, "clash_time1" : time1, "clash_time2" : time2}
+"""
 
-    return {"clash_time1" : time1, "clash_time2" : time2}
+def get_NBA(): #returns list of all games this month
+    year = 2022
+    mon = date.today().month
+    #print(mon)
+
+    match mon: #changes current month (1-12) to month system used by NBA api: Jan = 0 .. . Mar = 3, Sept = 4 ... December = 7
+        case 1:
+            mon = 0
+        case 2:
+            mon = 1
+        case 3: 
+            mon = 2
+        case 4:
+            mon = 3
+        case 9:
+            mon = 4
+        case 10:
+            mon = 5
+        case 11:
+            mon = 6
+        case 12:
+            mon = 7 
+
+    url = f"https://data.nba.com/data/10s/v2015/json/mobile_teams/nba/{year}/league/00_full_schedule.json"
+    request_site = Request(url)
+    response = urlopen(request_site)
+
+    data = json.loads(response.read())
+    data = data['lscd'][mon]['mscd']['g']   
+
+    return data
 
 def search_anime(search):
     #MAL api
@@ -105,6 +146,5 @@ def get_anime_date(id):
     #print(URL)#checks for getting correct URL
     response = urlopen(request_site)#grabs the JSON from the page
     data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
-    anime = data_json['title']
     animeDate = data_json['broadcast']['day_of_the_week'].capitalize()
-    return animeDate
+    return {"data" : data_json, "anime_date" : animeDate}
