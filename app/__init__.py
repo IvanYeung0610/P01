@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-import os, database, csv, api_info
+import os, database, csv, api_info, algorithm
 
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ def get_cities(cities):
 
 @app.route("/")
 def index():
-    return render_template('home.html')
+    return render_template("home.html")
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -35,7 +35,11 @@ def login():
         session.permanent = True
         session["username"] = usr
         session['logged_in'] = True
-        return redirect(url_for("home"))
+        uid = database.get_uid(session["username"])
+        if (not database.check_pref(uid)):
+            return redirect(url_for("pref"))
+        else:
+            return redirect(url_for("index"))
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -51,74 +55,69 @@ def register():
     if (not database.check_username(usr)):
         database.add_user(usr, pswd)
     else:
-        return render_template("register.html")
+        error="User already exists"
+        return render_template("register.html", error=error)
     if request.method == "POST":
         return redirect(url_for("login"))
 
 @app.route("/preferences", methods=['GET', 'POST'])
 def pref():
-    if request.method == "GET":
-        cities = []
-        get_cities(cities)
-        #api_info.search_anime(id) <-- SOMETHING IS WRONG WITH THE SPLIT IN API_INFO
-        return render_template('preferences.html',
-        cities=cities)
-    if request.method == "POST":
-        if "page2" in request.form:
-            #if searching for anime name
-            if request.form["submit"] == 'Search':
-                search = request.form["search"]
-                searchresult = api_info.search_anime(search)
-                #doesn't currently work without keys
-                '''searchresult = []
-                for x in search:
-                    searchresult.append(x)'''
-                return render_template('preferences.html',
-                    page2=True,
-                    searchresult=searchresult)
-            #if picking one 
+    if (not bool(session)):
+        return redirect(url_for("index"))
+    else:
+        if request.method == "GET":
+            cities = []
+            get_cities(cities)
+            #api_info.search_anime(id) <-- SOMETHING IS WRONG WITH THE SPLIT IN API_INFO
+            return render_template('preferences.html',
+            cities=cities)
+        if request.method == "POST":
+            if "page2" in request.form:
+                #if searching for anime name
+                if request.form["submit"] == 'Search':
+                    search = request.form["search"]
+                    searchresult = api_info.search_anime(search)
+                    #doesn't currently work without keys
+                    '''searchresult = []
+                    for x in search:
+                        searchresult.append(x)'''
+                    return render_template('preferences.html',
+                        page2=True,
+                        searchresult=searchresult)
+                #if picking one 
+                else:
+                    name = request.form["submit"]
+                    #get anime using name
+                    print(name)
+                    return redirect(url_for("index"))
             else:
-                name = request.form["submit"]
-                #get anime using name
-                print(name)
-                return redirect(url_for("home"))
-            
-        else:
-            league = request.form["league"]
-            anime = request.form["anime"]
-            weather = request.form["weather"]
-            city = request.form["city"]
-            uid = database.get_uid(session["username"])
-
-            if (not database.check_pref(uid)):
-                database.add_pref(uid, league, anime, weather)
-            else:
-                database.update_pref(uid, league, anime, weather)
-
-            if int(anime) > 0:
-                return render_template('preferences.html',
-                page2=True)
-            
-        if (not database.check_user_info(uid)):
-            database.add_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
-        else:
-            database.update_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
-        return redirect(url_for("home"))
-
-@app.route("/logout")
-def logout():
-    session['logged_in'] = False
-    session.pop('username', None)
-    return redirect(url_for("login"))
-
-@app.route("/home")
-def home():
-    return render_template("home.html")
-
+                nba = request.form["nba"]
+                anime = request.form["anime"]
+                weather = request.form["weather"]
+                city = request.form["city"]
+                uid = database.get_uid(session["username"])
+                if (not database.check_pref(uid)):
+                    database.add_pref(uid, nba, anime, weather)
+                else:
+                    database.update_pref(uid, nba, anime, weather)
+                if int(anime) > 0:
+                    return render_template('preferences.html',
+                    page2=True)
+                if (not database.check_user_info(uid)):
+                    database.add_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
+                else:
+                    database.update_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
+                return redirect(url_for("index"))
 
 @app.route("/grass")
 def grass():
-    return render_template("grass.html")
+    uid = database.get_uid(session["username"])
+    if (not bool(session)):
+        return redirect(url_for("index"))
+    elif (not database.check_pref(uid)):
+        return redirect(url_for("pref"))
+    else:
+        return render_template("grass.html", grass=algorithm.algorithm(uid))
 
 @app.route("/info")
 def info():
