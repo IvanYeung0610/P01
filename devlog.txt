@@ -154,7 +154,7 @@ ivanY -- 2022-12-16 18:26
 jeffC -- 2022-12-16 21:27
 * removed LOL_clash api_info
 * added NBA api
-* added NBA algorithm
+* added NBA algorithm, chance to go out decreases as you approach NBA game
 
 ivanY -- 2022-12-17 
 * made update functions for the seperate columns in user_info table and tested them:
@@ -167,3 +167,8 @@ vivianG -- 2022-12-17
 * added grass.html page
 * made a redirect to preferences page if they want api info but don't have preferences set
 * put in the start of the weather.html page
+
+jeffC -- 2022-12-18 00:22
+
+* bugfixed weather calculator
+* changed anime calculator to function more like NBA calculator, makes chance to go outside lower as you approach an anime airing time
