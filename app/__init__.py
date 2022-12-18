@@ -90,15 +90,15 @@ def pref():
                     print(name)
                     return redirect(url_for("index"))
             else:
-                league = request.form["league"]
+                nba = request.form["nba"]
                 anime = request.form["anime"]
                 weather = request.form["weather"]
                 city = request.form["city"]
                 uid = database.get_uid(session["username"])
                 if (not database.check_pref(uid)):
-                    database.add_pref(uid, league, anime, weather)
+                    database.add_pref(uid, nba, anime, weather)
                 else:
-                    database.update_pref(uid, league, anime, weather)
+                    database.update_pref(uid, nba, anime, weather)
                 if int(anime) > 0:
                     return render_template('preferences.html',
                     page2=True)
@@ -115,7 +115,8 @@ def grass():
     elif (not database.check_pref(uid)):
         return redirect(url_for("pref"))
     else:
-        return render_template("grass.html")
+        uid = database.get_uid(session["username"])
+        return render_template("grass.html", grass=algorithm.algorithm(uid))
 
 @app.route("/info")
 def info():
