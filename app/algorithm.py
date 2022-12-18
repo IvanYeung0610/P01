@@ -120,5 +120,5 @@ def algorithm(uid):
     nba_fac = NBA_today(get_NBA()) * get_nba_pref(uid) / 10
     #print("nba: " + str(nba_fac))
     anime_fac = calc_anime_date((get_favorite_anime(uid))) * get_anime_pref(uid) / 10
-    #print("anime: " + str(anime_fac))
-    return((weather_fac + nba_fac + anime_fac) / 3)
+    print("anime: " + str(anime_fac))
+    #return((weather_fac + nba_fac + anime_fac) / 3)
