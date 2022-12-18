@@ -3,6 +3,7 @@ from urllib.request import urlopen, Request
 from urllib import request
 from datetime import datetime as dt, date
 from database import add_weather_info
+import database
 
 def replace_space(input):
     split_words = input.split(' ')
@@ -33,8 +34,14 @@ def get_weather(user_location):
         rain_chance = 0
     else:
         rain_chance = data_json['data'][0]['precip']
+    print("User's Location: " + user_location)
+    print("temperature: " + str(data_json['data'][0]['temp']))
+    print("humidity: " + str(data_json['data'][0]['rh']))
+    print("rain_chance " + str(rain_chance))
     add_weather_info(user_location, data_json['data'][0]['temp'], data_json['data'][0]['rh'], rain_chance, data_json['data'][0]['aqi'], data_json['data'][0]['sunrise'], data_json['data'][0]['sunset'])
-
+    print("temperature: " + database.get_temperature(user_location))
+    print("humidity: " + database.get_humidity(user_location))
+    print("rain_chance " + database.get_rain_chance(user_location))
 
     return None
 """
