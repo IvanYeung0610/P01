@@ -33,7 +33,7 @@ def get_weather(user_location):
         rain_chance = 0
     else:
         rain_chance = data_json['data'][0]['precip']
-    add_weather_info(data_json['data'][0]['temp'], data_json['data'][0]['rh'], rain_chance, data_json['data'][0]['aqi'], data_json['data'][0]['sunrise'], data_json['data'][0]['sunset'])
+    add_weather_info(user_location, data_json['data'][0]['temp'], data_json['data'][0]['rh'], rain_chance, data_json['data'][0]['aqi'], data_json['data'][0]['sunrise'], data_json['data'][0]['sunset'])
 
 
     return None
