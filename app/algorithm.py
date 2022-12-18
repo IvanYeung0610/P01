@@ -57,7 +57,7 @@ def NBA_today(data):
         #    #print(f"The {x['h']['tc']} {x['h']['tn']} will be playing the {x['v']['tc']} {x['v']['tn']} at {x['stt']} on {x['gdte']}")
     #print(delta)
 
-    if delta < 30 and delta > 0: #if time till next nba game is < 30 min, calculate %
+    if delta < 30 and delta >= 0: #if time till next nba game is < 30 min, calculate %
         return delta / 30
     elif delta > -60:
         return 0
@@ -92,7 +92,7 @@ def calc_anime_date(uid):
         anime_broadcast_time = dt.strptime(anime_broadcast_time, '%Y-%m-%d %H-%M') #dt object with anime broadcast date + time
         difference = anime_broadcast_time - current_JST 
         difference = difference.total_seconds() / 60 #difference in minutes
-        if difference > 0 and difference < 30:
+        if difference >= 0 and difference < 30:
             return difference / 30 
         elif difference < 0 and difference < -60:
             return 0 #if it's been less than 1 since episode aired
