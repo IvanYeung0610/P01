@@ -156,6 +156,9 @@ def weather_details():
             temp = database.get_temperature(city)
             humid = database.get_humidity(city)
             rain = database.get_rain_chance(city)
+            aqi = database.get_aqi(city)
+            sunrise = database.get_sunrise(city)
+            sunset = database.get_sunset(city)
             '''
             https://cdn-icons-png.flaticon.com/512/3222/3222672.png
             https://cdn-icons-png.flaticon.com/512/5822/5822964.png
@@ -165,7 +168,7 @@ def weather_details():
 
             Source: https://www.flaticon.com/
             '''
-        return render_template("weather.html", temp=temp, humid=humid, rain=rain)
+        return render_template("weather.html", temp=temp, humid=humid, rain=rain, aqi=aqi, sunrise=sunrise, sunset=sunset)
 
 @app.route("/nba_details")
 def nba_details():

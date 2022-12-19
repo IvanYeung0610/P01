@@ -188,3 +188,6 @@ jeffC -- 2022-12-18 21:07
 brianC -- 2022-12-19 12:18
 * created faster pref and user_info functions
 * edited boostrap for search bar
+
+ivanY -- 2022-12-18 23:32
+* added aqi, sunrise, and sunset to /weather_details function
