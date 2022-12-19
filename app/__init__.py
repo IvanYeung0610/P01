@@ -125,7 +125,7 @@ def pref():
 @app.route("/logout")
 def logout():
     if 'username' in session:
-        session.pop('username', None)
+        session.clear()
         return redirect(url_for('index'))
     else:
         return "error.html"
@@ -147,7 +147,6 @@ def weather_details():
         return redirect(url_for("index"))
     else:
         uid = database.get_uid(session["username"])
-        print(uid)
         if (not database.check_pref(uid)):
             return redirect(url_for("pref"))
         else:
@@ -167,7 +166,22 @@ def weather_details():
 
             Source: https://www.flaticon.com/
             '''
-        return render_template("weather.html", temp=temp, humid=humid, rain=rain, aqi=aqi, sunrise=sunrise, sunset=sunset)
+            if (rain <= 20):
+                link = "https://cdn-icons-png.flaticon.com/512/3222/3222672.png"
+                alt = "sunny"
+            elif (rain <= 40):
+                link = "https://cdn-icons-png.flaticon.com/512/5822/5822964.png"
+                alt = "partly sunny"
+            elif (rain <= 60):
+                link = "https://cdn-icons-png.flaticon.com/512/899/899718.png"
+                alt = "cloudy"
+            elif (rain <= 80):
+                link = "https://cdn-icons-png.flaticon.com/512/106/106044.png"
+                alt = "rainy"
+            elif (rain <= 100):
+                link = "https://cdn-icons-png.flaticon.com/512/4088/4088914.png"
+                alt = "heavy rain"
+        return render_template("weather.html", temp=temp, humid=humid, rain=rain, aqi=aqi, sunrise=sunrise, sunset=sunset, link=link, alt=alt)
 
 @app.route("/nba_details")
 def nba_details():
