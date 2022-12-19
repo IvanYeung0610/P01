@@ -104,7 +104,6 @@ def pref():
                 animeint = 44511
                 database.pref(uid, nba, anime, weather)
                 database.user_info(uid, city, animeint, "Filler")
-                '''
                 if (not database.check_pref(uid)):
                     database.add_pref(uid, nba, anime, weather)
                 else:
@@ -113,11 +112,11 @@ def pref():
                 if (not database.check_user_info(uid)):
                     database.add_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
                     api_info.get_weather(database.get_city(uid))
-                    print("USER'S CITY: " + database.get_city(uid))
+                    #print("USER'S CITY: " + database.get_city(uid))
                 else:
                     database.update_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
                     api_info.get_weather(database.get_city(uid))
-                    print("USER'S CITY: " + database.get_city(uid))'''
+                    #print("USER'S CITY: " + database.get_city(uid))
                 if int(anime) > 0:
                     return render_template('preferences.html',
                     page2=True)
