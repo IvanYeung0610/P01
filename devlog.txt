@@ -190,4 +190,10 @@ brianC -- 2022-12-19 12:18
 * edited boostrap for search bar
 
 ivanY -- 2022-12-18 23:32
-* added aqi, sunrise, and sunset to /weather_details function
+* added aqi, sunrise, and sunset to /weatherdetails function
+
+jeffC -- 2022-12-19 09:15
+
+* restored lost progress when yesterday: 
+    * added anime detail page stub
+* began fixing anime search
