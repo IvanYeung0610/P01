@@ -87,7 +87,7 @@ def pref():
                 #if picking one 
                 else:
                     name = request.form["submit"]
-                    animeint = 44512
+                    animeint = 44511
                     #name will replace animeint when it is done
                     uid = database.get_uid(session["username"])
                     database.update_favorite_anime(uid, animeint)
