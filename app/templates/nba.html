@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block head %}
-Weather
+All NBA games this month
 {% endblock %}
 
 {% block title %}
-Weather
+NBA
 {% endblock %}
 
 {% block body %}
@@ -13,14 +13,17 @@ Weather
         <thead>
         <tr>
             <th scope="col">Team</th>
+            
             <th scope="col">Time</th>
-        </tr>
+        </tr> 
         </thead>
         <tbody>
+            {%for row in data%}
             <tr>
-                <td></td>
-                <td></td>
+                <td>{{row['v']['tc'] + " " + row['v']['tn'] + " vs. " + row['h']['tc'] + " " + row['v']['tn']}}</td>
+                <td>{{row['gdte'] + " " + row['stt']}}</td>
             </tr>
+            {%endfor%}
         </tbody>
     </table>
 {% endblock %}
