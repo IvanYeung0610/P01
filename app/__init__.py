@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-import os, database, csv, api_info, algorithm
+import os, database, csv, algorithm, api_info
 
 app = Flask(__name__)
 
@@ -167,7 +167,13 @@ def nba_details():
         if (not database.check_pref(uid)):
             return redirect(url_for("pref"))
         else:
-            return render_template("nba.html")
+            data = api_info.get_NBA()
+            for x in data.copy():
+                if x['stt'] == 'Final':
+                    data.remove(x)
+                    #print("removed")
+            #print(data[0])
+            return render_template("nba.html", data=data)
 
 @app.route("/anime_details")
 def anime_details():

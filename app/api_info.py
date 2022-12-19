@@ -35,14 +35,14 @@ def get_weather(user_location):
         rain_chance = 0
     else:
         rain_chance = data_json['data'][0]['precip']
-    print("User's Location: " + user_location)
-    print("temperature: " + str(data_json['data'][0]['temp']))
-    print("humidity: " + str(data_json['data'][0]['rh']))
-    print("rain_chance " + str(rain_chance))
+    #print("User's Location: " + city)
+    #print("temperature: " + str(data_json['data'][0]['temp']))
+    #print("humidity: " + str(data_json['data'][0]['rh']))
+    #print("rain_chance " + str(rain_chance))
     add_weather_info(city, data_json['data'][0]['temp'], data_json['data'][0]['rh'], rain_chance, data_json['data'][0]['aqi'], data_json['data'][0]['sunrise'], data_json['data'][0]['sunset'])
-    print("temperature: " + str(database.get_temperature(city)))
-    print("humidity: " + str(database.get_humidity(city)))
-    print("rain_chance " + str(database.get_rain_chance(city)))
+    #print("temperature: " + str(database.get_temperature(city)))
+    #print("humidity: " + str(database.get_humidity(city)))
+    #print("rain_chance " + str(database.get_rain_chance(city)))
 
     return None
 """

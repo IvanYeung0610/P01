@@ -29,6 +29,7 @@ def NBA_today(data):
     #print(current_time)
     delta = None
     for x in data:
+            
         #print("here")
         #print(f"{x['gdte']}")
         #print(f"{x['stt']}")
@@ -42,15 +43,16 @@ def NBA_today(data):
             difference = difference.total_seconds() / 60
             #print(difference)
             if difference > -60:
+                #print(difference)
                 delta = difference
                 #print(dt_object)
                 #print(difference)
                 #print("delta")
                 #print(delta)
                 break
-            else:
-                delta = 0
-                break
+    
+    if delta == None:
+        delta = 0
         #if (f"{x['gdte']}") == str(date.today()):
         #    #print(x)
         #    games_today.append(x)
@@ -116,9 +118,9 @@ def algorithm(uid):
     #print(calc_anime_date(44511)) #test using chainsawman
     #p['data'][0irint(calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10) #test using chainsawman
     weather_fac = calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10
-    #print("weather: " + str(weather_fac))
+    print("weather: " + str(weather_fac))
     nba_fac = NBA_today(get_NBA()) * get_nba_pref(uid) / 10
-    #print("nba: " + str(nba_fac))
+    print("nba: " + str(nba_fac))
     anime_fac = calc_anime_date((get_favorite_anime(uid))) * get_anime_pref(uid) / 10
     print("anime: " + str(anime_fac))
-    #return((weather_fac + nba_fac + anime_fac) / 3)
+    return((weather_fac + nba_fac + anime_fac) / 3)
