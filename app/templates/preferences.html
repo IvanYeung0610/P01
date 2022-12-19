@@ -15,13 +15,16 @@ Preferences
         <div class="container">
 
             <div class="row">
-                <div class="col-7 offset-2">
+                <div class="col-8 offset-2">
                     <label for="search" class="form-label">Pick Your Favorite Anime</label>
+                    <div class="input-group">
                     <input class="form-control" type="text" id="search" name="search" placeholder="Enter keywords of your favorite anime to search">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" name="submit" value="Search" type="submit">Search</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-1">
-                    <input type="submit" name="submit" value="Search">
-                </div>
+
             </div>
             {% for x in searchresult %}
             <div class="row">
@@ -35,17 +38,10 @@ Preferences
     {% else %}
     <form action="preferences" method="POST">
         <div class="container">
-
-            <div class="row">
-                <div class="col-8 offset-2">
-                    <label for="nba" class="form-label">How important is the NBA to you?</label>
-                    <input type="range" class="form-range" min="0" max="10" step="1" id="league" name="nba">
-                </div>
-            </div>
             <div class="row mb-3">
                 <div class="col-8 offset-2">
-                    <label for="city" class="form-label">Pick Your City</label>
-                    <input class="form-control" list="cityOptions" id="city" name="city" placeholder="Type to search...">
+                    <label for="city" class="form-label">What City are you in?</label>
+                    <input class="form-control" list="cityOptions" id="city" name="city" placeholder="Type to search..." required>
                     <datalist id="cityOptions">
                     {% for x in cities %}
                         <option value="{{ x }}">
@@ -53,6 +49,13 @@ Preferences
                     </datalist>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <label for="nba" class="form-label">How important is the NBA to you?</label>
+                    <input type="range" class="form-range" min="0" max="10" step="1" id="league" name="nba">
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-8 offset-2">
                     <label for="weather" class="form-label">How important is the weather to you?</label>

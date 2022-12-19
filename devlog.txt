@@ -184,3 +184,7 @@ ivanY -- 2022-12-18 00:50
 
 jeffC -- 2022-12-18 21:07
 * populated NBA detail tables
+
+brianC -- 2022-12-19 12:18
+* created faster pref and user_info functions
+* edited boostrap for search bar

@@ -69,6 +69,12 @@ def update_pref(uid, nba, anime, weather):
     db.commit()
     c.close()
 
+def pref(uid, nba, anime, weather):
+    c = db.cursor()
+    c.execute("REPLACE INTO preferences VALUES(?, ?, ?, ?) ", (int(uid), int(nba), int(anime), int(weather) ))
+    db.commit()
+    c.close()
+
 def get_nba_pref(uid):
     c = db.cursor()
     c.execute("SELECT nba FROM preferences WHERE uid = ?", (int(uid),) )
@@ -110,6 +116,12 @@ def check_user_info(uid):
 def update_user_info(uid, city, favorite_anime, favorite_weather):
     c = db.cursor()
     c.execute("UPDATE user_info SET city = ?, favorite_anime = ?, favorite_weather = ? WHERE uid = ?", (str(city), int(favorite_anime), str(favorite_weather), int(uid)))
+    db.commit()
+    c.close()
+
+def user_info(uid, city, favorite_anime, favorite_weather):
+    c = db.cursor()
+    c.execute("REPLACE INTO user_info VALUES(?, ?, ?, ?)", (int(uid), str(city), int(favorite_anime), str(favorite_weather)))
     db.commit()
     c.close()
 
