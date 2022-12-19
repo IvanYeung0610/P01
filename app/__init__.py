@@ -159,6 +159,7 @@ def weather_details():
             aqi = database.get_aqi(city)
             sunrise = database.get_sunrise(city)
             sunset = database.get_sunset(city)
+            print(rain)
             '''
             https://cdn-icons-png.flaticon.com/512/3222/3222672.png
             https://cdn-icons-png.flaticon.com/512/5822/5822964.png
@@ -168,7 +169,10 @@ def weather_details():
 
             Source: https://www.flaticon.com/
             '''
-        return render_template("weather.html", temp=temp, humid=humid, rain=rain, aqi=aqi, sunrise=sunrise, sunset=sunset)
+            if (rain < 20):
+                link = "https://cdn-icons-png.flaticon.com/512/3222/3222672.png"
+                alt = "sunny"
+        return render_template("weather.html", temp=temp, humid=humid, rain=rain, aqi=aqi, sunrise=sunrise, sunset=sunset, link=link, alt=alt)
 
 @app.route("/nba_details")
 def nba_details():
