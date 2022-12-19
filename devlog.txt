@@ -184,3 +184,6 @@ ivanY -- 2022-12-18 00:50
 
 jeffC -- 2022-12-18 21:07
 * populated NBA detail tables
+
+ivanY -- 2022-12-18 23:32
+* added aqi, sunrise, and sunset to /weather_details function
