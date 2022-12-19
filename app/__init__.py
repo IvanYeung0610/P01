@@ -84,7 +84,7 @@ def pref():
                 #if picking one 
                 else:
                     name = request.form["submit"]
-                    #print(searchresult[name])
+                    #print(name)
                     animeint = 44511
                     #name will replace animeint when it is done
                     uid = database.get_uid(session["username"])

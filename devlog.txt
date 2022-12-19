@@ -196,4 +196,4 @@ jeffC -- 2022-12-19 09:15
 
 * restored lost progress when yesterday: 
     * added anime detail page stub
-* began fixing anime search
+* fixed anime search in html
