@@ -141,7 +141,7 @@ def search_anime(search):
         #anime_img_lg = values[2]['large']
         #print(anime_name)
         return_list.append(value)
-    print(return_list)
+    #print(return_list)
     return return_list
 
 def get_anime_date(id):
