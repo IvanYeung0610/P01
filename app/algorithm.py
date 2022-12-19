@@ -28,31 +28,28 @@ def NBA_today(data):
     current_time = dt.today()
     #print(current_time)
     delta = None
-    for x in data.copy():
-        if x['stt'] == 'Final':
-            data.remove(x)
     for x in data:
             
         #print("here")
         #print(f"{x['gdte']}")
         #print(f"{x['stt']}")
-        #if (f"{x['gdte']}") == str(current_time.date()):
-        dt_string = f"{x['gdtutc']} " + f"{x['utctm']}"
-        #print(dt_string)
-        dt_object = dt.strptime(dt_string, '%Y-%m-%d %H:%M') - (timedelta(hours=5))
-        #print(dt_object)
-        #print(current_time)
-        difference = dt_object - current_time
-        difference = difference.total_seconds() / 60
-        #print(difference)
-        if difference > -60:
-            #print(difference)
-            delta = difference
+        if (f"{x['gdte']}") == str(current_time.date()):
+            dt_string = f"{x['gdtutc']} " + f"{x['utctm']}"
+            #print(dt_string)
+            dt_object = dt.strptime(dt_string, '%Y-%m-%d %H:%M') - (timedelta(hours=5))
             #print(dt_object)
+            #print(current_time)
+            difference = dt_object - current_time
+            difference = difference.total_seconds() / 60
             #print(difference)
-            #print("delta")
-            #print(delta)
-            break
+            if difference > -60:
+                #print(difference)
+                delta = difference
+                #print(dt_object)
+                #print(difference)
+                #print("delta")
+                #print(delta)
+                break
     
     if delta == None:
         delta = 0
