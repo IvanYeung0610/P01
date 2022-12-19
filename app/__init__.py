@@ -124,7 +124,9 @@ def pref():
 
 @app.route("/logout")
 def logout():
-    if 'username' in session:
+    if (not bool(session)):
+        return redirect(url_for("index"))
+    elif 'username' in session:
         session.clear()
         return redirect(url_for('index'))
     else:
