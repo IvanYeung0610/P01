@@ -155,34 +155,23 @@ def weather_details():
             city = database.get_city(uid)
             temp = database.get_temperature(city)
             humid = database.get_humidity(city)
-            rain = database.get_rain_chance(city)
+            #rain = database.get_rain_chance(city)
+            rain = 80.0
             aqi = database.get_aqi(city)
             sunrise = database.get_sunrise(city)
             sunset = database.get_sunset(city)
-            '''
-            https://cdn-icons-png.flaticon.com/512/3222/3222672.png
-            https://cdn-icons-png.flaticon.com/512/5822/5822964.png
-            https://cdn-icons-png.flaticon.com/512/899/899718.png
-            https://cdn-icons-png.flaticon.com/512/106/106044.png
-            https://cdn-icons-png.flaticon.com/512/4088/4088914.png
-
-            Source: https://www.flaticon.com/
-            '''
-            if (rain <= 20):
+            if (rain <= 25):
                 link = "https://cdn-icons-png.flaticon.com/512/3222/3222672.png"
                 alt = "sunny"
-            elif (rain <= 40):
+            elif (rain <= 50):
                 link = "https://cdn-icons-png.flaticon.com/512/5822/5822964.png"
                 alt = "partly sunny"
-            elif (rain <= 60):
+            elif (rain <= 75):
                 link = "https://cdn-icons-png.flaticon.com/512/899/899718.png"
                 alt = "cloudy"
-            elif (rain <= 80):
-                link = "https://cdn-icons-png.flaticon.com/512/106/106044.png"
-                alt = "rainy"
             elif (rain <= 100):
                 link = "https://cdn-icons-png.flaticon.com/512/4088/4088914.png"
-                alt = "heavy rain"
+                alt = "rainy"
         return render_template("weather.html", temp=temp, humid=humid, rain=rain, aqi=aqi, sunrise=sunrise, sunset=sunset, link=link, alt=alt)
 
 @app.route("/nba_details")
