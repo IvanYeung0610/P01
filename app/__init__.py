@@ -101,6 +101,19 @@ def pref():
                 animeint = 44511
                 database.pref(uid, nba, anime, weather)
                 database.user_info(uid, city, animeint, "Filler")
+                if (not database.check_pref(uid)):
+                    database.add_pref(uid, nba, anime, weather)
+                else:
+                    database.update_pref(uid, nba, anime, weather)
+                
+                if (not database.check_user_info(uid)):
+                    database.add_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
+                    api_info.get_weather(database.get_city(uid))
+                    #print("USER'S CITY: " + database.get_city(uid))
+                else:
+                    database.update_user_info(uid, city, 44511, "Filler") # Favorite weather is no longer being used. Will be inserted with filler for now.
+                    api_info.get_weather(database.get_city(uid))
+                    #print("USER'S CITY: " + database.get_city(uid))
                 if int(anime) > 0:
                     return render_template('preferences.html',
                     page2=True)
@@ -108,8 +121,10 @@ def pref():
 
 @app.route("/logout")
 def logout():
-    if 'username' in session:
-        session.pop('username', None)
+    if (not bool(session)):
+        return redirect(url_for("index"))
+    elif 'username' in session:
+        session.clear()
         return redirect(url_for('index'))
     else:
         return "error.html"
@@ -131,27 +146,30 @@ def weather_details():
         return redirect(url_for("index"))
     else:
         uid = database.get_uid(session["username"])
-        print(uid)
         if (not database.check_pref(uid)):
             return redirect(url_for("pref"))
         else:
             city = database.get_city(uid)
             temp = database.get_temperature(city)
             humid = database.get_humidity(city)
-            rain = database.get_rain_chance(city)
+            #rain = database.get_rain_chance(city)
+            rain = 80.0
             aqi = database.get_aqi(city)
             sunrise = database.get_sunrise(city)
             sunset = database.get_sunset(city)
-            '''
-            https://cdn-icons-png.flaticon.com/512/3222/3222672.png
-            https://cdn-icons-png.flaticon.com/512/5822/5822964.png
-            https://cdn-icons-png.flaticon.com/512/899/899718.png
-            https://cdn-icons-png.flaticon.com/512/106/106044.png
-            https://cdn-icons-png.flaticon.com/512/4088/4088914.png
-
-            Source: https://www.flaticon.com/
-            '''
-        return render_template("weather.html", temp=temp, humid=humid, rain=rain, aqi=aqi, sunrise=sunrise, sunset=sunset)
+            if (rain <= 25):
+                link = "https://cdn-icons-png.flaticon.com/512/3222/3222672.png"
+                alt = "sunny"
+            elif (rain <= 50):
+                link = "https://cdn-icons-png.flaticon.com/512/5822/5822964.png"
+                alt = "partly sunny"
+            elif (rain <= 75):
+                link = "https://cdn-icons-png.flaticon.com/512/899/899718.png"
+                alt = "cloudy"
+            elif (rain <= 100):
+                link = "https://cdn-icons-png.flaticon.com/512/4088/4088914.png"
+                alt = "rainy"
+        return render_template("weather.html", temp=temp, humid=humid, rain=rain, aqi=aqi, sunrise=sunrise, sunset=sunset, link=link, alt=alt)
 
 @app.route("/nba_details")
 def nba_details():
