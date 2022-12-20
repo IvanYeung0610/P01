@@ -202,3 +202,4 @@ jeffC -- 2022-12-19 22:02
 * ***Beautified anime search***
 * Made it so that if user's anime pref is 0, it won't make them select an anime
 * Finished algorithm functionality on HTML
+* added aboslute file directory (os)

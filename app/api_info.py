@@ -1,9 +1,8 @@
 from flask import json
 from urllib.request import urlopen, Request
-from urllib import request
 from datetime import datetime as dt, date
 from database import add_weather_info
-import database
+import os
 
 def replace_space(input):
     split_words = input.split(' ')
@@ -17,8 +16,12 @@ def get_weather(user_location):
     #weather api
     city = user_location
     try:
-        with open('./keys/key_weatherbit.txt', 'r') as f:
-            key_weather = f.read().strip()
+        wd = os.path.dirname(os.path.realpath(__file__))
+        #print(wd)
+        file = open(wd + "/keys/key_weatherbit.txt", "r")
+        key_weather = file.read()
+       # with open('./keys/key_weatherbit.txt', 'r') as f:
+       #     key_weather = f.read().strip()
     except FileNotFoundError:
         print("File containing key for weatherbit does not exist.")
         key_weather = None
@@ -80,8 +83,10 @@ def get_NBA(): #returns list of all games this month
 def search_anime(search):
     #MAL api
     try:
-        with open('./keys/key_MAL.txt', 'r') as f:
-            key_MAL = f.read().strip()
+        wd = os.path.dirname(os.path.realpath(__file__))
+        #print(wd)
+        file = open(wd + "/keys/key_MAL.txt", "r")
+        key_MAL = file.read().strip()
     except FileNotFoundError:
         print("File containing key for My Anime List API does not exist")
         key_MAL = None
@@ -116,8 +121,12 @@ def search_anime(search):
 
 def get_anime_date(id):
     try:
-        with open('./keys/key_MAL.txt', 'r') as f:
-            key_MAL = f.read().strip()
+        wd = os.path.dirname(os.path.realpath(__file__))
+        #print(wd)
+        file = open(wd + "/keys/key_MAL.txt", "r")
+        key_MAL = file.read().strip()
+       # with open('./keys/key_MAL.txt', 'r') as f:
+       #     key_MAL = f.read().strip()
     except FileNotFoundError:
         print("File containing key for My Anime List API does not exist")
         key_MAL = None
