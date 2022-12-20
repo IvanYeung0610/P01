@@ -45,36 +45,6 @@ def get_weather(user_location):
     #print("rain_chance " + str(database.get_rain_chance(city)))
 
     return None
-"""
-def get_LOL_clash():
-    #LOL api
-    try:
-        with open('./keys/key_LOL.txt', 'r') as f:
-            key_LOL = f.read().strip()
-    except FileNotFoundError:
-        print("File containing key for RIOT API does not exist")
-        key_LOL = None
-    #print(key_LOL)
-
-    URL = f"https://na1.api.riotgames.com/lol/clash/v1/tournaments?api_key={key_LOL}"
-    request_site = Request(URL)#bundles url with headers to identify user as not a bot
-    #print(URL)#checks for getting correct URL
-    response = urlopen(request_site)#grabs the JSON from the page
-    data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
-    #print(data_json)#checks for correct retrieval of JSON
-    if len(data_json) == 2:
-        time1 = dt.fromtimestamp((int(data_json[1]['schedule'][0]['startTime']) / 1000)).date()
-        time2 = dt.fromtimestamp((int(data_json[0]['schedule'][0]['startTime']) / 1000)).date()
-    elif len(data_json) == 1:
-        time1 = dt.fromtimestamp((int(data_json[0]['schedule'][0]['startTime']) / 1000)).date()
-        time2 = "No clash!"
-    elif len(data_json) == 0:
-        time1 = "No clash!"
-        time2 = "No clash!"
-    
-    return {"data" : data_json, "clash_time1" : time1, "clash_time2" : time2}
-"""
-
 def get_NBA(): #returns list of all games this month
     year = 2022
     mon = date.today().month

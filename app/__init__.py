@@ -72,7 +72,7 @@ def pref():
             return render_template('preferences.html',
             cities=cities)
         if request.method == "POST":
-            if "page2" in request.form:
+            if "page2" in request.form and database.get_anime_pref() != 0:
                 #if searching for anime name
                 if request.form["submit"] == 'Search':
                     search = request.form["search"]

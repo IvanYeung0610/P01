@@ -197,3 +197,7 @@ jeffC -- 2022-12-19 09:15
 * restored lost progress when yesterday: 
     * added anime detail page stub
 * fixed anime search in html
+jeffC -- 2022-12-19 22:02
+
+* ***Beautified anime search***
+* Made it so that if user's anime pref is 0, it won't make them select an anime
