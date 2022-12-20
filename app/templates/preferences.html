@@ -26,13 +26,24 @@ Preferences
                 </div>
 
             </div>
+
             {% for x in searchresult %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{x['main_picture']['medium']}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{x['title']}}</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <button class="btn btn-outline-secondary" name="submit" value="{{x['id']}}" type="submit">Select</button>
+                </div>
+            </div> 
+            {% endfor %}
+            <!--{% for x in searchresult %}
             <div class="row">
                 <div class="col-8 offset-2">
-                    <button type="submit" value="{{x}}" name="submit" class="btn btn-primary btn-block w-100 mt-3" >{{x}}</button>
+                    <button type="submit" value="{{x['id']}}" name="submit" class="btn btn-primary btn-block w-100 mt-3" >{{x['title']}}</button>
                 </div>
             </div>
-            {% endfor %}
+            {% endfor %} -->
         </div>
     </form>
     {% else %}

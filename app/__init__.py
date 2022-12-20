@@ -78,16 +78,13 @@ def pref():
                     search = request.form["search"]
                     searchresult = api_info.search_anime(search)
                     #doesn't currently work without keys
-                    '''searchresult = []
-                    for x in search:
-                        searchresult.append(x)'''
                     return render_template('preferences.html',
                         page2=True,
                         searchresult=searchresult)
                 #if picking one 
                 else:
                     name = request.form["submit"]
-                    animeint = 44511
+                    animeint = name
                     #name will replace animeint when it is done
                     uid = database.get_uid(session["username"])
                     database.update_favorite_anime(uid, animeint)
@@ -200,7 +197,9 @@ def anime_details():
         if (not database.check_pref(uid)):
             return redirect(url_for("pref"))
         else:
-            return render_template("anime.html")
+            data = api_info.get_anime_date(database.get_favorite_anime(uid))['data']
+            print(data)
+            return render_template("anime.html", data=data)
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

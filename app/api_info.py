@@ -128,16 +128,19 @@ def search_anime(search):
     #print(data_json)#checks for correct retrieval of JSON
     #anime = data_json['title']
     #animeDate = data_json['broadcast']['day_of_the_week'].capitalize()
-    return_list = {}
+    return_list = []
     counter = 0
     for e in data_json['data']:
        values = list(e.values()) #gets rid of data container dict
        for value in values:
         values = list(value.values()) #gets rid of node container dict
         #print(values)
+        #anime_id = values[0]
         #anime_name = values[1]
+        #anime_img_med = values[2]['medium']
+        #anime_img_lg = values[2]['large']
         #print(anime_name)
-        return_list[f"{values[1]}"] = values[0]
+        return_list.append(value)
     #print(return_list)
     return return_list
 
