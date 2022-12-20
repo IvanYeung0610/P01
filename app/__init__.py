@@ -139,7 +139,14 @@ def grass():
         if (not database.check_pref(uid)):
             return redirect(url_for("pref"))
         else:
-            return render_template("grass.html", grass=algorithm.grass(algorithm.algorithm(uid)))
+            compatibility = algorithm.algorithm(uid)
+            grass = algorithm.grass(compatibility)
+            airing = database.get_anime_algo_statement(uid)
+            city = database.get_city(uid)
+            temp = database.get_temperature(city)
+            humid = database.get_humidity(city)
+            rain = database.get_rain_chance(city)
+            return render_template("grass.html", grass=grass, compatibility=compatibility * 100, airing=airing, temp=temp, humid=humid, rain=rain)
 
 @app.route("/weather_details")
 def weather_details():
@@ -153,8 +160,7 @@ def weather_details():
             city = database.get_city(uid)
             temp = database.get_temperature(city)
             humid = database.get_humidity(city)
-            #rain = database.get_rain_chance(city)
-            rain = 80.0
+            rain = database.get_rain_chance(city)
             aqi = database.get_aqi(city)
             sunrise = database.get_sunrise(city)
             sunset = database.get_sunset(city)

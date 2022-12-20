@@ -53,54 +53,54 @@ db.setup_tables()
 # else:
 #     print("WEATHER PREF IS INCORRECT. SHOULD BE 6 NOT " + db.get_anime_pref(0))
 
-#CHECKING ADDING USER_INFO
+# #CHECKING ADDING USER_INFO
 
-print()
-print("user_info table exists?:" + str(db.check_user_info(0)))
-db.add_user_info(0, "New York", 44511, "Rain")
-print(20*"#" + "ADDING USER INFO" + 20*"#")
+# print()
+# print("user_info table exists?:" + str(db.check_user_info(0)))
+# db.add_user_info(0, "New York", 44511, "Rain")
+# print(20*"#" + "ADDING USER INFO" + 20*"#")
 
-if (db.get_city(0) == "New York"):
-    print("CITY IS CORRECT")
-else:
-    print("CITY IS INCORRECT. SHOULD BE New York NOT " + db.get_city(0))
+# if (db.get_city(0) == "New York"):
+#     print("CITY IS CORRECT")
+# else:
+#     print("CITY IS INCORRECT. SHOULD BE New York NOT " + db.get_city(0))
 
-if (db.get_favorite_anime(0) == 44511):
-    print("FAVORITE ANIME IS CORRECT")
-else:
-    print("FAVORITE ANIME IS INCORRECT. SHOULD BE 44511 NOT " + db.get_favorite_anime(0))
+# if (db.get_favorite_anime(0) == 44511):
+#     print("FAVORITE ANIME IS CORRECT")
+# else:
+#     print("FAVORITE ANIME IS INCORRECT. SHOULD BE 44511 NOT " + db.get_favorite_anime(0))
 
-if (db.get_favorite_weather(0) == "Rain"):
-    print("FAVORITE WEATHER IS CORRECT")
-else:
-    print("FAVORITE WEATHER IS INCORRECT. SHOULD BE Rain NOT " + db.get_favorite_weather(0))
+# if (db.get_favorite_weather(0) == "Rain"):
+#     print("FAVORITE WEATHER IS CORRECT")
+# else:
+#     print("FAVORITE WEATHER IS INCORRECT. SHOULD BE Rain NOT " + db.get_favorite_weather(0))
 
-#CHECKING UPDATING USER_INFO
+# #CHECKING UPDATING USER_INFO
 
-print()
-print("user_info table exists?:" + str(db.check_user_info(0)))
-db.update_user_info(0, "Chicago", 12324, "Sunny")
-db.update_city(0, "Alanta")
-db.update_favorite_anime(0, 12324)
-db.update_favorite_weather(0, "Rain")
-print(20*"#" + "UPDATING USER INFO" + 20*"#")
+# print()
+# print("user_info table exists?:" + str(db.check_user_info(0)))
+# db.update_user_info(0, "Chicago", 12324, "Sunny")
+# db.update_city(0, "Alanta")
+# db.update_favorite_anime(0, 12324)
+# db.update_favorite_weather(0, "Rain")
+# print(20*"#" + "UPDATING USER INFO" + 20*"#")
 
-if (db.get_city(0) == "Chicago"):
-    print("CITY IS CORRECT")
-else:
-    print("CITY IS INCORRECT. SHOULD BE Chicago NOT " + db.get_city(0))
+# if (db.get_city(0) == "Chicago"):
+#     print("CITY IS CORRECT")
+# else:
+#     print("CITY IS INCORRECT. SHOULD BE Chicago NOT " + db.get_city(0))
 
-if (db.get_favorite_anime(0) == 12324):
-    print("FAVORITE ANIME IS CORRECT")
-else:
-    print("FAVORITE ANIME IS INCORRECT. SHOULD BE 12324 NOT " + db.get_favorite_anime(0))
+# if (db.get_favorite_anime(0) == 12324):
+#     print("FAVORITE ANIME IS CORRECT")
+# else:
+#     print("FAVORITE ANIME IS INCORRECT. SHOULD BE 12324 NOT " + db.get_favorite_anime(0))
 
-if (db.get_favorite_weather(0) == "Sunny"):
-    print("FAVORITE WEATHER IS CORRECT")
-else:
-    print("FAVORITE WEATHER IS INCORRECT. SHOULD BE Sunny NOT " + db.get_favorite_weather(0))
+# if (db.get_favorite_weather(0) == "Sunny"):
+#     print("FAVORITE WEATHER IS CORRECT")
+# else:
+#     print("FAVORITE WEATHER IS INCORRECT. SHOULD BE Sunny NOT " + db.get_favorite_weather(0))
 
-#CHECKING ADDING WEATHER
+## CHECKING ADDING WEATHER
 
 # print()
 # db.add_weather_info(0.5, 1.0, 1.5, 2.0, 2.5, 3.0)
@@ -171,3 +171,8 @@ else:
 #     print("SUNSET IS CORRECT")
 # else:
 #     print("SUNSET IS INCORRECT. SHOULD BE 4.0 NOT " + db.get_sunset())
+
+#CHECKING adding and getting anime_algo
+
+db.add_anime_algo(0, "GO TOUCH GRASS")
+print(db.get_anime_algo_statement(0))

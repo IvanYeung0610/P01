@@ -203,3 +203,14 @@ jeffC -- 2022-12-19 22:02
 * Made it so that if user's anime pref is 0, it won't make them select an anime
 * Finished algorithm functionality on HTML
 * added aboslute file directory (os)
+
+ivanY -- 2022-12-20 00:15
+* made tables and functions to store and retrieve additional info for grass.html page:
+    * anime_algo (uid INTEGER PRIMARY KEY, statement TEXT)
+    * nba_algo (uid INTEGER PRIMARY KEY, statement TEXT)
+    * add_anime_algo(uid, statement)
+    * get_anime_algo_statement(uid)
+    * add_nba_algo(uid, statement)
+    * get_nba_algo_statement(uid)
+* added additional information to be presented in grass.html page 
+* changed calc_anime_date parameters in order to insert statement into anime_algo table

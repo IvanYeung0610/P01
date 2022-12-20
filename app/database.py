@@ -9,6 +9,8 @@ def setup_tables():
     c.execute("CREATE TABLE IF NOT EXISTS preferences (uid INTEGER PRIMARY KEY, nba INTEGER, anime INTEGER, weather INTEGER)")
     c.execute("CREATE TABLE IF NOT EXISTS user_info (uid INTEGER PRIMARY KEY, city TEXT, favorite_anime INTEGER, favorite_weather TEXT)")
     c.execute("CREATE TABLE IF NOT EXISTS weather_info (city TEXT PRIMARY KEY, temperature REAL, humidity REAL, rain_chance REAL, aqi REAL, sunrise REAL, sunset REAL)")
+    c.execute("CREATE TABLE IF NOT EXISTS anime_algo (uid INTEGER PRIMARY KEY, statement TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS nba_algo (uid INTEGER PRIMARY KEY, statement TEXT)")
     c.close()
 
 def get_password(username):
@@ -212,3 +214,31 @@ def get_sunset(city):
     sunset = c.fetchone()[0]
     c.close()
     return sunset
+
+def add_anime_algo(uid, statement):
+    c = db.cursor()
+    c.execute("DELETE FROM anime_algo WHERE uid = ?", (str(uid),)) #clears row of user's previous
+    c.execute("INSERT INTO anime_algo VALUES(?, ?)", (str(uid), str(statement)))
+    db.commit()
+    c.close()
+
+def get_anime_algo_statement(uid):
+    c = db.cursor()
+    c.execute("SELECT statement FROM anime_algo WHERE uid = ?", (str(uid),))
+    statement = c.fetchone()[0]
+    c.close()
+    return statement
+
+def add_nba_algo(uid, statement):
+    c = db.cursor()
+    c.execute("DELETE FROM nba_algo WHERE uid = ?", (str(uid),)) #clears row of user's previous
+    c.execute("INSERT INTO nba_algo VALUES(?, ?)", (str(uid), str(statement)))
+    db.commit()
+    c.close()
+
+def get_nba_algo_statement(uid):
+    c = db.cursor()
+    c.execute("SELECT statement FROM nba_algo WHERE uid = ?", (str(uid),))
+    statement = c.fetchone()[0]
+    c.close()
+    return statement
