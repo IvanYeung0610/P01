@@ -136,9 +136,5 @@ def grass(weight):
     if result[0] == 1:
         return "Yes!"
     else:
-<<<<<<< HEAD
-        return "No!"
-=======
         return "No!"
     
->>>>>>> refs/remotes/origin/main
