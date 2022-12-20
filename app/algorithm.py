@@ -86,7 +86,7 @@ def weekday_to_integer(day):
 def calc_anime_date(uid, anime_id):
     deets = get_anime_date(anime_id)
     if deets['airing'] == 0:
-        add_anime_algo(uid, "Your favorite anime has finished airing. You can watch it whenever you want. GO TOUCH SOME GRASS!")
+        add_anime_algo(uid, "Your favorite anime has finished airing. You can watch it whenever you want.")
         return 1 #it's finished! you can watch whenever
         
     current_JST = dt.today() + timedelta(hours=14)
@@ -97,13 +97,13 @@ def calc_anime_date(uid, anime_id):
         difference = anime_broadcast_time - current_JST 
         difference = difference.total_seconds() / 60 #difference in minutes
         if difference >= 0 and difference < 30:
-            add_anime_algo(uid, "An episode of your favorite anime is about to air in " + str(difference) + " minutes. STAY IN AND WAIT!")    
+            add_anime_algo(uid, "An episode of your favorite anime is about to air in " + str(difference) + " minutes.")    
             return difference / 30 
         elif difference < 0 and difference < -60:
-            add_anime_algo(uid, "An episode of your favorite anime has aired " + str(-1 * difference) + " minutes ago. STAY IN AND WATCH!")
+            add_anime_algo(uid, "An episode of your favorite anime has aired " + str(-1 * difference) + " minutes ago.")
             return 0 #if it's been less than 1 since episode aired
     else:
-        add_anime_algo(uid, "Your favorite anime is not airing today. GO TOUCH SOME GRASS!")
+        add_anime_algo(uid, "Your favorite anime is not airing today.")
         return 1 #wrong day for anime
 
     #this is the anime airing date for EST
