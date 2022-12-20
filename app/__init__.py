@@ -65,6 +65,7 @@ def pref():
     if (not bool(session)):
         return redirect(url_for("index"))
     else:
+        uid = database.get_uid(session["username"])
         if request.method == "GET":
             cities = []
             get_cities(cities)
@@ -72,7 +73,7 @@ def pref():
             return render_template('preferences.html',
             cities=cities)
         if request.method == "POST":
-            if "page2" in request.form and database.get_anime_pref() != 0:
+            if "page2" in request.form and database.get_anime_pref(uid) != 0:
                 #if searching for anime name
                 if request.form["submit"] == 'Search':
                     search = request.form["search"]
