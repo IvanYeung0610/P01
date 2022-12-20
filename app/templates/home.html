@@ -17,4 +17,14 @@ Or to take arms against the world outside, <br>
 And by opposing end them?" <br>
 </h1>
 
+{% if session["logged_in"] %}
+<div class="container">
+    <div class="row">
+        <a class="btn btn-primary btn-lg btn-block" href="/grass">GO OUTSIDE?</a>
+    </div>
+</div>
+
+{% endif %} 
+
+
 {% endblock %}

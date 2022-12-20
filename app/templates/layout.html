@@ -14,18 +14,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
         <nav id="navbar-example2" class="p-4 navbar navbar bg-light">
         <div class="container-fluid">
-                <h2>TOUCH GRASS?</h2>
-                {% if session["logged_in"] %}
-                <ul class="nav justify-content-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/grass">
-                            <button type="button" class="btn btn-primary"><h3>SHOULD U GO OUTSIDE?</h3></button>
-
-                        </a>
-                    </li> 
-                </ul>
-                {% endif %}
-                <ul class="nav nav-pills">
+                <a class="navbar-brand" href="#">TOUCH GRASS?</a>
+                <ul class="nav nav-pills justify-content-right">
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
                     </li> 
@@ -65,7 +55,7 @@
     </head> 
     <body>
     {% block body %}
-    
+
     {% endblock %} 
     </body>
 </html>
