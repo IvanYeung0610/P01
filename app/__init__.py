@@ -65,6 +65,7 @@ def pref():
     if (not bool(session)):
         return redirect(url_for("index"))
     else:
+        uid = database.get_uid(session["username"])
         if request.method == "GET":
             cities = []
             get_cities(cities)
@@ -72,22 +73,19 @@ def pref():
             return render_template('preferences.html',
             cities=cities)
         if request.method == "POST":
-            if "page2" in request.form:
+            if "page2" in request.form and database.get_anime_pref(uid) != 0:
                 #if searching for anime name
                 if request.form["submit"] == 'Search':
                     search = request.form["search"]
                     searchresult = api_info.search_anime(search)
                     #doesn't currently work without keys
-                    '''searchresult = []
-                    for x in search:
-                        searchresult.append(x)'''
                     return render_template('preferences.html',
                         page2=True,
                         searchresult=searchresult)
                 #if picking one 
                 else:
                     name = request.form["submit"]
-                    animeint = 44511
+                    animeint = name
                     #name will replace animeint when it is done
                     uid = database.get_uid(session["username"])
                     database.update_favorite_anime(uid, animeint)
@@ -124,7 +122,9 @@ def pref():
 
 @app.route("/logout")
 def logout():
-    if 'username' in session:
+    if (not bool(session)):
+        return redirect(url_for("index"))
+    elif 'username' in session:
         session.clear()
         return redirect(url_for('index'))
     else:
@@ -139,7 +139,14 @@ def grass():
         if (not database.check_pref(uid)):
             return redirect(url_for("pref"))
         else:
-            return render_template("grass.html", grass=algorithm.algorithm(uid))
+            compatibility = algorithm.algorithm(uid)
+            grass = algorithm.grass(compatibility)
+            airing = database.get_anime_algo_statement(uid)
+            city = database.get_city(uid)
+            temp = database.get_temperature(city)
+            humid = database.get_humidity(city)
+            rain = database.get_rain_chance(city)
+            return render_template("grass.html", grass=grass, compatibility=compatibility * 100, airing=airing, temp=temp, humid=humid, rain=rain)
 
 @app.route("/weather_details")
 def weather_details():
@@ -157,30 +164,18 @@ def weather_details():
             aqi = database.get_aqi(city)
             sunrise = database.get_sunrise(city)
             sunset = database.get_sunset(city)
-            '''
-            https://cdn-icons-png.flaticon.com/512/3222/3222672.png
-            https://cdn-icons-png.flaticon.com/512/5822/5822964.png
-            https://cdn-icons-png.flaticon.com/512/899/899718.png
-            https://cdn-icons-png.flaticon.com/512/106/106044.png
-            https://cdn-icons-png.flaticon.com/512/4088/4088914.png
-
-            Source: https://www.flaticon.com/
-            '''
-            if (rain <= 20):
+            if (rain <= 25):
                 link = "https://cdn-icons-png.flaticon.com/512/3222/3222672.png"
                 alt = "sunny"
-            elif (rain <= 40):
+            elif (rain <= 50):
                 link = "https://cdn-icons-png.flaticon.com/512/5822/5822964.png"
                 alt = "partly sunny"
-            elif (rain <= 60):
+            elif (rain <= 75):
                 link = "https://cdn-icons-png.flaticon.com/512/899/899718.png"
                 alt = "cloudy"
-            elif (rain <= 80):
-                link = "https://cdn-icons-png.flaticon.com/512/106/106044.png"
-                alt = "rainy"
             elif (rain <= 100):
                 link = "https://cdn-icons-png.flaticon.com/512/4088/4088914.png"
-                alt = "heavy rain"
+                alt = "rainy"
         return render_template("weather.html", temp=temp, humid=humid, rain=rain, aqi=aqi, sunrise=sunrise, sunset=sunset, link=link, alt=alt)
 
 @app.route("/nba_details")
@@ -209,7 +204,9 @@ def anime_details():
         if (not database.check_pref(uid)):
             return redirect(url_for("pref"))
         else:
-            return render_template("anime.html")
+            data = api_info.get_anime_date(database.get_favorite_anime(uid))['data']
+            print(data)
+            return render_template("anime.html", data=data)
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

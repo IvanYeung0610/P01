@@ -9,5 +9,24 @@ Grass
 {% endblock %}
 
 {% block body %}
-    {{ grass }}
+<h1>
+    Should you touch grass?: {{ grass }} <br>
+    Compatibility to go outside: {{ compatibility }} %
+</h1>
+
+<br>
+
+<h2>Weather</h2>
+<h3>
+    Temperature: {{ temp }} °F <br>
+    Humidity: {{ humid }} % <br>
+    Chance of Rain: {{ rain }} % <br>
+</h3>
+
+<br>
+
+<h2>Anime</h2>
+<h3>
+    {{ airing }}
+</h3>
 {% endblock %}

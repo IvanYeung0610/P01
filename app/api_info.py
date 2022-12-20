@@ -1,9 +1,8 @@
 from flask import json
 from urllib.request import urlopen, Request
-from urllib import request
 from datetime import datetime as dt, date
 from database import add_weather_info
-import database
+import os
 
 def replace_space(input):
     split_words = input.split(' ')
@@ -17,8 +16,12 @@ def get_weather(user_location):
     #weather api
     city = user_location
     try:
-        with open('./keys/key_weatherbit.txt', 'r') as f:
-            key_weather = f.read().strip()
+        wd = os.path.dirname(os.path.realpath(__file__))
+        #print(wd)
+        file = open(wd + "/keys/key_weatherbit.txt", "r")
+        key_weather = file.read()
+       # with open('./keys/key_weatherbit.txt', 'r') as f:
+       #     key_weather = f.read().strip()
     except FileNotFoundError:
         print("File containing key for weatherbit does not exist.")
         key_weather = None
@@ -45,36 +48,6 @@ def get_weather(user_location):
     #print("rain_chance " + str(database.get_rain_chance(city)))
 
     return None
-"""
-def get_LOL_clash():
-    #LOL api
-    try:
-        with open('./keys/key_LOL.txt', 'r') as f:
-            key_LOL = f.read().strip()
-    except FileNotFoundError:
-        print("File containing key for RIOT API does not exist")
-        key_LOL = None
-    #print(key_LOL)
-
-    URL = f"https://na1.api.riotgames.com/lol/clash/v1/tournaments?api_key={key_LOL}"
-    request_site = Request(URL)#bundles url with headers to identify user as not a bot
-    #print(URL)#checks for getting correct URL
-    response = urlopen(request_site)#grabs the JSON from the page
-    data_json = json.loads(response.read())#reads the JSON of the page and turns it into a dictionary
-    #print(data_json)#checks for correct retrieval of JSON
-    if len(data_json) == 2:
-        time1 = dt.fromtimestamp((int(data_json[1]['schedule'][0]['startTime']) / 1000)).date()
-        time2 = dt.fromtimestamp((int(data_json[0]['schedule'][0]['startTime']) / 1000)).date()
-    elif len(data_json) == 1:
-        time1 = dt.fromtimestamp((int(data_json[0]['schedule'][0]['startTime']) / 1000)).date()
-        time2 = "No clash!"
-    elif len(data_json) == 0:
-        time1 = "No clash!"
-        time2 = "No clash!"
-    
-    return {"data" : data_json, "clash_time1" : time1, "clash_time2" : time2}
-"""
-
 def get_NBA(): #returns list of all games this month
     year = 2022
     mon = date.today().month
@@ -110,8 +83,10 @@ def get_NBA(): #returns list of all games this month
 def search_anime(search):
     #MAL api
     try:
-        with open('./keys/key_MAL.txt', 'r') as f:
-            key_MAL = f.read().strip()
+        wd = os.path.dirname(os.path.realpath(__file__))
+        #print(wd)
+        file = open(wd + "/keys/key_MAL.txt", "r")
+        key_MAL = file.read().strip()
     except FileNotFoundError:
         print("File containing key for My Anime List API does not exist")
         key_MAL = None
@@ -128,23 +103,30 @@ def search_anime(search):
     #print(data_json)#checks for correct retrieval of JSON
     #anime = data_json['title']
     #animeDate = data_json['broadcast']['day_of_the_week'].capitalize()
-    return_list = {}
+    return_list = []
     counter = 0
     for e in data_json['data']:
        values = list(e.values()) #gets rid of data container dict
        for value in values:
         values = list(value.values()) #gets rid of node container dict
         #print(values)
+        #anime_id = values[0]
         #anime_name = values[1]
+        #anime_img_med = values[2]['medium']
+        #anime_img_lg = values[2]['large']
         #print(anime_name)
-        return_list[f"{values[1]}"] = values[0]
+        return_list.append(value)
     #print(return_list)
     return return_list
 
 def get_anime_date(id):
     try:
-        with open('./keys/key_MAL.txt', 'r') as f:
-            key_MAL = f.read().strip()
+        wd = os.path.dirname(os.path.realpath(__file__))
+        #print(wd)
+        file = open(wd + "/keys/key_MAL.txt", "r")
+        key_MAL = file.read().strip()
+       # with open('./keys/key_MAL.txt', 'r') as f:
+       #     key_MAL = f.read().strip()
     except FileNotFoundError:
         print("File containing key for My Anime List API does not exist")
         key_MAL = None
