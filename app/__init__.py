@@ -72,7 +72,7 @@ def pref():
             return render_template('preferences.html',
             cities=cities)
         if request.method == "POST":
-            if "page2" in request.form and database.get_anime_pref() != 0:
+            if "page2" in request.form and database.get_anime_pref(database.get_uid(session["username"])):
                 #if searching for anime name
                 if request.form["submit"] == 'Search':
                     search = request.form["search"]
@@ -138,7 +138,7 @@ def grass():
         if (not database.check_pref(uid)):
             return redirect(url_for("pref"))
         else:
-            return render_template("grass.html", grass=algorithm.algorithm(uid))
+            return render_template("grass.html", grass=algorithm.grass(algorithm.algorithm(uid)))
 
 @app.route("/weather_details")
 def weather_details():

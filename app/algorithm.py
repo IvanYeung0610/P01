@@ -2,6 +2,7 @@ from database import *
 from api_info import *
 import math
 from datetime import date, datetime as dt, timedelta
+import random
 def calc_weather(city):
     get_weather(city)
     temp = get_temperature(city)
@@ -124,3 +125,12 @@ def algorithm(uid):
     anime_fac = calc_anime_date((get_favorite_anime(uid))) * get_anime_pref(uid) / 10
     print("anime: " + str(anime_fac))
     return((weather_fac + nba_fac + anime_fac) / 3)
+
+def grass(weight):
+    yes_no = [0, 1]
+    result = random.choices(yes_no, weights=(weight, 1-weight), k = 1)
+    if result[0] == 1:
+        return "Yes!"
+    else:
+        return "No!"
+    
