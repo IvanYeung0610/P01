@@ -11,7 +11,7 @@ This site will determine whether it would be optimal for the user to go outside 
 
 # APIs used:
 * [Weather API](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_weatherAPI.md)
-* [Riot API](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_riotAPI.md)
+* [NBA Schedule API](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_NBA_Schedule.md)
 * [My Anime List API](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_MyAnimeList.md)
 
 # Launch Codes:
