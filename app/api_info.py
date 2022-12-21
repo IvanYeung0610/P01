@@ -132,7 +132,7 @@ def get_anime_date(id):
         key_MAL = None
     #print(key_MAL)
     pref_anime = id #read pref anime to here
-    URL = f"https://api.myanimelist.net/v2/anime/{pref_anime}?fields=broadcast"
+    URL = f"https://api.myanimelist.net/v2/anime/{pref_anime}?fields=broadcast,synopsis,studios,start_date,end_date,alternative_titles,rank,num_episodes,average_episode_duration"
     headers = {"X-MAL-CLIENT-ID": f"{key_MAL}"}
     request_site = Request(URL, headers = headers)#bundles url with headers to identify user as not a bot
     #print(URL)#checks for getting correct URL
