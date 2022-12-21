@@ -214,3 +214,8 @@ ivanY -- 2022-12-20 00:15
     * get_nba_algo_statement(uid)
 * added additional information to be presented in grass.html page 
 * changed calc_anime_date parameters in order to insert statement into anime_algo table
+
+jeffC -- 2022-12-20 21:22
+* Moved button to calculate grass to home page center
+* Added small details about anime
+* Made anime detail age a bit prettier
