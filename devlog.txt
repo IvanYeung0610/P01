@@ -219,3 +219,6 @@ jeffC -- 2022-12-20 22:31
 * Moved button to calculate grass to home page center
 * Added small details about anime
 * Made anime detail page a bit prettier
+
+vivianG -- 2022-12-20
+* added table striping to make info easier to read
