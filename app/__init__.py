@@ -180,8 +180,8 @@ def weather_details():
                 aqi = str(aqi) + filler + desc[5]
             sunrise = database.get_sunrise(city)
             sunset = database.get_sunset(city)
-            hour = str(int(sunset[:2]) - 12)
-            sunset = hour + sunset[2:]
+            #hour = str(int(sunset[:2]) - 12)
+            #sunset = hour + sunset[2:]
             if (rain <= 25):
                 link = "https://cdn-icons-png.flaticon.com/512/3222/3222672.png"
                 alt = "sunny"
@@ -223,7 +223,7 @@ def anime_details():
             return redirect(url_for("pref"))
         else:
             data = api_info.get_anime_date(database.get_favorite_anime(uid))['data']
-            print(data)
+            #print(data)
             return render_template("anime.html", data=data, avg_dur=int(data['average_episode_duration'] / 60))
 
 if __name__ == "__main__": #false if this file imported as module

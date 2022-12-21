@@ -215,7 +215,11 @@ ivanY -- 2022-12-20 00:15
 * added additional information to be presented in grass.html page 
 * changed calc_anime_date parameters in order to insert statement into anime_algo table
 
-jeffC -- 2022-12-20 22:31
+jeffC -- 2022-12-20 23:00
 * Moved button to calculate grass to home page center
 * Added small details about anime
 * Made anime detail page a bit prettier
+* Made weather page prettier
+
+vivianG -- 2022-12-20
+* added table striping to make info easier to read
