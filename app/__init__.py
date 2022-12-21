@@ -187,8 +187,6 @@ def weather_details():
                 aqi = str(aqi) + filler + desc[5]
             sunrise = database.get_sunrise(city)
             sunset = database.get_sunset(city)
-            #hour = str(int(sunset[:2]) - 12)
-            #sunset = hour + sunset[2:]
             if (rain <= 25):
                 link = "https://cdn-icons-png.flaticon.com/512/3222/3222672.png"
                 alt = "sunny"
