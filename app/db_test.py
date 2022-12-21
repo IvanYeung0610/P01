@@ -176,3 +176,6 @@ db.setup_tables()
 
 db.add_anime_algo(0, "GO TOUCH GRASS")
 print(db.get_anime_algo_statement(0))
+
+print(db.add_nba_algo("This is the first statement"))
+print(db.add_nba_algo("This is the second statement"))
