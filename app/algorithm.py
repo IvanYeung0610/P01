@@ -128,7 +128,9 @@ def algorithm(uid):
     print("nba: " + str(nba_fac))
     anime_fac = calc_anime_date(uid, (get_favorite_anime(uid))) * get_anime_pref(uid) / 10
     print("anime: " + str(anime_fac))
-    return((weather_fac + nba_fac + anime_fac) / 3)
+    return((weather_fac + 
+            nba_fac + 
+            anime_fac) / 3)
 
 def grass(weight):
     yes_no = [0, 1]

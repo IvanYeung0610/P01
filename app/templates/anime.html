@@ -5,15 +5,23 @@ Anime details
 {% endblock %}
 
 {% block title %}
-Anie
+Anime
 {% endblock %}
 
 {% block body %}
+<div class=container>
+    <div class="text-center">
+        <img src="{{data['main_picture']['large']}}" class="img-fluid mx-auto">
+    </div>
     <table class="table">
         <tr>
             <th scope="row">Name</th>
-            <td> {{data['title']}}</td>
-            
+            <td> {{data['title']}}</td> 
         </tr> 
+        <tr>
+           <th scope="row">Broadcast Time</th>
+           <td> {{data['broadcast']['day_of_the_week'].capitalize()}}s at {{data['broadcast']['start_time']}} JST</td>
+        </tr>
     </table>
+</div>
 {% endblock %}
