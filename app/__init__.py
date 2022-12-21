@@ -206,7 +206,7 @@ def anime_details():
         else:
             data = api_info.get_anime_date(database.get_favorite_anime(uid))['data']
             print(data)
-            return render_template("anime.html", data=data)
+            return render_template("anime.html", data=data, avg_dur=int(data['average_episode_duration'] / 60))
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

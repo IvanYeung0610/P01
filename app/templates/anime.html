@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block head %}
-Anime details
+{{data['title']}}
 {% endblock %}
 
 {% block title %}
@@ -11,13 +11,43 @@ Anime
 {% block body %}
 <div class=container>
     <div class="text-center">
-        <img src="{{data['main_picture']['large']}}" class="img-fluid mx-auto">
+        <img src="{{data['main_picture']['large']}}" class="img-fluid mx-auto pb-5">
     </div>
     <table class="table">
+        {% if 'en' in data['alternative_titles'] %}
         <tr>
-            <th scope="row">Name</th>
-            <td> {{data['title']}}</td> 
+            <th scope="row">Name (English)</th>
+            <td>{{data['alternative_titles']['en']}}</td>
         </tr> 
+        {% endif %}
+        <tr>
+           <th scope="row">Ranking</th>
+           <td> {{data['rank']}}</td>
+        </tr>
+
+        <tr>
+           <th scope="row">Synopsis</th>
+           <td> {{data['synopsis']}}</td>
+        </tr>
+        <tr>
+           <th scope="row">Studio(s)</th>
+           {%for x in data['studios']%}
+           <td> {{x['name']}}</td>
+           {% endfor %}
+        </tr>
+        <tr>
+           <th scope="row">Number of Episodes</th>
+           <td> {{data['num_episodes']}}</td>
+        </tr>
+
+        <tr>
+           <th scope="row">Average Episode Length</th>
+           <td> {{avg_dur}} minutes</td>
+        </tr>
+        <tr>
+           <th scope="row">Start - End</th>
+           <td> {{data['start_date']}} -- {{data['end_date']}}</td>
+        </tr>
         <tr>
            <th scope="row">Broadcast Time</th>
            <td> {{data['broadcast']['day_of_the_week'].capitalize()}}s at {{data['broadcast']['start_time']}} JST</td>
