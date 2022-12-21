@@ -227,3 +227,6 @@ vivianG -- 2022-12-20
 ivanY -- 2022-12-20 23:32
 * implemented statements in the grass.html page 
 * improved how the grass.html page looks
+
+jeffC -- 2022-12-20 23:47
+* Fixed anime-movie bug
