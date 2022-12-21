@@ -228,7 +228,6 @@ def anime_details():
             return redirect(url_for("pref"))
         else:
             data = api_info.get_anime_date(database.get_favorite_anime(uid))['data']
-            print(data)
             if 'average_episode_duration' in data:
                 avg_dur = int(data['average_episode_duration'] / 60)
             else:

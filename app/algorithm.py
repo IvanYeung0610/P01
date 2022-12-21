@@ -19,7 +19,7 @@ def truncate(number, decimals=0):
     return math.trunc(number * factor) / factor
 
 def calc_weather(city):
-    get_weather(city)
+    #get_weather(city)
     temp = get_temperature(city)
     humidity = get_humidity(city)
     rain_chance = get_rain_chance(city) 
@@ -78,7 +78,7 @@ def NBA_today(data):
     #print(delta)
 
     if delta < 30 and delta >= 0: #if time till next nba game is < 30 min, calculate %
-        add_nba_algo("There is an NBA game in " + str(truncate(delta, 2)) + " minutes.")
+        add_nba_algo(f"There is an NBA game between {teams} in " + str(truncate(delta, 2)) + " minutes.")
         return delta / 30
     elif delta > -60:
         if delta > 0:
@@ -150,7 +150,7 @@ def algorithm(uid):
     
     #print(calc_anime_date(44511)) #test using chainsawman
     #p['data'][0irint(calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10) #test using chainsawman
-    weather_fac = calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10
+    weather_fac = calc_weather(get_city(uid)) * get_weather_pref(uid) / 10
     print("weather: " + str(weather_fac))
     nba_fac = NBA_today(get_NBA()) * get_nba_pref(uid) / 10
     print("nba: " + str(nba_fac))
