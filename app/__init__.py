@@ -159,12 +159,11 @@ def weather_details():
         else:
             city = database.get_city(uid)
             temp = str(database.get_temperature(city))
-            deg = chr(176)
-            print(deg)
+            temp += " " + chr(176)
             humid = str(database.get_humidity(city))
             rain = database.get_rain_chance(city)
             aqi = database.get_aqi(city)
-            filler = " which is "
+            filler = ", Rating: "
             desc = ["Good", "Moderate", "Unhealthy for Sensitive Groups", "Unhealthy", "Very Unhealthy", "Hazardous"]
             if (aqi <= 50):
                 aqi = str(aqi) + filler + desc[0]
