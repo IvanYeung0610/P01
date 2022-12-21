@@ -159,12 +159,29 @@ def weather_details():
             return redirect(url_for("pref"))
         else:
             city = database.get_city(uid)
-            temp = database.get_temperature(city)
-            humid = database.get_humidity(city)
+            temp = str(database.get_temperature(city))
+            temp += " " + chr(176)
+            humid = str(database.get_humidity(city))
             rain = database.get_rain_chance(city)
             aqi = database.get_aqi(city)
+            filler = ", Rating: "
+            desc = ["Good", "Moderate", "Unhealthy for Sensitive Groups", "Unhealthy", "Very Unhealthy", "Hazardous"]
+            if (aqi <= 50):
+                aqi = str(aqi) + filler + desc[0]
+            elif (aqi <= 100):
+                aqi = str(aqi) + filler + desc[1]
+            elif (aqi <= 150):
+                aqi = str(aqi) + filler + desc[2]
+            elif (aqi <= 200):
+                aqi = str(aqi) + filler + desc[3]
+            elif (aqi <= 300):
+                aqi = str(aqi) + filler + desc[4]
+            else:
+                aqi = str(aqi) + filler + desc[5]
             sunrise = database.get_sunrise(city)
             sunset = database.get_sunset(city)
+            hour = str(int(sunset[:2]) - 12)
+            sunset = hour + sunset[2:]
             if (rain <= 25):
                 link = "https://cdn-icons-png.flaticon.com/512/3222/3222672.png"
                 alt = "sunny"
@@ -174,10 +191,10 @@ def weather_details():
             elif (rain <= 75):
                 link = "https://cdn-icons-png.flaticon.com/512/899/899718.png"
                 alt = "cloudy"
-            elif (rain <= 100):
+            else:
                 link = "https://cdn-icons-png.flaticon.com/512/4088/4088914.png"
                 alt = "rainy"
-        return render_template("weather.html", temp=temp, humid=humid, rain=rain, aqi=aqi, sunrise=sunrise, sunset=sunset, link=link, alt=alt)
+        return render_template("weather.html", temp=temp, humid=humid, rain=str(rain), aqi=aqi, sunrise=sunrise, sunset=sunset, link=link, alt=alt)
 
 @app.route("/nba_details")
 def nba_details():
@@ -207,7 +224,7 @@ def anime_details():
         else:
             data = api_info.get_anime_date(database.get_favorite_anime(uid))['data']
             print(data)
-            return render_template("anime.html", data=data)
+            return render_template("anime.html", data=data, avg_dur=int(data['average_episode_duration'] / 60))
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

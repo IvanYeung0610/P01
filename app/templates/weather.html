@@ -9,12 +9,35 @@ Weather
 {% endblock %}
 
 {% block body %}
-    Temperature: {{ temp }}
-    Humidity: {{ humid }}
-    Chance of rain: {{ rain }}
-    Air Quality Index: {{ aqi }}
-    Sunrise: {{ sunrise }}
-    Sunset: {{ sunset }}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Type</th>
+            
+            <th scope="col">Info</th>
+        </tr> 
+        </thead>
+        <tbody>
+            <tr>
+                <td>Temperature</td><td>{{ temp + "F"}}</td>
+            </tr>
+            <tr>
+                <td>Humidity</td><td>{{ humid + " %" }}</td>
+            </tr>
+            <tr>
+                <td>Chance of Rain</td><td>{{ rain + " %" }}</td>
+            </tr>
+            <tr>
+                <td>Air Quality Index</td><td>{{ aqi }}</td>
+            </tr>
+            <tr>
+                <td>Sunrise</td><td>{{ sunrise + " A.M." }}</td>
+            </tr>
+            <tr>
+                <td>Sunset</td><td>{{ sunset + " P.M." }}</td>
+            </tr>
+        </tbody>
+    </table>
     <br>
     <img src="{{ link }}" alt="{{ alt }}">
 {% endblock %}
