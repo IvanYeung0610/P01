@@ -12,33 +12,35 @@ Weather
     <div class="text-center">
         <img class="img-fluid pb-5" src="{{ link }}" alt="{{ alt }}">
     </div>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Info</th>
-        </tr> 
-        </thead>
-        <tbody>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>Temperature</td><td>{{ temp + "F"}}</td>
-            </tr>
-            <tr>
-                <td>Humidity</td><td>{{ humid + " %" }}</td>
-            </tr>
-            <tr>
-                <td>Chance of Rain</td><td>{{ rain + " %" }}</td>
-            </tr>
-            <tr>
-                <td>Air Quality Index</td><td>{{ aqi }}</td>
-            </tr>
-            <tr>
-                <td>Sunrise</td><td>{{ sunrise }}</td>
-            </tr>
-            <tr>
-                <td>Sunset</td><td>{{ sunset }}</td>
-            </tr>
-        </tbody>
-    </table>
+                <th scope="col">Type</th>
+                <th scope="col">Info</th>
+            </tr> 
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Temperature</td><td>{{ temp + "F"}}</td>
+                </tr>
+                <tr>
+                    <td>Humidity</td><td>{{ humid + " %" }}</td>
+                </tr>
+                <tr>
+                    <td>Chance of Rain</td><td>{{ rain + " %" }}</td>
+                </tr>
+                <tr>
+                    <td>Air Quality Index</td><td>{{ aqi }}</td>
+                </tr>
+                <tr>
+                    <td>Sunrise</td><td>{{ sunrise }}</td>
+                </tr>
+                <tr>
+                    <td>Sunset</td><td>{{ sunset }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <br>
 {% endblock %}

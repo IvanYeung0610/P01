@@ -67,11 +67,26 @@ def pref():
     else:
         uid = database.get_uid(session["username"])
         if request.method == "GET":
+            uid = database.get_uid(session["username"])
             cities = []
             get_cities(cities)
             #api_info.search_anime(id) <-- SOMETHING IS WRONG WITH THE SPLIT IN API_INFO
-            return render_template('preferences.html',
-            cities=cities)
+            if database.check_pref(uid):
+                city = ""
+                if database.check_user_info(uid):
+                    city = database.get_city(uid)
+                nba = database.get_nba_pref(uid)
+                anime = database.get_anime_pref(uid)
+                weather = database.get_weather_pref(uid)
+                return render_template('preferences.html',
+                    cities=cities,
+                    nba=nba,
+                    anime=anime,
+                    weather=weather,
+                    city=city)
+            else: 
+                return render_template('preferences.html',
+                    cities=cities)
         if request.method == "POST":
             if "page2" in request.form and database.get_anime_pref(uid) != 0:
                 #if searching for anime name

@@ -230,3 +230,8 @@ ivanY -- 2022-12-20 23:32
 
 jeffC -- 2022-12-20 23:47
 * Fixed anime-movie bug
+
+brianC -- 2022-12-21 03:12
+* Cleaned up styling of anime search page
+* Restrictions on anime search(required characters) that previously caused 403 errors
+* Preferences page will populate with existing values if they exist
