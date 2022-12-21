@@ -3,6 +3,21 @@ from api_info import *
 import math
 from datetime import date, datetime as dt, timedelta
 import random
+
+def truncate(number, decimals=0):
+    """
+    Returns a value truncated to a specific number of decimal places.
+    """
+    if not isinstance(decimals, int):
+        raise TypeError("decimal places must be an integer.")
+    elif decimals < 0:
+        raise ValueError("decimal places has to be 0 or more.")
+    elif decimals == 0:
+        return math.trunc(number)
+
+    factor = 10.0 ** decimals
+    return math.trunc(number * factor) / factor
+
 def calc_weather(city):
     get_weather(city)
     temp = get_temperature(city)
@@ -25,7 +40,7 @@ def calc_weather(city):
     return (temp_factor + humidity_factor + rain_factor) / 3
     
 def NBA_today(data): 
-
+    games_today = True # True if there are games today, false if there aren't any games today
     current_time = dt.today()
     #print(current_time)
     delta = None
@@ -43,6 +58,7 @@ def NBA_today(data):
             difference = dt_object - current_time
             difference = difference.total_seconds() / 60
             #print(difference)
+            teams = f" the {x['h']['tc']} {x['h']['tn']} and the {x['v']['tc']} {x['v']['tn']}"
             if difference > -60:
                 #print(difference)
                 delta = difference
@@ -54,6 +70,7 @@ def NBA_today(data):
     
     if delta == None:
         delta = 0
+        games_today = False
         #if (f"{x['gdte']}") == str(date.today()):
         #    #print(x)
         #    games_today.append(x)
@@ -61,10 +78,19 @@ def NBA_today(data):
     #print(delta)
 
     if delta < 30 and delta >= 0: #if time till next nba game is < 30 min, calculate %
+        add_nba_algo("There is an NBA game in " + str(truncate(delta, 2)) + " minutes.")
         return delta / 30
     elif delta > -60:
+        if delta > 0:
+            add_nba_algo(f"There is an NBA game between {teams} in " + str(truncate(delta, 2)) + " minutes.")
+        else:
+            add_nba_algo(f"An NBA game between {teams} has been ongoing for " + str(truncate(-1 * (delta), 2)) + " minutes.")
         return 0
     else:
+        if (games_today):
+            add_anime_algo("There are no NBA games today.")
+        else:
+            add_nba_algo("There are no NBA games starting soon.")
         return 1 
 
 def weekday_to_integer(day):
@@ -130,14 +156,14 @@ def algorithm(uid):
     print("nba: " + str(nba_fac))
     anime_fac = calc_anime_date(uid, (get_favorite_anime(uid))) * get_anime_pref(uid) / 10
     print("anime: " + str(anime_fac))
-    return((weather_fac + 
+    return truncate(((weather_fac + 
             nba_fac + 
-            anime_fac) / 3)
+            anime_fac) / 3), 2)
 
 def grass(weight):
     yes_no = [0, 1]
     result = random.choices(yes_no, weights=(weight, 1-weight), k = 1)
-    if result[0] == 1:
+    if result[0] == 0:
         return "Yes!"
     else:
         return "No!"

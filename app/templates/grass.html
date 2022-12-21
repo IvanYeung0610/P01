@@ -1,32 +1,45 @@
 {% extends "layout.html" %}
 
-{% block head %}
-Grass
-{% endblock %}
-
 {% block title %}
 Grass
 {% endblock %}
 
 {% block body %}
-<h1>
-    Should you touch grass?: {{ grass }} <br>
-    Compatibility to go outside: {{ compatibility }} %
-</h1>
+<div class="content">
+    <h1 class="display-2">Should you touch grass?</h1>
+        
+    <h1 class="display-1"> 
+        <p class={{ response_color }}>
+            {{ grass }} 
+        </p>
+    </h1>
 
-<br>
+    <h2>Compatibility to go outside</h2>
+    <h3>
+        {{ compatibility }} %
+    </h3>
 
-<h2>Weather</h2>
-<h3>
-    Temperature: {{ temp }} °F <br>
-    Humidity: {{ humid }} % <br>
-    Chance of Rain: {{ rain }} % <br>
-</h3>
+    <br>
 
-<br>
+    <h2>Weather</h2>
+    <h3>
+        Temperature: {{ temp }} °F <br>
+        Humidity: {{ humid }} % <br>
+        Chance of Rain: {{ rain }} % <br>
+    </h3>
 
-<h2>Anime</h2>
-<h3>
-    {{ airing }}
-</h3>
-{% endblock %}
+    <br>
+
+    <h2>Anime</h2>
+    <h3>
+        {{ airing }}
+    </h3>
+
+    <br>
+
+    <h2>NBA</h2>
+    <h3>
+        {{ nba }}
+    </h3>
+    {% endblock %}
+</div>
