@@ -9,6 +9,9 @@ Weather
 {% endblock %}
 
 {% block body %}
+    <div class="text-center">
+        <img class="img-fluid pb-5" src="{{ link }}" alt="{{ alt }}">
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -39,5 +42,4 @@ Weather
         </tbody>
     </table>
     <br>
-    <img src="{{ link }}" alt="{{ alt }}">
 {% endblock %}
