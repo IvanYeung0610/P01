@@ -142,11 +142,12 @@ def grass():
             compatibility = algorithm.algorithm(uid)
             grass = algorithm.grass(compatibility)
             airing = database.get_anime_algo_statement(uid)
+            nba = database.get_nba_algo_statement()
             city = database.get_city(uid)
             temp = database.get_temperature(city)
             humid = database.get_humidity(city)
             rain = database.get_rain_chance(city)
-            return render_template("grass.html", grass=grass, compatibility=compatibility * 100, airing=airing, temp=temp, humid=humid, rain=rain)
+            return render_template("grass.html", grass=grass, compatibility=compatibility * 100, airing=airing, temp=temp, humid=humid, rain=rain, nba=nba)
 
 @app.route("/weather_details")
 def weather_details():
