@@ -161,7 +161,7 @@ def algorithm(uid):
 def grass(weight):
     yes_no = [0, 1]
     result = random.choices(yes_no, weights=(weight, 1-weight), k = 1)
-    if result[0] == 1:
+    if result[0] == 0:
         return "Yes!"
     else:
         return "No!"

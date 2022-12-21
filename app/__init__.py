@@ -147,7 +147,14 @@ def grass():
             temp = database.get_temperature(city)
             humid = database.get_humidity(city)
             rain = database.get_rain_chance(city)
-            return render_template("grass.html", grass=grass, compatibility=compatibility * 100, airing=airing, temp=temp, humid=humid, rain=rain, nba=nba)
+            if (grass == "No!"):
+                response_color = "text-danger"
+            else:
+                response_color = "text-success"
+            return render_template("grass.html", grass=grass, 
+            compatibility=compatibility * 100, airing=airing, 
+            temp=temp, humid=humid, rain=rain, nba=nba, 
+            response_color=response_color)
 
 @app.route("/weather_details")
 def weather_details():
