@@ -35,23 +35,36 @@ Anime
            <td> {{x['name']}}</td>
            {% endfor %}
         </tr>
+        {% if 'num_episodes' in data %}
         <tr>
            <th scope="row">Number of Episodes</th>
            <td> {{data['num_episodes']}}</td>
         </tr>
-
+        {% endif %}
+        {% if avg_dur != 0 %}
         <tr>
            <th scope="row">Average Episode Length</th>
            <td> {{avg_dur}} minutes</td>
         </tr>
-        <tr>
-           <th scope="row">Start - End</th>
-           <td> {{data['start_date']}} -- {{data['end_date']}}</td>
+        {% endif %}
+        {% if 'start_date' in data %}
+        <tr> 
+           <th scope="row">Start Date</th>
+           <td> {{data['start_date']}}</td>
         </tr>
+        {% endif %}
+        {% if 'end_date' in data %}
+        <tr> 
+           <th scope="row">End Date</th>
+           <td> {{data['start_date']}}</td>
+        </tr>
+        {% endif %}       
+        {% if 'broadcast' in data %}
         <tr>
            <th scope="row">Broadcast Time</th>
            <td> {{data['broadcast']['day_of_the_week'].capitalize()}}s at {{data['broadcast']['start_time']}} JST</td>
         </tr>
+        {% endif %}
     </table>
 </div>
 {% endblock %}

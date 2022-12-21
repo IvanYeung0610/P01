@@ -88,23 +88,25 @@ def calc_anime_date(uid, anime_id):
     if deets['airing'] == 0:
         add_anime_algo(uid, "Your favorite anime has finished airing. You can watch it whenever you want.")
         return 1 #it's finished! you can watch whenever
-        
-    current_JST = dt.today() + timedelta(hours=14)
-    #print(current_JST)
-    if current_JST.weekday() == deets['anime_date']: 
-        anime_broadcast_time = current_JST.date().strftime('%Y-%m-%d') + " " + deets['anime_time'] #string with anime broadcast date + time
-        anime_broadcast_time = dt.strptime(anime_broadcast_time, '%Y-%m-%d %H-%M') #dt object with anime broadcast date + time
-        difference = anime_broadcast_time - current_JST 
-        difference = difference.total_seconds() / 60 #difference in minutes
-        if difference >= 0 and difference < 30:
-            add_anime_algo(uid, "An episode of your favorite anime is about to air in " + str(difference) + " minutes.")    
-            return difference / 30 
-        elif difference < 0 and difference < -60:
-            add_anime_algo(uid, "An episode of your favorite anime has aired " + str(-1 * difference) + " minutes ago.")
-            return 0 #if it's been less than 1 since episode aired
-    else:
-        add_anime_algo(uid, "Your favorite anime is not airing today.")
-        return 1 #wrong day for anime
+    if 'anime_date' in deets and 'anime_time' in deets:
+        current_JST = dt.today() + timedelta(hours=14)
+        #print(current_JST)
+        if current_JST.weekday() == deets['anime_date']: 
+            anime_broadcast_time = current_JST.date().strftime('%Y-%m-%d') + " " + deets['anime_time'] #string with anime broadcast date + time
+            anime_broadcast_time = dt.strptime(anime_broadcast_time, '%Y-%m-%d %H-%M') #dt object with anime broadcast date + time
+            difference = anime_broadcast_time - current_JST 
+            difference = difference.total_seconds() / 60 #difference in minutes
+            if difference >= 0 and difference < 30:
+                add_anime_algo(uid, "An episode of your favorite anime is about to air in " + str(difference) + " minutes.")    
+                return difference / 30 
+            elif difference < 0 and difference < -60:
+                add_anime_algo(uid, "An episode of your favorite anime has aired " + str(-1 * difference) + " minutes ago.")
+                return 0 #if it's been less than 1 since episode aired
+        else:
+            add_anime_algo(uid, "Your favorite anime is not airing today.")
+            return 1 #wrong day for anime
+    else: 
+        return 1 #doesnt have a broadcast time
 
     #this is the anime airing date for EST
     #abt_est = dt.strptime(anime_broadcast_time, '%Y-%m-%d %H:%M') - (timedelta(hours=14))
