@@ -32,7 +32,7 @@ def calc_weather(city):
     if humidity <= 60:
         humidity_factor = humidity / 60
     else: 
-        humidity_factor = math.pow((100-humidity), -1) * 10
+        humidity_factor = (humidity - 60)/ 100
    
     rain_factor = 1 - rain_chance/100
 
