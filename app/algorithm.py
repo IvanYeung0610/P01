@@ -25,7 +25,7 @@ def calc_weather(city):
     rain_chance = get_rain_chance(city) 
     #print(rain_chance)
     if temp > 75:
-        temp_factor = math.pow((100-temp), -1) * 100
+        temp_factor = math.pow((temp - 75), -1)
     elif temp <= 75:
         temp_factor = temp / 75
     
@@ -79,7 +79,7 @@ def NBA_today(data):
 
     if delta < 30 and delta >= 0: #if time till next nba game is < 30 min, calculate %
         add_nba_algo(f"There is an NBA game between {teams} in " + str(truncate(delta, 2)) + " minutes.")
-        return delta / 30
+        return 1 - (delta / 30)
     elif delta > -60:
         if delta > 0:
             add_nba_algo(f"There is an NBA game between {teams} in " + str(truncate(delta, 2)) + " minutes.")
@@ -124,7 +124,7 @@ def calc_anime_date(uid, anime_id):
             difference = difference.total_seconds() / 60 #difference in minutes
             if difference >= 0 and difference < 30:
                 add_anime_algo(uid, "An episode of your favorite anime is about to air in " + str(difference) + " minutes.")    
-                return difference / 30 
+                return 1 - (difference / 30)
             elif difference < 0 and difference < -60:
                 add_anime_algo(uid, "An episode of your favorite anime has aired " + str(-1 * difference) + " minutes ago.")
                 return 0 #if it's been less than 1 since episode aired
