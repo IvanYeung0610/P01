@@ -21,7 +21,7 @@ NBA
             <tbody>
                 {%for row in data%}
                 <tr>
-                    <td>{{row['v']['tc'] + " " + row['v']['tn'] + " vs. " + row['h']['tc'] + " " + row['v']['tn']}}</td>
+                    <td>{{row['v']['tc'] + " " + row['v']['tn'] + " vs. " + row['h']['tc'] + " " + row['h']['tn']}}</td>
                     <td>{{row['gdte'] + " " + row['stt']}}</td>
                 </tr>
                 {%endfor%}
