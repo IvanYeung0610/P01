@@ -18,7 +18,7 @@ Preferences
                 <div class="col-8 offset-2">
                     <label for="search" class="form-label">Pick Your Favorite Anime</label>
                     <div class="input-group">
-                    <input class="form-control" type="text" id="search" name="search" placeholder="Enter keywords of your favorite anime to search">
+                    <input class="form-control" type="text" id="search" name="search" placeholder="Enter keywords of your favorite anime to search" minlength="3">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" name="submit" value="Search" type="submit">Search</button>
                         </div>
@@ -29,8 +29,8 @@ Preferences
             <div class="container">
                 <div class="row row-cols-4">
                     {% for x in searchresult %}
-                    <div class="col">
-                         <div class="card" style="width: 18rem;">
+                    <div class="col" style="padding-bottom:20px">
+                        <div class="card" style="width: 18rem; height:100%;" >
                             <img src="{{x['main_picture']['medium']}}" class="card-img-top" alt="...">
                              <div class="card-body">
                                 <h5 class="card-title">{{x['title']}}</h5>
@@ -56,7 +56,7 @@ Preferences
             <div class="row mb-3">
                 <div class="col-8 offset-2">
                     <label for="city" class="form-label">What City are you in?</label>
-                    <input class="form-control" list="cityOptions" id="city" name="city" placeholder="Type to search..." required>
+                    <input class="form-control" list="cityOptions" id="city" name="city" placeholder="Type to search..." required value="{{city}}">
                     <datalist id="cityOptions">
                     {% for x in cities %}
                         <option value="{{ x }}">
@@ -67,20 +67,20 @@ Preferences
             <div class="row">
                 <div class="col-8 offset-2">
                     <label for="nba" class="form-label">How important is the NBA to you?</label>
-                    <input type="range" class="form-range" min="0" max="10" step="1" id="league" name="nba">
+                    <input type="range" class="form-range" min="0" max="10" step="1" id="nba" name="nba" value="{{nba}}">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-8 offset-2">
                     <label for="weather" class="form-label">How important is the weather to you?</label>
-                    <input type="range" class="form-range" min="0" max="10" step="1" id="weather" name="weather">
+                    <input type="range" class="form-range" min="0" max="10" step="1" id="weather" name="weather"  value="{{weather}}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-8 offset-2">
                     <label for="anime" class="form-label">How important is anime to you?</label>
-                    <input type="range" class="form-range" min="0" max="10" step="1" id="anime" name="anime">
+                    <input type="range" class="form-range" min="0" max="10" step="1" id="anime" name="anime"  value="{{anime}}">
                 </div>
             </div>
             <div class="row justify-content-center">

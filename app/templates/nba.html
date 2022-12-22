@@ -9,21 +9,23 @@ NBA
 {% endblock %}
 
 {% block body %}
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Team</th>
-            
-            <th scope="col">Time</th>
-        </tr> 
-        </thead>
-        <tbody>
-            {%for row in data%}
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{{row['v']['tc'] + " " + row['v']['tn'] + " vs. " + row['h']['tc'] + " " + row['v']['tn']}}</td>
-                <td>{{row['gdte'] + " " + row['stt']}}</td>
-            </tr>
-            {%endfor%}
-        </tbody>
-    </table>
+                <th scope="col">Team</th>
+                
+                <th scope="col">Time</th>
+            </tr> 
+            </thead>
+            <tbody>
+                {%for row in data%}
+                <tr>
+                    <td>{{row['v']['tc'] + " " + row['v']['tn'] + " vs. " + row['h']['tc'] + " " + row['v']['tn']}}</td>
+                    <td>{{row['gdte'] + " " + row['stt']}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
