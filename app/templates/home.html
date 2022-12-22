@@ -24,6 +24,69 @@ And by opposing end them?" <br>
     </div>
 </div>
 
+<br>
+
+    {% if session["preferences"] %}
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col"><h1>Factors</h1></th>
+                    <th scope="col"><h1>Preferences</h1></th>
+                </tr> 
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><h1 class="display-4">City</h1></td><td><h1 class="display-6">{{ city }}</h1></td>
+                    </tr>
+                    <tr>
+                        <td><h1 class="display-4">Weather</h1></td><td><h1 class="display-6">{{ weather_pref }} / 10</h1></td>
+                    </tr>
+                    <tr>
+                        <td><h1 class="display-4">NBA</h1></td><td><h1 class="display-6">{{ nba_pref }} / 10</h1></td>
+                    </tr>
+                    <tr>
+                        <td><h1 class="display-4">Anime</h1></td><td><h1 class="display-6">{{ anime_pref }} / 10</h1></td>
+                    </tr>
+                    <tr>
+                        <td><h1 class="display-4">Favorite Anime</h1></td><td><h1 class="display-6">{{ favorite_anime }}</h1></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col"><h1>Factors</h1></th>
+                <th scope="col"><h1>Preferences</h1></th>
+            </tr> 
+            </thead>
+            <tbody>
+                <tr>
+                    <td><h1 class="display-4">City</h1></td><td></td>
+                </tr>
+                <tr>
+                    <td><h1 class="display-4">Weather</h1></td><td></td>
+                </tr>
+                <tr>
+                    <td><h1 class="display-4">NBA</h1></td><td></td>
+                </tr>
+                <tr>
+                    <td><h1 class="display-4">Anime</h1></td><td></td>
+                </tr>
+                <tr>
+                    <td><h1 class="display-4">Favorite Anime</h1></td><td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        <div class="alert alert-primary" role="alert">
+            You have not filled out your preferences. You will not be able to access any of the features until you do so.
+        </div>
+    {% endif %}
+
 {% endif %} 
 
 

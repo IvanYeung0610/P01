@@ -15,7 +15,30 @@ def get_cities(cities):
 
 @app.route("/")
 def index():
-    return render_template("home.html")
+    city = ""
+    weather_pref = ""
+    anime_pref = ""
+    nba_pref = ""
+    favorite_anime = ""
+    try:
+        if(session["logged_in"]):
+            session["preferences"] = True
+            uid =  database.get_uid(session["username"])
+            city = database.get_city(uid)
+            weather_pref = str(database.get_weather_pref(uid))
+            # print("Weather Preferences: " + weather_pref)
+            anime_pref = str(database.get_anime_pref(uid))
+            # print("Anime preferences: " + anime_pref)
+            nba_pref = str(database.get_nba_pref(uid))
+            # print("NBA preferences: " + nba_pref)
+            if (anime_pref != "0"):
+                data = api_info.get_anime_date(database.get_favorite_anime(uid))['data']
+                favorite_anime = data['alternative_titles']['en']
+            else:
+                favorite_anime = "You do not have a favorite anime."
+    except:
+        session["preferences"] = False
+    return render_template("home.html", city=city, weather_pref=weather_pref, anime_pref=anime_pref, nba_pref=nba_pref, favorite_anime=favorite_anime)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
