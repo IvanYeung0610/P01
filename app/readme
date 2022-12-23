@@ -10,7 +10,7 @@ DISCO:
 QCC:
 
 Notes:
-* To determine the weight of the weather, we use 75 degrees (F), 60 % humidity, and 0 % chance of rain as the 'standard', 100%
+* To determine the weight of the weather, we use 75 degrees (F), 60 % humidity, and 0 % chance of rain as the 'standard', meaning 100%
     * To calculate the weight of the temperature, we use 2 separate distributions.
         * If the temperature is 75 or below, we divide the temperature by 75.
         * If the temperature is at or above 75, we take the difference of the temperature and 75 and get the inverse.
