@@ -241,3 +241,7 @@ ivanY -- 2022-12-21 19:52
 
 ivanY -- 2022-12-21 22:36
 * created a table that displays the user's preferences when they log in
+
+jeffC -- 2022-12-22 20:32
+
+*added desc of algorithm to readme and grass page
