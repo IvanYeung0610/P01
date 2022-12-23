@@ -22,30 +22,30 @@ def calc_weather(city):
     #get_weather(city)
     temp = get_temperature(city)
     humidity = get_humidity(city)
-    rain_chance = get_rain_chance(city) 
+    rain_chance = get_rain_chance(city)
     #print(rain_chance)
     if temp > 75:
         temp_factor = math.pow((temp - 75), -1)
     elif temp <= 75:
         temp_factor = temp / 75
-    
+
     if humidity <= 60:
         humidity_factor = humidity / 60
-    else: 
+    else:
         humidity_factor = (humidity - 60)/ 100
-   
+
     rain_factor = 1 - rain_chance/100
 
    # return {"factor" : (temp_factor + humidity_factor + rain_factor) / 3, "weather" : weather}
     return (temp_factor + humidity_factor + rain_factor) / 3
-    
-def NBA_today(data): 
+
+def NBA_today(data):
     games_today = True # True if there are games today, false if there aren't any games today
     current_time = dt.today()
     #print(current_time)
     delta = None
     for x in data:
-            
+
         #print("here")
         #print(f"{x['gdte']}")
         #print(f"{x['stt']}")
@@ -67,7 +67,7 @@ def NBA_today(data):
                 #print("delta")
                 #print(delta)
                 break
-    
+
     if delta == None:
         delta = 0
         games_today = False
@@ -91,7 +91,7 @@ def NBA_today(data):
             add_anime_algo("There are no NBA games today.")
         else:
             add_nba_algo("There are no NBA games starting soon.")
-        return 1 
+        return 1
 
 def weekday_to_integer(day):
     if day == "Monday":
@@ -117,13 +117,13 @@ def calc_anime_date(uid, anime_id):
     if 'anime_date' in deets and 'anime_time' in deets:
         current_JST = dt.today() + timedelta(hours=14)
         #print(current_JST)
-        if current_JST.weekday() == deets['anime_date']: 
+        if current_JST.weekday() == deets['anime_date']:
             anime_broadcast_time = current_JST.date().strftime('%Y-%m-%d') + " " + deets['anime_time'] #string with anime broadcast date + time
             anime_broadcast_time = dt.strptime(anime_broadcast_time, '%Y-%m-%d %H-%M') #dt object with anime broadcast date + time
-            difference = anime_broadcast_time - current_JST 
+            difference = anime_broadcast_time - current_JST
             difference = difference.total_seconds() / 60 #difference in minutes
             if difference >= 0 and difference < 30:
-                add_anime_algo(uid, "An episode of your favorite anime is about to air in " + str(difference) + " minutes.")    
+                add_anime_algo(uid, "An episode of your favorite anime is about to air in " + str(difference) + " minutes.")
                 return 1 - (difference / 30)
             elif difference < 0 and difference < -60:
                 add_anime_algo(uid, "An episode of your favorite anime has aired " + str(-1 * difference) + " minutes ago.")
@@ -131,33 +131,33 @@ def calc_anime_date(uid, anime_id):
         else:
             add_anime_algo(uid, "Your favorite anime is not airing today.")
             return 1 #wrong day for anime
-    else: 
+    else:
         return 1 #doesnt have a broadcast time
 
     #this is the anime airing date for EST
     #abt_est = dt.strptime(anime_broadcast_time, '%Y-%m-%d %H:%M') - (timedelta(hours=14))
     #
     #if weekday_to_integer(deets['anime_date']) == current_day.weekday()""
-    
-    
-    
+
+
+
 def algorithm(uid):
-    #print(calc_weather("New York City")) 
-    #print(calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10) 
+    #print(calc_weather("New York City"))
+    #print(calc_weather(replace_space(get_city(uid))) * get_weather_pref(uid) / 10)
 
     #print(calc_LOL_clash())
     #print(calc_LOL_clash() * get_league_pref(uid) / 10)
-    
+
     #print(calc_anime_date(44511)) #test using chainsawman
     #p['data'][0irint(calc_anime_date(get_favorite_anime(uid)) * get_anime_pref(uid) / 10) #test using chainsawman
     weather_fac = calc_weather(get_city(uid)) * get_weather_pref(uid) / 10
-    print("weather: " + str(weather_fac))
+    #print("weather: " + str(weather_fac))
     nba_fac = NBA_today(get_NBA()) * get_nba_pref(uid) / 10
-    print("nba: " + str(nba_fac))
+    #print("nba: " + str(nba_fac))
     anime_fac = calc_anime_date(uid, (get_favorite_anime(uid))) * get_anime_pref(uid) / 10
-    print("anime: " + str(anime_fac))
-    return truncate(((weather_fac + 
-            nba_fac + 
+    #print("anime: " + str(anime_fac))
+    return truncate(((weather_fac +
+            nba_fac +
             anime_fac) / 3), 2)
 
 def grass(weight):
@@ -167,4 +167,3 @@ def grass(weight):
         return "Yes!"
     else:
         return "No!"
-    

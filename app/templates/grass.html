@@ -7,17 +7,17 @@ Grass
 {% block body %}
 <div class="content">
     <h1>Should you touch grass?</h1>
-        
-    <h1 class="display-1"> 
+
+    <h1 class="display-1">
         <p class={{ response_color }}>
-            {{ grass }} 
+            {{ grass }}
         </p>
     </h1>
     <div class="text-center">
         <dl class="row">
             <dt class="col-sm-3"> <h3 >Compatibility to touch grass</h3> </dt>
             <dd class="col-sm-9"> <h1 class="display-6"> {{ compatibility }} %</h1></dd>
-            
+
             <dt class="col-sm-3"><h3>Temperature</h3></dt>
             <dd class="col-sm-9"><h1 class="display-6"> {{ temp }} °F</h1></dd>
 
@@ -29,42 +29,46 @@ Grass
 
             <dt class="col-sm-3"><h3>Favorite Anime</h3></dt>
             <dd class="col-sm-9"><h1 class="display-6"> {{ airing }}</h1></dd>
-        
-                
+
+
             <dt class="col-sm-3"><h3>NBA</h3></dt>
             <dd class="col-sm-9"><h1 class="display-6"> {{ nba }}</h1></dd>
         </dl>
     </div>
-
-    <div class="container">
-        <h5>
-            To determine the weight of the weather, we use 75 degrees (F), 60 % humidity, and 0 % chance of rain as the 'standard', meaning 100%
-            <ul>
-                <li>To calculate the weight of the temperature, we use 2 separate distributions.</li>
-                <li>If the temperature is 75 or below, we divide the temperature by 75.</li>
-                <li>If the temperature is at or above 75, we take the difference of the temperature and 75 and get the inverse.</li>
-            </ul>
-            Humidity is the same:
-            <ul>
-                <li>Less than or equal 60: humidity / 60</li>
-                <li>More than 60: (humidity - 60) / 100</li>
-            </ul>
-            Rain chance is 1 - (rain chance / 100), since rain chance is expressed as a percentage<br>
-            <br>
-            To determine the weight of NBA games, we find the difference between the current time and the next NBA game
-            <ul>
-                <li>If the difference is under 30 min and at or above 0 (game is starting in less than 30 min), we subtract (difference / 30) from 1 to get the weight</li>
-                <li>If the difference is between -60 and 0, the weight is set to 0 (game has been going on for less than an hour)</li>
-                <li>If neither of these conditions are filled, the weight is set to 1</li>
-            </ul>
-            <br>
-            To determine the weight of the user's favorite anime, we check 2 things: if the anime is finished airing, and if the anime will air a new episode within 30 minutes
-                <ul>
-                    <li>Uses a the same algorithm as NBA, except it checks if the anime is finished airing. If it is, the weight is automatically set to 0.</li>
-                </ul>
-            <br>  
-            The weights of the three APIs are averaged, then used in a picker, which picks between going outside or not, with the calculated weight used for the weight of going outside.<br>
-        </h5>
-    </div>
+    <footer class="site-footer bg-light">
+      <div class="container">
+        <h4>
+          How Does the Algorithm Work?
+        </h4>
+          <h5 class="lead">
+              To determine the weight of the weather, we use 75 degrees (F), 60 % humidity, and 0 % chance of rain as the 'standard', meaning 100%
+              <ul>
+                  <li>To calculate the weight of the temperature, we use 2 separate distributions.</li>
+                  <li>If the temperature is 75 or below, we divide the temperature by 75.</li>
+                  <li>If the temperature is at or above 75, we take the difference of the temperature and 75 and get the inverse.</li>
+              </ul>
+              Humidity is the same:
+              <ul>
+                  <li>Less than or equal 60: humidity / 60</li>
+                  <li>More than 60: (humidity - 60) / 100</li>
+              </ul>
+              Rain chance is 1 - (rain chance / 100), since rain chance is expressed as a percentage<br>
+              <br>
+              To determine the weight of NBA games, we find the difference between the current time and the next NBA game
+              <ul>
+                  <li>If the difference is under 30 min and at or above 0 (game is starting in less than 30 min), we subtract (difference / 30) from 1 to get the weight</li>
+                  <li>If the difference is between -60 and 0, the weight is set to 0 (game has been going on for less than an hour)</li>
+                  <li>If neither of these conditions are filled, the weight is set to 1</li>
+              </ul>
+              <br>
+              To determine the weight of the user's favorite anime, we check 2 things: if the anime is finished airing, and if the anime will air a new episode within 30 minutes
+                  <ul>
+                      <li>Uses a the same algorithm as NBA, except it checks if the anime is finished airing. If it is, the weight is automatically set to 0.</li>
+                  </ul>
+              <br>
+              The weights of the three APIs are averaged, then used in a picker, which picks between going outside or not, with the calculated weight used for the weight of going outside.<br>
+          </h5>
+      </div>
+    </footer>
     {% endblock %}
 </div>
